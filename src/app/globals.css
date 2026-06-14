@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  background: #fffaf7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(217, 155, 43, 0.12), transparent 30rem),
+    linear-gradient(180deg, #fffaf7 0%, #ffffff 45%, #fff7f3 100%);
+  color: #26324d;
+}
+
+::selection {
+  background: #ffe8dc;
+  color: #87351f;
+}
+
+@keyframes scroll-x {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 28s linear infinite;
+}
+
+.animate-scroll-x:hover {
+  animation-play-state: paused;
+}
