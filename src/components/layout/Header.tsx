@@ -31,15 +31,15 @@ export function Header() {
                 className="h-full w-full object-contain"
               />
             </span>
-            <span className="max-w-[22rem] leading-tight text-indigoInk drop-shadow-[0_1px_1px_rgba(255,255,255,0.95)]">
+            <span className="max-w-[22rem] leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.55)]">
               <span
-                className="block text-xl font-bold"
+                className="block text-xl font-extrabold text-white transition-colors hover:text-turmeric"
                 lang="mai-Tirh"
                 title="Mithila sanskritik Sanstha Australia"
               >
                 {TIRHUTA_ORGANISATION_NAME}
               </span>
-              <span className="mt-1 block text-sm font-semibold text-indigoInk/75">
+              <span className="mt-1 block text-sm font-bold text-white/90 transition-colors hover:text-turmeric">
                 {ORGANISATION_NAME}
               </span>
             </span>
@@ -51,7 +51,7 @@ export function Header() {
             <Button href="/membership">Join / Donate</Button>
           </div>
         </div>
-        <div className="mt-4 [&_a]:bg-white/0 [&_a]:font-semibold [&_a]:drop-shadow-[0_1px_1px_rgba(255,255,255,0.9)] [&_a:hover]:bg-white/70">
+        <div className="mt-4 [&_a]:bg-transparent [&_a]:font-bold [&_a]:text-white [&_a]:drop-shadow-[0_2px_4px_rgba(0,0,0,0.55)] [&_a:hover]:bg-white/15 [&_a:hover]:text-turmeric">
           <Navigation items={publicNavigation} ariaLabel="Primary navigation" />
         </div>
       </div>
