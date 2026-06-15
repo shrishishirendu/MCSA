@@ -25,52 +25,6 @@ export function EventManagementWorkspace() {
 
   return (
     <div className="grid gap-8">
-      <section className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-        <Card className="bg-lotus-50/70">
-          <p className="text-sm font-bold uppercase tracking-wide text-lotus-700">
-            Fast launch model
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-indigoInk">
-            Use external ticketing now. Keep MCSA as the official event hub.
-          </h2>
-          <p className="mt-4 max-w-3xl text-sm leading-6 text-indigoInk/70">
-            This is the quickest reliable path. Sydney, Melbourne and other
-            city groups can run ticketing, payment collection, check-in and
-            attendee exports through an event platform. The MCSA website shows
-            only approved official events and sends people to the correct
-            registration link.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button href="#events">View events</Button>
-            <Button href="#platforms" variant="secondary">
-              Compare platforms
-            </Button>
-          </div>
-        </Card>
-
-        <Card>
-          <h2 className="text-xl font-bold text-indigoInk">
-            What MCSA controls
-          </h2>
-          <div className="mt-5 grid gap-3">
-            {[
-              "Which events appear as official MCSA events",
-              "Which city group owns the event",
-              "Final admin approval before publishing",
-              "Public event description and contact point",
-              "External ticketing link shown to members and guests"
-            ].map((item) => (
-              <div
-                key={item}
-                className="rounded-md border border-indigoInk/10 bg-white p-3 text-sm font-semibold text-indigoInk/75"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        </Card>
-      </section>
-
       <section id="events">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -81,11 +35,12 @@ export function EventManagementWorkspace() {
               Upcoming MCSA events
             </h2>
             <p className="mt-2 text-sm text-indigoInk/65">
-              Replace the temporary platform links with live ticketing links
-              after each event is created by its city admin.
+              Approved public events listed by Mithila Cultural Society
+              Australia. Registration and payment are handled through the
+              selected event platform.
             </p>
           </div>
-          <Button href="mailto:info@mithilaculturalsociety.org.au" variant="secondary">
+          <Button href="#create-event" variant="secondary">
             Submit event for approval
           </Button>
         </div>
@@ -140,23 +95,73 @@ export function EventManagementWorkspace() {
         </div>
       </section>
 
-      <section id="platforms" className="grid gap-5 lg:grid-cols-3">
-        {externalEventPlatforms.map((platform) => (
-          <Card key={platform.name}>
-            <p className="text-sm font-bold uppercase tracking-wide text-lotus-700">
-              {platform.fit}
-            </p>
-            <h3 className="mt-3 text-2xl font-bold text-indigoInk">
-              {platform.name}
+      <section
+        id="create-event"
+        className="rounded-2xl border border-lotus-100 bg-lotus-50/60 p-5 sm:p-7"
+      >
+        <div className="mb-6 max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-wide text-lotus-700">
+            Create an event
+          </p>
+          <h2 className="mt-2 text-2xl font-bold text-indigoInk">
+            How MCSA events are created and approved
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-indigoInk/70">
+            City groups can create events in an external ticketing platform,
+            then submit the live event link to MCSA for official approval and
+            publishing on this page.
+          </p>
+        </div>
+
+        <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+          <Card className="bg-white">
+            <h3 className="text-xl font-bold text-indigoInk">
+              Quick operating process
             </h3>
-            <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-              {platform.description}
-            </p>
-            <Button href={platform.url} className="mt-5" variant="secondary">
-              Open {platform.name}
+            <div className="mt-5 grid gap-3">
+              {launchSteps.map((step, index) => (
+                <div
+                  key={step}
+                  className="flex gap-3 rounded-md bg-lotus-50 p-3 text-sm text-indigoInk/75"
+                >
+                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-white text-xs font-bold text-lotus-700">
+                    {index + 1}
+                  </span>
+                  <span>{step}</span>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="bg-white">
+            <h3 className="text-xl font-bold text-indigoInk">
+              What MCSA approves
+            </h3>
+            <div className="mt-5 grid gap-3">
+              {[
+                "Which events appear as official MCSA events",
+                "Which city group owns the event",
+                "Final admin approval before publishing",
+                "Public event description and contact point",
+                "External ticketing link shown to members and guests"
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-md border border-indigoInk/10 bg-white p-3 text-sm font-semibold text-indigoInk/75"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+            <Button
+              href="mailto:info@mithilaculturalsociety.org.au"
+              className="mt-5"
+              variant="secondary"
+            >
+              Email event for approval
             </Button>
           </Card>
-        ))}
+        </div>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
@@ -180,19 +185,25 @@ export function EventManagementWorkspace() {
         </Card>
 
         <Card>
-          <h2 className="text-xl font-bold text-indigoInk">
-            Quick operating process
-          </h2>
+          <h2 className="text-xl font-bold text-indigoInk">Ticketing options</h2>
           <div className="mt-5 grid gap-3">
-            {launchSteps.map((step, index) => (
+            {externalEventPlatforms.map((platform) => (
               <div
-                key={step}
-                className="flex gap-3 rounded-md bg-lotus-50 p-3 text-sm text-indigoInk/75"
+                key={platform.name}
+                className="rounded-md border border-indigoInk/10 p-4"
               >
-                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-white text-xs font-bold text-lotus-700">
-                  {index + 1}
-                </span>
-                <span>{step}</span>
+                <p className="text-xs font-bold uppercase tracking-wide text-lotus-700">
+                  {platform.fit}
+                </p>
+                <h3 className="mt-2 font-bold text-indigoInk">
+                  {platform.name}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-indigoInk/70">
+                  {platform.description}
+                </p>
+                <Button href={platform.url} className="mt-4" variant="secondary">
+                  Open {platform.name}
+                </Button>
               </div>
             ))}
           </div>
