@@ -14,30 +14,6 @@ import { HeroCarousel } from "@/components/sections/HeroCarousel";
 const memberJoiningFormUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
 
-const mithilaLandmarks = [
-  {
-    title: "Madhubani Railway Station",
-    location: "Madhubani, Bihar",
-    imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Madhubani_Railway_Station.jpg/1024px-Madhubani_Railway_Station.jpg",
-    imageAlt:
-      "Madhubani Railway Station building decorated with Mithila painting",
-    credit: "Sntshkumar750, CC BY-SA 4.0, via Wikimedia Commons",
-    sourceUrl:
-      "https://commons.wikimedia.org/wiki/File:Madhubani_Railway_Station.jpg"
-  },
-  {
-    title: "Janki Mandir",
-    location: "Janakpur, Mithila",
-    imageUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Janki_Mandir_alt_version.jpg/1024px-Janki_Mandir_alt_version.jpg",
-    imageAlt: "Front view of Janki Mandir in Janakpur",
-    credit: "Abhishek Dutta, CC BY 3.0, via Wikimedia Commons",
-    sourceUrl:
-      "https://commons.wikimedia.org/wiki/File:Janki_Mandir_alt_version.jpg"
-  }
-];
-
 export default function HomePage() {
   const scrollingHighlights = [...culturalHighlights, ...culturalHighlights];
 
@@ -69,44 +45,6 @@ export default function HomePage() {
           </div>
         </div>
         <HeroCarousel images={culturalImages} />
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-        <div className="mb-6 max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-            Mithila landmarks
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-indigoInk">
-            Places that connect the community to Mithila
-          </h2>
-        </div>
-        <div className="grid gap-5 lg:grid-cols-2">
-          {mithilaLandmarks.map((landmark) => (
-            <Card key={landmark.title} className="overflow-hidden p-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={landmark.imageUrl}
-                alt={landmark.imageAlt}
-                className="aspect-[16/9] w-full object-cover"
-                loading="lazy"
-              />
-              <div className="p-5">
-                <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-                  {landmark.location}
-                </p>
-                <h3 className="mt-2 text-xl font-bold text-indigoInk">
-                  {landmark.title}
-                </h3>
-                <a
-                  href={landmark.sourceUrl}
-                  className="mt-3 inline-block text-xs font-semibold text-indigoInk/60 transition hover:text-lotus-700"
-                >
-                  {landmark.credit}
-                </a>
-              </div>
-            </Card>
-          ))}
-        </div>
       </section>
 
       <section className="overflow-hidden border-y border-indigoInk/10 bg-white">
