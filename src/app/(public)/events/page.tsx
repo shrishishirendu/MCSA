@@ -5,8 +5,8 @@ export default function EventsPage() {
   return (
     <PageLayout
       title="Events"
-      eyebrow="Event management"
-      description="Create events, manage city groups, invite members, prepare event payments, track attendees and keep final approval with admin."
+      eyebrow="Official event hub"
+      description="Find approved MCSA events and register through the selected event platform. City groups can manage ticketing externally while MCSA keeps final publishing control."
     >
       <EventManagementWorkspace />
     </PageLayout>

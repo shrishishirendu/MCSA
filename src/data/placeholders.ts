@@ -134,6 +134,95 @@ export const eventRoles: Array<{
   }
 ];
 
+export const externalEventPlatforms = [
+  {
+    name: "Humanitix",
+    url: "https://www.humanitix.com/au",
+    fit: "Recommended for MCSA community events",
+    description:
+      "Australian not-for-profit ticketing platform with registrations, paid tickets, attendee exports, QR check-in and event emails."
+  },
+  {
+    name: "TryBooking",
+    url: "https://www.trybooking.com/au",
+    fit: "Strong Australian community option",
+    description:
+      "Australian ticketing platform used by community, school and cultural organisations for bookings, payments and check-in."
+  },
+  {
+    name: "Eventbrite",
+    url: "https://www.eventbrite.com.au",
+    fit: "Good for public event discovery",
+    description:
+      "Large event marketplace with event pages, ticketing, promotion tools and attendee management."
+  }
+];
+
+export const publicEventListings: Array<{
+  id: string;
+  groupId: EventGroupId;
+  title: string;
+  date: string;
+  time: string;
+  venue: string;
+  city: string;
+  status: "approved" | "draft" | "needs-ticket-link";
+  ticketingPlatform: "Humanitix" | "TryBooking" | "Eventbrite" | "To be selected";
+  ticketingUrl: string;
+  priceLabel: string;
+  audience: string;
+  summary: string;
+}> = [
+  {
+    id: "sydney-mithila-cultural-festival",
+    groupId: "sydney",
+    title: "Sydney Mithila Cultural Festival",
+    date: "12 September 2026",
+    time: "5:30 PM",
+    venue: "Parramatta, NSW",
+    city: "Sydney",
+    status: "needs-ticket-link",
+    ticketingPlatform: "Humanitix",
+    ticketingUrl: "https://www.humanitix.com/au",
+    priceLabel: "Paid tickets",
+    audience: "Members, families and guests",
+    summary:
+      "A public cultural evening with Mithila food, music, performances, Madhubani art and community recognition."
+  },
+  {
+    id: "melbourne-madhubani-workshop",
+    groupId: "melbourne",
+    title: "Melbourne Madhubani Art Workshop",
+    date: "18 October 2026",
+    time: "11:00 AM",
+    venue: "Docklands, VIC",
+    city: "Melbourne",
+    status: "needs-ticket-link",
+    ticketingPlatform: "TryBooking",
+    ticketingUrl: "https://www.trybooking.com/au",
+    priceLabel: "Member and family tickets",
+    audience: "Members, youth and families",
+    summary:
+      "A small-format workshop for families and young members to learn Madhubani art and Mithila cultural expression."
+  },
+  {
+    id: "brisbane-community-meetup",
+    groupId: "brisbane",
+    title: "Brisbane Mithila Community Meetup",
+    date: "To be confirmed",
+    time: "TBC",
+    venue: "Brisbane, QLD",
+    city: "Brisbane",
+    status: "draft",
+    ticketingPlatform: "To be selected",
+    ticketingUrl: "https://www.humanitix.com/au",
+    priceLabel: "Free or donation-based",
+    audience: "Local members and volunteers",
+    summary:
+      "A local planning meetup for future cultural events, volunteer coordination and community introductions."
+  }
+];
+
 export const managedEvents: Array<{
   id: string;
   groupId: EventGroupId;
