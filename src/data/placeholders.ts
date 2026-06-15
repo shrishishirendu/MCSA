@@ -190,6 +190,22 @@ export const publicEventListings: Array<{
       "Register and pay through Humanitix. MCSA will use the external event page for ticketing, attendee management and event updates."
   },
   {
+    id: "durga-puja",
+    groupId: "national",
+    title: "Durga Puja",
+    date: "See Humanitix page",
+    time: "See ticketing page",
+    venue: "See Humanitix page",
+    city: "Official event",
+    status: "approved",
+    ticketingPlatform: "Humanitix",
+    ticketingUrl: "https://events.humanitix.com/durga-puja",
+    priceLabel: "Tickets via Humanitix",
+    audience: "Members, families and guests",
+    summary:
+      "Register and pay through Humanitix. MCSA will use the external event page for ticketing, attendee management and event updates."
+  },
+  {
     id: "sydney-mithila-cultural-festival",
     groupId: "sydney",
     title: "Sydney Mithila Cultural Festival",
