@@ -8,6 +8,17 @@ import { Navigation } from "@/components/layout/Navigation";
 export function Header() {
   return (
     <header className="border-b border-indigoInk/10 bg-white/95 backdrop-blur">
+      <div className="relative h-28 overflow-hidden border-b border-indigoInk/10 sm:h-36 lg:h-44">
+        <Image
+          src="/images/australia-mithila-banner.png"
+          alt="Australian landmarks with Mithila inspired cultural motifs"
+          width={1792}
+          height={768}
+          priority
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/15 to-white/55" />
+      </div>
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-3">
