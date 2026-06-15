@@ -8,18 +8,11 @@ import type {
 
 export const featuredEvents: EventSummary[] = [
   {
-    id: "mithila-festival-2026",
-    title: "Mithila Cultural Festival",
-    date: "2026-09-12",
-    location: "Sydney, NSW",
-    status: "published"
-  },
-  {
-    id: "madhubani-workshop",
-    title: "Madhubani Art Workshop",
-    date: "2026-10-18",
-    location: "Melbourne, VIC",
-    status: "published"
+    id: "mithila-mahotsav-2026",
+    title: "Upcoming event - Mithila Mahotsav 2026",
+    date: "2026",
+    location: "Australia",
+    status: "draft"
   }
 ];
 
@@ -204,54 +197,6 @@ export const publicEventListings: Array<{
     audience: "Members, families and guests",
     summary:
       "Register and pay through Humanitix. MCSA will use the external event page for ticketing, attendee management and event updates."
-  },
-  {
-    id: "sydney-mithila-cultural-festival",
-    groupId: "sydney",
-    title: "Sydney Mithila Cultural Festival",
-    date: "12 September 2026",
-    time: "5:30 PM",
-    venue: "Parramatta, NSW",
-    city: "Sydney",
-    status: "needs-ticket-link",
-    ticketingPlatform: "Humanitix",
-    ticketingUrl: "https://www.humanitix.com/au",
-    priceLabel: "Paid tickets",
-    audience: "Members, families and guests",
-    summary:
-      "A public cultural evening with Mithila food, music, performances, Madhubani art and community recognition."
-  },
-  {
-    id: "melbourne-madhubani-workshop",
-    groupId: "melbourne",
-    title: "Melbourne Madhubani Art Workshop",
-    date: "18 October 2026",
-    time: "11:00 AM",
-    venue: "Docklands, VIC",
-    city: "Melbourne",
-    status: "needs-ticket-link",
-    ticketingPlatform: "TryBooking",
-    ticketingUrl: "https://www.trybooking.com/au",
-    priceLabel: "Member and family tickets",
-    audience: "Members, youth and families",
-    summary:
-      "A small-format workshop for families and young members to learn Madhubani art and Mithila cultural expression."
-  },
-  {
-    id: "brisbane-community-meetup",
-    groupId: "brisbane",
-    title: "Brisbane Mithila Community Meetup",
-    date: "To be confirmed",
-    time: "TBC",
-    venue: "Brisbane, QLD",
-    city: "Brisbane",
-    status: "draft",
-    ticketingPlatform: "To be selected",
-    ticketingUrl: "https://www.humanitix.com/au",
-    priceLabel: "Free or donation-based",
-    audience: "Local members and volunteers",
-    summary:
-      "A local planning meetup for future cultural events, volunteer coordination and community introductions."
   }
 ];
 
