@@ -23,6 +23,309 @@ export const featuredEvents: EventSummary[] = [
   }
 ];
 
+export type EventGroupId =
+  | "national"
+  | "sydney"
+  | "melbourne"
+  | "brisbane"
+  | "perth"
+  | "adelaide";
+
+export type EventRoleId =
+  | "super-admin"
+  | "sydney-admin"
+  | "melbourne-admin"
+  | "member";
+
+export type EventStatus =
+  | "draft"
+  | "submitted"
+  | "approved"
+  | "published"
+  | "completed";
+
+export const eventGroups: Array<{
+  id: EventGroupId;
+  name: string;
+  city: string;
+  admin: string;
+  paymentAccount: string;
+  description: string;
+}> = [
+  {
+    id: "national",
+    name: "National committee",
+    city: "Australia wide",
+    admin: "Central admin",
+    paymentAccount: "National Stripe account",
+    description: "Oversight, approvals, reporting and cross-city events."
+  },
+  {
+    id: "sydney",
+    name: "Sydney events group",
+    city: "Sydney",
+    admin: "Sydney admin",
+    paymentAccount: "Sydney event collection",
+    description: "Creates and manages events for NSW members and guests."
+  },
+  {
+    id: "melbourne",
+    name: "Melbourne events group",
+    city: "Melbourne",
+    admin: "Melbourne admin",
+    paymentAccount: "Melbourne event collection",
+    description: "Creates and manages events for VIC members and guests."
+  },
+  {
+    id: "brisbane",
+    name: "Brisbane events group",
+    city: "Brisbane",
+    admin: "Brisbane admin",
+    paymentAccount: "Brisbane event collection",
+    description: "Future local event group for Queensland activities."
+  },
+  {
+    id: "perth",
+    name: "Perth events group",
+    city: "Perth",
+    admin: "Perth admin",
+    paymentAccount: "Perth event collection",
+    description: "Future local event group for Western Australia activities."
+  },
+  {
+    id: "adelaide",
+    name: "Adelaide events group",
+    city: "Adelaide",
+    admin: "Adelaide admin",
+    paymentAccount: "Adelaide event collection",
+    description: "Future local event group for South Australia activities."
+  }
+];
+
+export const eventRoles: Array<{
+  id: EventRoleId;
+  label: string;
+  groupId: EventGroupId | "all";
+  description: string;
+}> = [
+  {
+    id: "super-admin",
+    label: "Super admin",
+    groupId: "all",
+    description: "Can approve events, see all groups, payments and reports."
+  },
+  {
+    id: "sydney-admin",
+    label: "Sydney admin",
+    groupId: "sydney",
+    description: "Can manage Sydney events, invites, attendees and payments."
+  },
+  {
+    id: "melbourne-admin",
+    label: "Melbourne admin",
+    groupId: "melbourne",
+    description: "Can manage Melbourne events, invites, attendees and payments."
+  },
+  {
+    id: "member",
+    label: "Member",
+    groupId: "all",
+    description: "Can view published events, register and pay for own tickets."
+  }
+];
+
+export const managedEvents: Array<{
+  id: string;
+  groupId: EventGroupId;
+  title: string;
+  date: string;
+  time: string;
+  venue: string;
+  status: EventStatus;
+  visibility: "public" | "members" | "invite-only";
+  capacity: number;
+  registrations: number;
+  ticketPriceAud: number;
+  revenueAud: number;
+  owner: string;
+  summary: string;
+  needsApproval: boolean;
+}> = [
+  {
+    id: "sydney-mithila-festival",
+    groupId: "sydney",
+    title: "Sydney Mithila Cultural Festival",
+    date: "2026-09-12",
+    time: "5:30 PM",
+    venue: "Parramatta Town Hall, NSW",
+    status: "published",
+    visibility: "public",
+    capacity: 220,
+    registrations: 146,
+    ticketPriceAud: 45,
+    revenueAud: 6570,
+    owner: "Sydney events group",
+    summary: "Music, food, Madhubani art, family performances and community awards.",
+    needsApproval: false
+  },
+  {
+    id: "melbourne-madhubani-workshop",
+    groupId: "melbourne",
+    title: "Melbourne Madhubani Art Workshop",
+    date: "2026-10-18",
+    time: "11:00 AM",
+    venue: "Docklands Community Hub, VIC",
+    status: "approved",
+    visibility: "members",
+    capacity: 80,
+    registrations: 44,
+    ticketPriceAud: 25,
+    revenueAud: 1100,
+    owner: "Melbourne events group",
+    summary: "Hands-on workshop for families, youth and new members.",
+    needsApproval: false
+  },
+  {
+    id: "brisbane-chhath-planning",
+    groupId: "brisbane",
+    title: "Brisbane Chhath Planning Meetup",
+    date: "2026-08-16",
+    time: "3:00 PM",
+    venue: "South Bank meeting room, QLD",
+    status: "submitted",
+    visibility: "members",
+    capacity: 60,
+    registrations: 0,
+    ticketPriceAud: 0,
+    revenueAud: 0,
+    owner: "Brisbane events group",
+    summary: "Volunteer planning, venue shortlist and safety requirements.",
+    needsApproval: true
+  },
+  {
+    id: "perth-maithili-evening",
+    groupId: "perth",
+    title: "Perth Maithili Stories Evening",
+    date: "2026-11-07",
+    time: "6:00 PM",
+    venue: "Perth cultural centre, WA",
+    status: "draft",
+    visibility: "invite-only",
+    capacity: 50,
+    registrations: 0,
+    ticketPriceAud: 15,
+    revenueAud: 0,
+    owner: "Perth events group",
+    summary: "Small-format gathering for language, stories and community introduction.",
+    needsApproval: false
+  }
+];
+
+export const eventInvitationCampaigns = [
+  {
+    id: "campaign-sydney-annual",
+    eventId: "sydney-mithila-festival",
+    groupId: "sydney" as EventGroupId,
+    audience: "Sydney annual members and supporters",
+    sent: 180,
+    opened: 132,
+    accepted: 98,
+    pending: 48,
+    declined: 34
+  },
+  {
+    id: "campaign-melbourne-members",
+    eventId: "melbourne-madhubani-workshop",
+    groupId: "melbourne" as EventGroupId,
+    audience: "Melbourne members and youth families",
+    sent: 74,
+    opened: 52,
+    accepted: 31,
+    pending: 18,
+    declined: 5
+  },
+  {
+    id: "campaign-brisbane-volunteers",
+    eventId: "brisbane-chhath-planning",
+    groupId: "brisbane" as EventGroupId,
+    audience: "Brisbane volunteers",
+    sent: 28,
+    opened: 19,
+    accepted: 12,
+    pending: 14,
+    declined: 2
+  }
+];
+
+export const eventPaymentRecords = [
+  {
+    id: "payment-001",
+    eventId: "sydney-mithila-festival",
+    groupId: "sydney" as EventGroupId,
+    payer: "Anita Jha",
+    ticketType: "Family ticket",
+    amountAud: 120,
+    status: "paid",
+    method: "Stripe ready",
+    reference: "EVT-SYD-1001"
+  },
+  {
+    id: "payment-002",
+    eventId: "sydney-mithila-festival",
+    groupId: "sydney" as EventGroupId,
+    payer: "Community Supporter",
+    ticketType: "General ticket",
+    amountAud: 45,
+    status: "paid",
+    method: "Stripe ready",
+    reference: "EVT-SYD-1002"
+  },
+  {
+    id: "payment-003",
+    eventId: "melbourne-madhubani-workshop",
+    groupId: "melbourne" as EventGroupId,
+    payer: "Ramesh Mishra",
+    ticketType: "Member ticket",
+    amountAud: 25,
+    status: "pending",
+    method: "Manual review",
+    reference: "EVT-MEL-1001"
+  }
+];
+
+export const eventAttendeeRecords = [
+  {
+    id: "attendee-001",
+    eventId: "sydney-mithila-festival",
+    groupId: "sydney" as EventGroupId,
+    name: "Anita Jha",
+    membership: "Annual member",
+    tickets: 4,
+    checkIn: "ready",
+    paymentStatus: "paid"
+  },
+  {
+    id: "attendee-002",
+    eventId: "melbourne-madhubani-workshop",
+    groupId: "melbourne" as EventGroupId,
+    name: "Ramesh Mishra",
+    membership: "Lifetime member",
+    tickets: 1,
+    checkIn: "pending payment",
+    paymentStatus: "pending"
+  },
+  {
+    id: "attendee-003",
+    eventId: "sydney-mithila-festival",
+    groupId: "sydney" as EventGroupId,
+    name: "Community Supporter",
+    membership: "Guest",
+    tickets: 1,
+    checkIn: "ready",
+    paymentStatus: "paid"
+  }
+];
+
 export const eventRequests = [
   {
     id: "event-request-001",
