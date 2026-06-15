@@ -11,6 +11,9 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
 
+const memberJoiningFormUrl =
+  "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
+
 export default function HomePage() {
   const scrollingHighlights = [...culturalHighlights, ...culturalHighlights];
 
@@ -35,7 +38,7 @@ export default function HomePage() {
             stories.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/membership">Become a member</Button>
+            <Button href={memberJoiningFormUrl}>Become a member</Button>
             <Button href="/events" variant="secondary">
               View events
             </Button>
@@ -193,6 +196,25 @@ export default function HomePage() {
 
       <section className="mx-auto grid max-w-7xl gap-4 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8">
         <Card>
+          <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
+            Member Portal
+          </p>
+          <h2 className="mt-3 text-xl font-bold text-indigoInk">
+            Join Mithila Cultural Society Australia
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-indigoInk/70">
+            New members can complete the official membership joining form
+            online. The committee will review the submitted details and follow
+            up with next steps.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Button href={memberJoiningFormUrl}>Open joining form</Button>
+            <Button href="/member" variant="secondary">
+              Member Portal
+            </Button>
+          </div>
+        </Card>
+        <Card>
           <h2 className="text-xl font-bold text-indigoInk">Upcoming events</h2>
           <div className="mt-4 grid gap-3">
             {featuredEvents.map((event) => (
@@ -205,7 +227,7 @@ export default function HomePage() {
             ))}
           </div>
         </Card>
-        <Card>
+        <Card className="lg:col-span-2">
           <h2 className="text-xl font-bold text-indigoInk">Latest stories</h2>
           <div className="mt-4 grid gap-3">
             {blogPosts.map((post) => (
