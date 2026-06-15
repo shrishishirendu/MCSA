@@ -659,5 +659,23 @@ export const culturalImages = [
     credit: "Toyin Adepoju, CC BY-SA 3.0, via Wikimedia Commons",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Madhubani_Mahavidyas.jpg",
     licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Madhubani_Railway_Station.jpg/1024px-Madhubani_Railway_Station.jpg",
+    alt: "Madhubani Railway Station building decorated with Mithila painting",
+    title: "Madhubani Railway Station",
+    credit: "Sntshkumar750, CC BY-SA 4.0, via Wikimedia Commons",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Madhubani_Railway_Station.jpg",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Janki_Mandir_alt_version.jpg/1024px-Janki_Mandir_alt_version.jpg",
+    alt: "Front view of Janki Mandir in Janakpur",
+    title: "Janki Mandir",
+    credit: "Abhishek Dutta, CC BY 3.0, via Wikimedia Commons",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Janki_Mandir_alt_version.jpg",
+    licenseUrl: "https://creativecommons.org/licenses/by/3.0/"
   }
 ];

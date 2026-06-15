@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type CarouselImage = {
@@ -38,14 +37,11 @@ export function HeroCarousel({ images }: HeroCarouselProps) {
   return (
     <div className="overflow-hidden rounded-lg border border-lotus-100 bg-white p-3 shadow-soft">
       <div className="relative grid min-h-[340px] place-items-center overflow-hidden rounded-md bg-[#fffdf8] ring-1 ring-indigoInk/10 sm:min-h-[420px]">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           key={activeImage.src}
           src={activeImage.src}
           alt={activeImage.alt}
-          width={1024}
-          height={720}
-          priority={activeIndex === 0}
-          unoptimized
           className="max-h-[330px] w-full object-contain p-3 transition-opacity duration-500 sm:max-h-[410px]"
         />
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-indigoInk/85 to-transparent p-4 text-white">
