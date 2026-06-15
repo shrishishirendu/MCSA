@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   advisors,
   blogPosts,
@@ -23,8 +22,6 @@ const mithilaLandmarks = [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Madhubani_Railway_Station.jpg/1024px-Madhubani_Railway_Station.jpg",
     imageAlt:
       "Madhubani Railway Station building decorated with Mithila painting",
-    width: 1024,
-    height: 617,
     credit: "Sntshkumar750, CC BY-SA 4.0, via Wikimedia Commons",
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:Madhubani_Railway_Station.jpg"
@@ -35,8 +32,6 @@ const mithilaLandmarks = [
     imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Janki_Mandir_alt_version.jpg/1024px-Janki_Mandir_alt_version.jpg",
     imageAlt: "Front view of Janki Mandir in Janakpur",
-    width: 1024,
-    height: 429,
     credit: "Abhishek Dutta, CC BY 3.0, via Wikimedia Commons",
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:Janki_Mandir_alt_version.jpg"
@@ -88,11 +83,10 @@ export default function HomePage() {
         <div className="grid gap-5 lg:grid-cols-2">
           {mithilaLandmarks.map((landmark) => (
             <Card key={landmark.title} className="overflow-hidden p-0">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={landmark.imageUrl}
                 alt={landmark.imageAlt}
-                width={landmark.width}
-                height={landmark.height}
                 className="aspect-[16/9] w-full object-cover"
                 loading="lazy"
               />
