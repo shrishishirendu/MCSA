@@ -21,7 +21,7 @@ const feedbackEmail =
 const socialLinks = [
   {
     label: "Facebook",
-    href: "https://www.facebook.com/search/top?q=Mithila%20Cultural%20Society%20Australia"
+    href: "https://www.facebook.com/groups/189257265814842"
   },
   {
     label: "Instagram",
