@@ -27,7 +27,7 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8 lg:py-16">
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:py-16">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
             Mithila Cultural Society Australia
@@ -45,6 +45,8 @@ export default function HomePage() {
             membership, donations, announcements, gallery updates and community
             stories.
           </p>
+        </div>
+        <div className="self-center">
           <div className="relative mt-6 overflow-hidden rounded-lg border border-lotus-100 bg-lotus-50 shadow-soft">
             <Image
               src="/images/mahotsav-invitation-card.png"
@@ -65,6 +67,9 @@ export default function HomePage() {
             </a>
           </div>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
         <HeroCarousel images={culturalImages} />
       </section>
 
