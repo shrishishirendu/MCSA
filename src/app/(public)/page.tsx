@@ -17,6 +17,9 @@ const memberJoiningFormUrl =
 const volunteerEmail =
   "mailto:info@mithilaculturalsocietyaustralia.org?subject=Volunteer%20interest%20-%20Mithila%20Cultural%20Society%20Australia";
 
+const yajmaanEmail =
+  "mailto:info@mithilaculturalsocietyaustralia.org?subject=Become%20Our%20Yajmaan%20-%20Mithila%20Mahotsav%202026";
+
 const mahotsavMarquee =
   "Mithila Mahotsav 2026 - Mithila Welcomes Mahashakti, from 17-19 October 2026 at Quakers Hill Community Hall, Sydney";
 
@@ -43,50 +46,54 @@ export default function HomePage() {
             membership, donations, announcements, gallery updates and community
             stories.
           </p>
-          <div className="mt-6 overflow-hidden rounded-lg border border-lotus-100 bg-gradient-to-br from-lotus-50 via-white to-turmeric/10 p-4 shadow-soft">
-            <div className="grid gap-4 xl:grid-cols-[1fr_auto] xl:items-center">
-              <div>
-                <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-lotus-700">
-                  Upcoming event
+          <div className="relative mt-6 overflow-hidden rounded-lg border border-[#c9a760] bg-[#fbf3df] p-4 shadow-soft">
+            <div className="pointer-events-none absolute inset-2 rounded-md border border-[#c9a760]/55" />
+            <div className="pointer-events-none absolute -right-10 -top-10 size-44 rounded-full border border-[#c9a760]/25" />
+            <div className="pointer-events-none absolute bottom-3 left-4 right-4 h-px bg-gradient-to-r from-transparent via-[#9b4b24]/35 to-transparent" />
+            <div className="relative grid gap-5 xl:grid-cols-[1fr_auto] xl:items-center">
+              <div className="text-center xl:text-left">
+                <p className="font-serif text-2xl font-bold italic tracking-wide text-[#9b4b24] sm:text-3xl">
+                  Upcoming Event
                 </p>
-                <h2 className="mt-2 text-2xl font-extrabold leading-tight text-indigoInk sm:text-[1.7rem]">
+                <h2 className="mt-3 text-[1.65rem] font-extrabold leading-tight text-indigoInk sm:text-3xl">
                   Celebrate Durga Puja and{" "}
-                  <span className="text-lotus-700">Mithila Mahotsav 2026</span>
+                  <span className="font-serif italic text-[#9b4b24]">
+                    Mithila Mahotsav
+                  </span>{" "}
+                  2026
                 </h2>
-                <div className="mt-3 flex flex-wrap items-center gap-3">
-                  <p className="max-w-md text-sm leading-6 text-indigoInk/72">
-                    Mithila welcomes Mahashakti from 17-19 October 2026 at
-                    Quakers Hill Community Hall, Sydney.
-                  </p>
+                <p className="mx-auto mt-3 max-w-xl text-sm font-medium leading-6 text-indigoInk/75 xl:mx-0">
+                  Mithila welcomes Mahashakti from 17-19 October 2026 at Quakers
+                  Hill Community Hall, Sydney.
+                </p>
+                <div className="mt-5">
                   <Button
-                    type="button"
-                    disabled
-                    className="min-h-10 cursor-not-allowed px-4 py-2 opacity-90"
-                    title="Yajmaan link coming soon"
+                    href={yajmaanEmail}
+                    className="border border-[#6f341c] bg-gradient-to-b from-[#b46335] to-[#7f351c] px-6 text-base shadow-soft hover:from-[#c97643] hover:to-[#8e3d21]"
                   >
                     Become Our Yajmaan
                   </Button>
                 </div>
               </div>
-              <div className="flex items-center gap-3 xl:justify-end">
-                <div className="grid size-28 place-items-center overflow-hidden rounded-md border border-lotus-100 bg-white shadow-soft">
+              <div className="flex items-center justify-center gap-3 xl:justify-end">
+                <div className="grid size-32 place-items-center overflow-hidden rounded-md border-[5px] border-[#8a5a2c] bg-[#d7b675] p-1 shadow-soft">
                   <Image
                     src="/images/maa-durga-mahashakti-sticker.png"
                     alt="Maa Durga Mahashakti"
-                    width={112}
-                    height={112}
-                    className="h-full w-full object-cover"
+                    width={120}
+                    height={120}
+                    className="h-full w-full rounded-sm object-cover"
                   />
                 </div>
-                <div className="grid size-28 place-items-center rounded-md border border-indigoInk/10 bg-white p-2 shadow-soft">
+                <div className="grid size-32 place-items-center rounded-md border-[5px] border-[#8a5a2c] bg-[#fff8e8] p-2 shadow-soft">
                   <Image
                     src="/images/durga-puja-humanitix-qr.png"
                     alt="Durga Puja ticket QR code"
-                    width={86}
-                    height={86}
-                    className="size-[4.9rem] object-contain"
+                    width={92}
+                    height={92}
+                    className="size-[5.2rem] object-contain"
                   />
-                  <p className="text-center text-[10px] font-bold uppercase tracking-wide text-indigoInk/60">
+                  <p className="text-center text-[10px] font-extrabold uppercase tracking-wide text-[#7f351c]">
                     Scan tickets
                   </p>
                 </div>
