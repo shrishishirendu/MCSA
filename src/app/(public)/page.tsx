@@ -17,8 +17,7 @@ const memberJoiningFormUrl =
 const volunteerEmail =
   "mailto:info@mithilaculturalsocietyaustralia.org?subject=Volunteer%20interest%20-%20Mithila%20Cultural%20Society%20Australia";
 
-const yajmaanEmail =
-  "mailto:info@mithilaculturalsocietyaustralia.org?subject=Become%20Our%20Yajmaan%20-%20Mithila%20Mahotsav%202026";
+const yajmaanUrl = "https://events.humanitix.com/durga-puja/tickets";
 
 const mahotsavMarquee =
   "Mithila Mahotsav 2026 - Mithila Welcomes Mahashakti, from 17-19 October 2026 at Quakers Hill Community Hall, Sydney";
@@ -56,8 +55,10 @@ export default function HomePage() {
               className="h-auto w-full"
             />
             <a
-              href={yajmaanEmail}
+              href={yajmaanUrl}
               aria-label="Become Our Yajmaan"
+              target="_blank"
+              rel="noreferrer"
               className="absolute bottom-[6%] left-[12%] h-[16%] w-[35%] rounded-md focus:outline-none focus:ring-4 focus:ring-turmeric/70"
             >
               <span className="sr-only">Become Our Yajmaan</span>
