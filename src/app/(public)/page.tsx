@@ -19,7 +19,7 @@ const feedbackEmail =
   "mailto:info@mithilaculturalsocietyaustralia.org?subject=MCSA%20feedback%2C%20suggestion%20or%20idea";
 
 const mahotsavMarquee =
-  "Mithila Mahotsav 2026 – Mithila Welcomes Mahashakti, from 17–19 October 2026 at Quakers Hill Community Hall, Sydney";
+  "Mithila Mahotsav 2026 - Mithila Welcomes Mahashakti, from 17-19 October 2026 at Quakers Hill Community Hall, Sydney";
 
 export default function HomePage() {
   const scrollingHighlights = Array.from({ length: 6 }, () => mahotsavMarquee);
@@ -44,34 +44,53 @@ export default function HomePage() {
             membership, donations, announcements, gallery updates and community
             stories.
           </p>
-          <div className="relative mt-6 overflow-hidden rounded-lg border border-lotus-100 bg-lotus-50 p-5 pr-24">
-            <Image
-              src="/images/mcsa-logo.jpg"
-              alt="Maa Durga sticker"
-              width={78}
-              height={78}
-              className="absolute right-4 top-4 rounded-full border border-lotus-100 bg-white p-1 shadow-soft"
-            />
-            <div>
-              <p className="text-sm font-bold uppercase tracking-wide text-lotus-700">
-                Upcoming event
-              </p>
-              <h2 className="mt-2 text-3xl font-bold text-indigoInk">
-                Mithila Mahotsav 2026
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-                Mithila welcomes Mahashakti from 17–19 October 2026 at Quakers
-                Hill Community Hall, Sydney.
-              </p>
-              <div className="mt-5">
-                <Button
-                  type="button"
-                  disabled
-                  className="cursor-not-allowed opacity-75"
-                  title="Yajmaan link coming soon"
-                >
-                  Become Our Yajmaan
-                </Button>
+          <div className="mt-6 overflow-hidden rounded-lg border border-lotus-100 bg-lotus-50 p-5">
+            <div className="grid gap-5 sm:grid-cols-[1fr_auto] sm:items-center">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-wide text-lotus-700">
+                  Upcoming event
+                </p>
+                <h2 className="mt-2 text-3xl font-bold text-indigoInk">
+                  Mithila Mahotsav 2026
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-indigoInk/70">
+                  Mithila welcomes Mahashakti from 17-19 October 2026 at Quakers
+                  Hill Community Hall, Sydney.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <Button
+                    type="button"
+                    disabled
+                    className="cursor-not-allowed opacity-75"
+                    title="Yajmaan link coming soon"
+                  >
+                    Become Our Yajmaan
+                  </Button>
+                  <Button href="/events" variant="secondary">
+                    View event details
+                  </Button>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 sm:justify-end">
+                <Image
+                  src="/images/maa-durga-mahashakti-sticker.png"
+                  alt="Maa Durga Mahashakti"
+                  width={112}
+                  height={112}
+                  className="size-24 rounded-md border border-lotus-100 bg-white object-cover shadow-soft sm:size-28"
+                />
+                <div className="rounded-md border border-indigoInk/10 bg-white p-2 shadow-soft">
+                  <Image
+                    src="/images/durga-puja-humanitix-qr.png"
+                    alt="Durga Puja ticket QR code"
+                    width={96}
+                    height={96}
+                    className="size-20 object-contain sm:size-24"
+                  />
+                  <p className="mt-1 text-center text-[10px] font-bold uppercase tracking-wide text-indigoInk/60">
+                    Scan tickets
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -143,6 +162,7 @@ export default function HomePage() {
           </form>
         </Card>
       </section>
+
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-2">
