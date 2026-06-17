@@ -5,11 +5,11 @@ import {
   culturalImages,
   featuredEvents
 } from "@/data/placeholders";
-import Image from "next/image";
 import { ORGANISATION_NAME } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
+import { UpcomingEventPopup } from "@/components/sections/UpcomingEventPopup";
 
 const memberJoiningFormUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
@@ -27,7 +27,9 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:py-16">
+      <UpcomingEventPopup yajmaanUrl={yajmaanUrl} />
+
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8 lg:py-16">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
             Mithila Cultural Society Australia
@@ -46,30 +48,6 @@ export default function HomePage() {
             stories.
           </p>
         </div>
-        <div className="self-center">
-          <div className="relative mt-6 overflow-hidden rounded-lg border border-lotus-100 bg-lotus-50 shadow-soft">
-            <Image
-              src="/images/mahotsav-invitation-card.png"
-              alt="Upcoming event invitation for Celebrate Durga Puja and Mithila Mahotsav 2026"
-              width={1104}
-              height={579}
-              priority
-              className="h-auto w-full"
-            />
-            <a
-              href={yajmaanUrl}
-              aria-label="Become Our Yajmaan"
-              target="_blank"
-              rel="noreferrer"
-              className="absolute bottom-[6%] left-[12%] h-[16%] w-[35%] rounded-md focus:outline-none focus:ring-4 focus:ring-turmeric/70"
-            >
-              <span className="sr-only">Become Our Yajmaan</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
         <HeroCarousel images={culturalImages} />
       </section>
 
