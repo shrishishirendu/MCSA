@@ -2,8 +2,7 @@ import {
   advisors,
   blogPosts,
   coreCommittee,
-  culturalImages,
-  featuredEvents
+  culturalImages
 } from "@/data/placeholders";
 import { ORGANISATION_NAME } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
@@ -260,19 +259,6 @@ export default function HomePage() {
             <Button href="/member" variant="secondary">
               Member Portal
             </Button>
-          </div>
-        </Card>
-        <Card>
-          <h2 className="text-xl font-bold text-indigoInk">Upcoming events</h2>
-          <div className="mt-4 grid gap-3">
-            {featuredEvents.map((event) => (
-              <div key={event.id} className="rounded-md bg-lotus-50 p-4">
-                <p className="font-semibold text-indigoInk">{event.title}</p>
-                <p className="text-sm text-indigoInk/65">
-                  {event.date} - {event.location}
-                </p>
-              </div>
-            ))}
           </div>
         </Card>
         <Card className="lg:col-span-2">
