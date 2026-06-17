@@ -18,25 +18,6 @@ const memberJoiningFormUrl =
 const feedbackEmail =
   "mailto:info@mithilaculturalsocietyaustralia.org?subject=MCSA%20feedback%2C%20suggestion%20or%20idea";
 
-const socialLinks = [
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/groups/189257265814842"
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/explore/search/keyword/?q=Mithila%20Cultural%20Society%20Australia"
-  },
-  {
-    label: "YouTube",
-    href: "https://www.youtube.com/results?search_query=Mithila+Cultural+Society+Australia"
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/search/results/all/?keywords=Mithila%20Cultural%20Society%20Australia"
-  }
-];
-
 export default function HomePage() {
   const scrollingHighlights = [...culturalHighlights, ...culturalHighlights];
 
@@ -96,27 +77,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-5 px-4 py-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-        <Card>
-          <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-            Social media
-          </p>
-          <h2 className="mt-3 text-2xl font-bold text-indigoInk">
-            Follow Mithila Cultural Society Australia
-          </h2>
-          <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-            Connect with community updates, event announcements, gallery posts
-            and cultural stories.
-          </p>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            {socialLinks.map((link) => (
-              <Button key={link.label} href={link.href} variant="secondary">
-                {link.label}
-              </Button>
-            ))}
-          </div>
-        </Card>
-
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <Card>
           <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
             Feedback and ideas

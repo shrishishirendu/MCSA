@@ -5,6 +5,81 @@ import { publicNavigation } from "@/lib/navigation";
 import { Button } from "@/components/ui/Button";
 import { Navigation } from "@/components/layout/Navigation";
 
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/groups/189257265814842",
+    icon: "facebook"
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/explore/search/keyword/?q=Mithila%20Cultural%20Society%20Australia",
+    icon: "instagram"
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/results?search_query=Mithila+Cultural+Society+Australia",
+    icon: "youtube"
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/search/results/all/?keywords=Mithila%20Cultural%20Society%20Australia",
+    icon: "linkedin"
+  }
+];
+
+function SocialIcon({ icon }: { icon: string }) {
+  if (icon === "facebook") {
+    return <span className="text-lg leading-none">f</span>;
+  }
+
+  if (icon === "instagram") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5">
+        <rect
+          x="5"
+          y="5"
+          width="14"
+          height="14"
+          rx="4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        <circle
+          cx="12"
+          cy="12"
+          r="3"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        <circle cx="16.5" cy="7.5" r="1" fill="currentColor" />
+      </svg>
+    );
+  }
+
+  if (icon === "youtube") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5">
+        <rect
+          x="3"
+          y="6"
+          width="18"
+          height="12"
+          rx="4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        <path d="M10 9.5v5l5-2.5-5-2.5Z" fill="currentColor" />
+      </svg>
+    );
+  }
+
+  return <span className="text-sm leading-none">in</span>;
+}
+
 export function Header() {
   return (
     <header className="relative overflow-hidden border-b border-indigoInk/10 bg-white">
@@ -44,7 +119,22 @@ export function Header() {
               </span>
             </span>
           </Link>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <div className="flex items-center gap-2">
+              {socialLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  aria-label={link.label}
+                  title={link.label}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="grid size-10 place-items-center rounded-full border border-white/35 bg-black/20 text-sm font-extrabold text-white shadow-soft backdrop-blur-sm transition hover:border-turmeric hover:bg-white hover:text-indigoInk"
+                >
+                  <SocialIcon icon={link.icon} />
+                </Link>
+              ))}
+            </div>
             <Button href="/member" variant="secondary" className="bg-white/92">
               Member Portal
             </Button>
