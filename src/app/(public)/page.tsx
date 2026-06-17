@@ -46,55 +46,22 @@ export default function HomePage() {
             membership, donations, announcements, gallery updates and community
             stories.
           </p>
-          <div className="event-invite-card mt-6">
-            <div className="event-invite-corner event-invite-corner-left" />
-            <div className="event-invite-corner event-invite-corner-right" />
-            <span className="event-diya event-diya-one" />
-            <span className="event-diya event-diya-two" />
-            <div className="event-invite-content">
-              <div className="event-invite-copy">
-                <p className="event-invite-kicker">
-                  Upcoming Event
-                </p>
-                <h2 className="event-invite-title">
-                  Celebrate Durga Puja and{" "}
-                  <span>
-                    Mithila Mahotsav
-                  </span>{" "}
-                  2026
-                </h2>
-                <p className="event-invite-body">
-                  Mithila welcomes Mahashakti from 17-19 October 2026 at Quakers
-                  Hill Community Hall, Sydney.
-                </p>
-                <Button href={yajmaanEmail} className="event-yajmaan-button">
-                  Become Our Yajmaan
-                </Button>
-              </div>
-              <div className="event-invite-media">
-                <div className="event-gold-frame">
-                  <Image
-                    src="/images/maa-durga-mahashakti-sticker.png"
-                    alt="Maa Durga Mahashakti"
-                    width={132}
-                    height={132}
-                    className="event-framed-image"
-                  />
-                </div>
-                <div className="event-qr-frame">
-                  <Image
-                    src="/images/durga-puja-humanitix-qr.png"
-                    alt="Durga Puja ticket QR code"
-                    width={98}
-                    height={98}
-                    className="event-qr-image"
-                  />
-                  <p>
-                    Scan tickets
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div className="relative mt-6 overflow-hidden rounded-lg border border-lotus-100 bg-lotus-50 shadow-soft">
+            <Image
+              src="/images/mahotsav-invitation-card.png"
+              alt="Upcoming event invitation for Celebrate Durga Puja and Mithila Mahotsav 2026"
+              width={1104}
+              height={579}
+              priority
+              className="h-auto w-full"
+            />
+            <a
+              href={yajmaanEmail}
+              aria-label="Become Our Yajmaan"
+              className="absolute bottom-[6%] left-[12%] h-[16%] w-[35%] rounded-md focus:outline-none focus:ring-4 focus:ring-turmeric/70"
+            >
+              <span className="sr-only">Become Our Yajmaan</span>
+            </a>
           </div>
         </div>
         <HeroCarousel images={culturalImages} />
