@@ -4,6 +4,7 @@ import {
   coreCommittee,
   culturalImages
 } from "@/data/placeholders";
+import Image from "next/image";
 import { ORGANISATION_NAME } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -259,6 +260,26 @@ export default function HomePage() {
             <Button href="/member" variant="secondary">
               Member Portal
             </Button>
+          </div>
+        </Card>
+        <Card className="overflow-hidden p-0">
+          <div className="relative">
+            <Image
+              src="/images/mahotsav-invitation-card.png"
+              alt="Upcoming event invitation for Celebrate Durga Puja and Mithila Mahotsav 2026"
+              width={1104}
+              height={579}
+              className="h-auto w-full"
+            />
+            <a
+              href={yajmaanUrl}
+              aria-label="Become Our Yajmaan"
+              target="_blank"
+              rel="noreferrer"
+              className="absolute bottom-[6%] left-[12%] h-[16%] w-[35%] rounded-md focus:outline-none focus:ring-4 focus:ring-turmeric/70"
+            >
+              <span className="sr-only">Become Our Yajmaan</span>
+            </a>
           </div>
         </Card>
         <Card className="lg:col-span-2">
