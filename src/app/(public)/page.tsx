@@ -9,10 +9,33 @@ import {
 import { ORGANISATION_NAME } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { FieldGroup, Label, TextArea, TextInput } from "@/components/ui/Form";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
 
 const memberJoiningFormUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
+
+const feedbackEmail =
+  "mailto:info@mithilaculturalsocietyaustralia.org?subject=MCSA%20feedback%2C%20suggestion%20or%20idea";
+
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/search/top?q=Mithila%20Cultural%20Society%20Australia"
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/explore/search/keyword/?q=Mithila%20Cultural%20Society%20Australia"
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/results?search_query=Mithila+Cultural+Society+Australia"
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/search/results/all/?keywords=Mithila%20Cultural%20Society%20Australia"
+  }
+];
 
 export default function HomePage() {
   const scrollingHighlights = [...culturalHighlights, ...culturalHighlights];
@@ -37,6 +60,19 @@ export default function HomePage() {
             membership, donations, announcements, gallery updates and community
             stories.
           </p>
+          <div className="mt-6 rounded-lg border border-lotus-100 bg-lotus-50 p-5">
+            <p className="text-sm font-bold uppercase tracking-wide text-lotus-700">
+              Upcoming event
+            </p>
+            <h2 className="mt-2 text-3xl font-bold text-indigoInk">
+              Mithila Mahotsav 2026
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-indigoInk/70">
+              A major community celebration bringing Maithils across Australia
+              together for culture, language, food, music, art and family
+              connection.
+            </p>
+          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href={memberJoiningFormUrl}>Become a member</Button>
             <Button href="/events" variant="secondary">
@@ -58,6 +94,72 @@ export default function HomePage() {
             </span>
           ))}
         </div>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-5 px-4 py-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+        <Card>
+          <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
+            Social media
+          </p>
+          <h2 className="mt-3 text-2xl font-bold text-indigoInk">
+            Follow Mithila Cultural Society Australia
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-indigoInk/70">
+            Connect with community updates, event announcements, gallery posts
+            and cultural stories.
+          </p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {socialLinks.map((link) => (
+              <Button key={link.label} href={link.href} variant="secondary">
+                {link.label}
+              </Button>
+            ))}
+          </div>
+        </Card>
+
+        <Card>
+          <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
+            Feedback and ideas
+          </p>
+          <h2 className="mt-3 text-2xl font-bold text-indigoInk">
+            Help us include Maithils across Australia
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-indigoInk/70">
+            Share suggestions for events, regional outreach, youth activities,
+            language programs, volunteering or community support. Ideas should
+            be reviewed by admin before publishing or actioning.
+          </p>
+          <form className="mt-5 grid gap-4" action={feedbackEmail}>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <FieldGroup>
+                <Label htmlFor="feedbackName">Name</Label>
+                <TextInput id="feedbackName" name="name" placeholder="Your name" />
+              </FieldGroup>
+              <FieldGroup>
+                <Label htmlFor="feedbackRegion">City / region</Label>
+                <TextInput
+                  id="feedbackRegion"
+                  name="region"
+                  placeholder="Sydney, Melbourne, Perth..."
+                />
+              </FieldGroup>
+            </div>
+            <FieldGroup>
+              <Label htmlFor="feedbackIdea">Feedback, suggestion or idea</Label>
+              <TextArea
+                id="feedbackIdea"
+                name="idea"
+                placeholder="Tell us what MCSA should consider for the community"
+              />
+            </FieldGroup>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button type="submit">Send for admin review</Button>
+              <span className="text-xs font-semibold text-indigoInk/55">
+                Admin approval workflow will be connected in the admin portal.
+              </span>
+            </div>
+          </form>
+        </Card>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
