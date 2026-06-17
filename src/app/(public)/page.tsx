@@ -46,54 +46,50 @@ export default function HomePage() {
             membership, donations, announcements, gallery updates and community
             stories.
           </p>
-          <div className="relative mt-6 overflow-hidden rounded-lg border border-[#c9a760] bg-[#fbf3df] p-4 shadow-soft">
-            <div className="pointer-events-none absolute inset-2 rounded-md border border-[#c9a760]/55" />
-            <div className="pointer-events-none absolute -right-10 -top-10 size-44 rounded-full border border-[#c9a760]/25" />
-            <div className="pointer-events-none absolute bottom-3 left-4 right-4 h-px bg-gradient-to-r from-transparent via-[#9b4b24]/35 to-transparent" />
-            <div className="relative grid gap-5 xl:grid-cols-[1fr_auto] xl:items-center">
-              <div className="text-center xl:text-left">
-                <p className="font-serif text-2xl font-bold italic tracking-wide text-[#9b4b24] sm:text-3xl">
+          <div className="event-invite-card mt-6">
+            <div className="event-invite-corner event-invite-corner-left" />
+            <div className="event-invite-corner event-invite-corner-right" />
+            <span className="event-diya event-diya-one" />
+            <span className="event-diya event-diya-two" />
+            <div className="event-invite-content">
+              <div className="event-invite-copy">
+                <p className="event-invite-kicker">
                   Upcoming Event
                 </p>
-                <h2 className="mt-3 text-[1.65rem] font-extrabold leading-tight text-indigoInk sm:text-3xl">
+                <h2 className="event-invite-title">
                   Celebrate Durga Puja and{" "}
-                  <span className="font-serif italic text-[#9b4b24]">
+                  <span>
                     Mithila Mahotsav
                   </span>{" "}
                   2026
                 </h2>
-                <p className="mx-auto mt-3 max-w-xl text-sm font-medium leading-6 text-indigoInk/75 xl:mx-0">
+                <p className="event-invite-body">
                   Mithila welcomes Mahashakti from 17-19 October 2026 at Quakers
                   Hill Community Hall, Sydney.
                 </p>
-                <div className="mt-5">
-                  <Button
-                    href={yajmaanEmail}
-                    className="border border-[#6f341c] bg-gradient-to-b from-[#b46335] to-[#7f351c] px-6 text-base shadow-soft hover:from-[#c97643] hover:to-[#8e3d21]"
-                  >
-                    Become Our Yajmaan
-                  </Button>
-                </div>
+                <Button href={yajmaanEmail} className="event-yajmaan-button">
+                  Become Our Yajmaan
+                </Button>
               </div>
-              <div className="flex items-center justify-center gap-3 xl:justify-end">
-                <div className="grid size-32 place-items-center overflow-hidden rounded-md border-[5px] border-[#8a5a2c] bg-[#d7b675] p-1 shadow-soft">
+              <div className="event-invite-media">
+                <div className="event-gold-frame">
                   <Image
                     src="/images/maa-durga-mahashakti-sticker.png"
                     alt="Maa Durga Mahashakti"
-                    width={120}
-                    height={120}
-                    className="h-full w-full rounded-sm object-cover"
+                    width={132}
+                    height={132}
+                    className="event-framed-image"
                   />
                 </div>
-                <div className="grid size-32 place-items-center rounded-md border-[5px] border-[#8a5a2c] bg-[#fff8e8] p-2 shadow-soft">
+                <div className="event-qr-frame">
                   <Image
                     src="/images/durga-puja-humanitix-qr.png"
                     alt="Durga Puja ticket QR code"
-                    width={92}
-                    height={92}
-                    className="size-[5.2rem] object-contain"
+                    width={98}
+                    height={98}
+                    className="event-qr-image"
                   />
-                  <p className="text-center text-[10px] font-extrabold uppercase tracking-wide text-[#7f351c]">
+                  <p>
                     Scan tickets
                   </p>
                 </div>
