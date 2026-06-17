@@ -3,9 +3,9 @@ import {
   blogPosts,
   coreCommittee,
   culturalImages,
-  culturalHighlights,
   featuredEvents
 } from "@/data/placeholders";
+import Image from "next/image";
 import { ORGANISATION_NAME } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -18,8 +18,11 @@ const memberJoiningFormUrl =
 const feedbackEmail =
   "mailto:info@mithilaculturalsocietyaustralia.org?subject=MCSA%20feedback%2C%20suggestion%20or%20idea";
 
+const mahotsavMarquee =
+  "Mithila Mahotsav 2026 – Mithila Welcomes Mahashakti, from 17–19 October 2026 at Quakers Hill Community Hall, Sydney";
+
 export default function HomePage() {
-  const scrollingHighlights = [...culturalHighlights, ...culturalHighlights];
+  const scrollingHighlights = Array.from({ length: 6 }, () => mahotsavMarquee);
 
   return (
     <main>
@@ -41,18 +44,36 @@ export default function HomePage() {
             membership, donations, announcements, gallery updates and community
             stories.
           </p>
-          <div className="mt-6 rounded-lg border border-lotus-100 bg-lotus-50 p-5">
-            <p className="text-sm font-bold uppercase tracking-wide text-lotus-700">
-              Upcoming event
-            </p>
-            <h2 className="mt-2 text-3xl font-bold text-indigoInk">
-              Mithila Mahotsav 2026
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-              A major community celebration bringing Maithils across Australia
-              together for culture, language, food, music, art and family
-              connection.
-            </p>
+          <div className="relative mt-6 overflow-hidden rounded-lg border border-lotus-100 bg-lotus-50 p-5 pr-24">
+            <Image
+              src="/images/mcsa-logo.jpg"
+              alt="Maa Durga sticker"
+              width={78}
+              height={78}
+              className="absolute right-4 top-4 rounded-full border border-lotus-100 bg-white p-1 shadow-soft"
+            />
+            <div>
+              <p className="text-sm font-bold uppercase tracking-wide text-lotus-700">
+                Upcoming event
+              </p>
+              <h2 className="mt-2 text-3xl font-bold text-indigoInk">
+                Mithila Mahotsav 2026
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-indigoInk/70">
+                Mithila welcomes Mahashakti from 17–19 October 2026 at Quakers
+                Hill Community Hall, Sydney.
+              </p>
+              <div className="mt-5">
+                <Button
+                  type="button"
+                  disabled
+                  className="cursor-not-allowed opacity-75"
+                  title="Yajmaan link coming soon"
+                >
+                  Become Our Yajmaan
+                </Button>
+              </div>
+            </div>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href={memberJoiningFormUrl}>Become a member</Button>
