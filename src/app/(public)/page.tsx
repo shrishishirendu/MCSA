@@ -43,47 +43,50 @@ export default function HomePage() {
             membership, donations, announcements, gallery updates and community
             stories.
           </p>
-          <div className="mt-6 overflow-hidden rounded-lg border border-lotus-100 bg-lotus-50 p-5">
-            <p className="text-sm font-bold uppercase tracking-wide text-lotus-700">
-              Upcoming event
-            </p>
-            <h2 className="mt-2 text-[1.65rem] font-bold leading-tight text-indigoInk xl:whitespace-nowrap xl:text-3xl">
-              Celebrate Durga Puja and Mithila Mahotsav 2026
-            </h2>
-            <div className="mt-4 grid gap-5 sm:grid-cols-[1fr_auto] sm:items-end">
+          <div className="mt-6 overflow-hidden rounded-lg border border-lotus-100 bg-gradient-to-br from-lotus-50 via-white to-turmeric/10 p-4 shadow-soft">
+            <div className="grid gap-4 xl:grid-cols-[1fr_auto] xl:items-center">
               <div>
-                <p className="text-sm leading-6 text-indigoInk/70">
-                  Mithila welcomes Mahashakti from 17-19 October 2026 at Quakers
-                  Hill Community Hall, Sydney.
+                <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-lotus-700">
+                  Upcoming event
                 </p>
-                <div className="mt-5">
+                <h2 className="mt-2 text-2xl font-extrabold leading-tight text-indigoInk sm:text-[1.7rem]">
+                  Celebrate Durga Puja and{" "}
+                  <span className="text-lotus-700">Mithila Mahotsav 2026</span>
+                </h2>
+                <div className="mt-3 flex flex-wrap items-center gap-3">
+                  <p className="max-w-md text-sm leading-6 text-indigoInk/72">
+                    Mithila welcomes Mahashakti from 17-19 October 2026 at
+                    Quakers Hill Community Hall, Sydney.
+                  </p>
                   <Button
                     type="button"
                     disabled
-                    className="cursor-not-allowed opacity-75"
+                    className="min-h-10 cursor-not-allowed px-4 py-2 opacity-90"
                     title="Yajmaan link coming soon"
                   >
                     Become Our Yajmaan
                   </Button>
                 </div>
               </div>
-              <div className="flex items-end gap-3 sm:justify-end">
-                <Image
-                  src="/images/maa-durga-mahashakti-sticker.png"
-                  alt="Maa Durga Mahashakti"
-                  width={128}
-                  height={128}
-                  className="size-24 rounded-md border border-lotus-100 bg-white object-cover shadow-soft sm:size-32"
-                />
-                <div className="rounded-md border border-indigoInk/10 bg-white p-2 shadow-soft">
+              <div className="flex items-center gap-3 xl:justify-end">
+                <div className="grid size-28 place-items-center overflow-hidden rounded-md border border-lotus-100 bg-white shadow-soft">
+                  <Image
+                    src="/images/maa-durga-mahashakti-sticker.png"
+                    alt="Maa Durga Mahashakti"
+                    width={112}
+                    height={112}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="grid size-28 place-items-center rounded-md border border-indigoInk/10 bg-white p-2 shadow-soft">
                   <Image
                     src="/images/durga-puja-humanitix-qr.png"
                     alt="Durga Puja ticket QR code"
-                    width={112}
-                    height={112}
-                    className="size-20 object-contain sm:size-28"
+                    width={86}
+                    height={86}
+                    className="size-[4.9rem] object-contain"
                   />
-                  <p className="mt-1 text-center text-[10px] font-bold uppercase tracking-wide text-indigoInk/60">
+                  <p className="text-center text-[10px] font-bold uppercase tracking-wide text-indigoInk/60">
                     Scan tickets
                   </p>
                 </div>
