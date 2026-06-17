@@ -14,8 +14,7 @@ import { UpcomingEventPopup } from "@/components/sections/UpcomingEventPopup";
 const memberJoiningFormUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
 
-const volunteerEmail =
-  "mailto:info@mithilaculturalsocietyaustralia.org?subject=Volunteer%20interest%20-%20Mithila%20Cultural%20Society%20Australia";
+const functionalMemberFormUrl = "https://forms.gle/yruEwXTZeMcKr7Mw8";
 
 const yajmaanUrl = "https://events.humanitix.com/durga-puja/tickets";
 
@@ -63,47 +62,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <Card>
-          <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-            Join our team
-          </p>
-          <h2 className="mt-3 text-2xl font-bold text-indigoInk">
-            Support Mithila Cultural Society Australia
-          </h2>
-          <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-            Help build a stronger Maithil community across Australia by joining
-            as a functional member or volunteering for events, outreach,
-            cultural programs and community support.
-          </p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-md border border-lotus-100 bg-lotus-50 p-5">
-              <h3 className="text-lg font-bold text-indigoInk">
-                Functional Member
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-indigoInk/70">
-                Take an active role in planning, coordination and society
-                functions.
-              </p>
-              <Button href={memberJoiningFormUrl} className="mt-4">
-                Join as Functional Member
-              </Button>
-            </div>
-            <div className="rounded-md border border-lotus-100 bg-lotus-50 p-5">
-              <h3 className="text-lg font-bold text-indigoInk">Volunteer</h3>
-              <p className="mt-2 text-sm leading-6 text-indigoInk/70">
-                Contribute time and skills for events, cultural activities,
-                member support and community outreach.
-              </p>
-              <Button href={volunteerEmail} variant="secondary" className="mt-4">
-                Join as a Volunteer
-              </Button>
-            </div>
-          </div>
-        </Card>
-      </section>
-
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-2">
@@ -237,6 +195,51 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <Card>
+          <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
+            Join our team
+          </p>
+          <h2 className="mt-3 text-3xl font-bold text-indigoInk">
+            Join our dynamic team
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-indigoInk/70">
+            Help build a stronger Maithil community across Australia by joining
+            as a functional member or volunteering for events, outreach,
+            cultural programs and community support.
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-md border border-lotus-100 bg-lotus-50 p-5">
+              <h3 className="text-lg font-bold text-indigoInk">
+                Functional Member
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-indigoInk/70">
+                Take an active role in planning, coordination and society
+                functions.
+              </p>
+              <Button
+                href={functionalMemberFormUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4"
+              >
+                Join as Functional Member
+              </Button>
+            </div>
+            <div className="rounded-md border border-lotus-100 bg-lotus-50 p-5">
+              <h3 className="text-lg font-bold text-indigoInk">Volunteer</h3>
+              <p className="mt-2 text-sm leading-6 text-indigoInk/70">
+                Contribute time and skills for events, cultural activities,
+                member support and community outreach.
+              </p>
+              <Button href="/volunteer" variant="secondary" className="mt-4">
+                Join as a Volunteer
+              </Button>
+            </div>
+          </div>
+        </Card>
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-4 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8">
