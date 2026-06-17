@@ -9,14 +9,13 @@ import Image from "next/image";
 import { ORGANISATION_NAME } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { FieldGroup, Label, TextArea, TextInput } from "@/components/ui/Form";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
 
 const memberJoiningFormUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
 
-const feedbackEmail =
-  "mailto:info@mithilaculturalsocietyaustralia.org?subject=MCSA%20feedback%2C%20suggestion%20or%20idea";
+const volunteerEmail =
+  "mailto:info@mithilaculturalsocietyaustralia.org?subject=Volunteer%20interest%20-%20Mithila%20Cultural%20Society%20Australia";
 
 const mahotsavMarquee =
   "Mithila Mahotsav 2026 - Mithila Welcomes Mahashakti, from 17-19 October 2026 at Quakers Hill Community Hall, Sydney";
@@ -57,7 +56,7 @@ export default function HomePage() {
                   Mithila welcomes Mahashakti from 17-19 October 2026 at Quakers
                   Hill Community Hall, Sydney.
                 </p>
-                <div className="mt-5 flex flex-wrap gap-3">
+                <div className="mt-5">
                   <Button
                     type="button"
                     disabled
@@ -65,9 +64,6 @@ export default function HomePage() {
                     title="Yajmaan link coming soon"
                   >
                     Become Our Yajmaan
-                  </Button>
-                  <Button href="/events" variant="secondary">
-                    View event details
                   </Button>
                 </div>
               </div>
@@ -94,12 +90,6 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button href={memberJoiningFormUrl}>Become a member</Button>
-            <Button href="/events" variant="secondary">
-              View events
-            </Button>
-          </div>
         </div>
         <HeroCarousel images={culturalImages} />
       </section>
@@ -120,46 +110,40 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <Card>
           <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-            Feedback and ideas
+            Join our team
           </p>
           <h2 className="mt-3 text-2xl font-bold text-indigoInk">
-            Help us include Maithils across Australia
+            Support Mithila Cultural Society Australia
           </h2>
           <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-            Share suggestions for events, regional outreach, youth activities,
-            language programs, volunteering or community support. Ideas should
-            be reviewed by admin before publishing or actioning.
+            Help build a stronger Maithil community across Australia by joining
+            as a functional member or volunteering for events, outreach,
+            cultural programs and community support.
           </p>
-          <form className="mt-5 grid gap-4" action={feedbackEmail}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <FieldGroup>
-                <Label htmlFor="feedbackName">Name</Label>
-                <TextInput id="feedbackName" name="name" placeholder="Your name" />
-              </FieldGroup>
-              <FieldGroup>
-                <Label htmlFor="feedbackRegion">City / region</Label>
-                <TextInput
-                  id="feedbackRegion"
-                  name="region"
-                  placeholder="Sydney, Melbourne, Perth..."
-                />
-              </FieldGroup>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-md border border-lotus-100 bg-lotus-50 p-5">
+              <h3 className="text-lg font-bold text-indigoInk">
+                Functional Member
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-indigoInk/70">
+                Take an active role in planning, coordination and society
+                functions.
+              </p>
+              <Button href={memberJoiningFormUrl} className="mt-4">
+                Join as Functional Member
+              </Button>
             </div>
-            <FieldGroup>
-              <Label htmlFor="feedbackIdea">Feedback, suggestion or idea</Label>
-              <TextArea
-                id="feedbackIdea"
-                name="idea"
-                placeholder="Tell us what MCSA should consider for the community"
-              />
-            </FieldGroup>
-            <div className="flex flex-wrap items-center gap-3">
-              <Button type="submit">Send for admin review</Button>
-              <span className="text-xs font-semibold text-indigoInk/55">
-                Admin approval workflow will be connected in the admin portal.
-              </span>
+            <div className="rounded-md border border-lotus-100 bg-lotus-50 p-5">
+              <h3 className="text-lg font-bold text-indigoInk">Volunteer</h3>
+              <p className="mt-2 text-sm leading-6 text-indigoInk/70">
+                Contribute time and skills for events, cultural activities,
+                member support and community outreach.
+              </p>
+              <Button href={volunteerEmail} variant="secondary" className="mt-4">
+                Join as a Volunteer
+              </Button>
             </div>
-          </form>
+          </div>
         </Card>
       </section>
 
