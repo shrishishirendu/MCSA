@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { ContentImagePicker } from "@/components/admin/ContentImagePicker";
 import { FieldGroup, Label, TextArea, TextInput } from "@/components/ui/Form";
+import { readJsonResponse } from "@/lib/response";
 
 export function AnnouncementEditor() {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
@@ -29,7 +30,7 @@ export function AnnouncementEditor() {
         publish
       })
     });
-    const result = (await response.json()) as { error?: string };
+    const result = await readJsonResponse<Record<string, never>>(response);
 
     if (!response.ok) {
       setStatus(result.error ?? "The announcement could not be saved.");

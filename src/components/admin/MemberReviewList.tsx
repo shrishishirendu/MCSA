@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { MemberSummary } from "@/types/content";
+import { readJsonResponse } from "@/lib/response";
 
 function formatDate(value?: string | null) {
   if (!value) return "Not assigned";
@@ -34,13 +35,12 @@ export function MemberReviewList({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status })
     });
-    const result = (await response.json()) as {
-      error?: string;
+    const result = await readJsonResponse<{
       member?: {
         membership_status: "approved" | "rejected";
         joined_at: string | null;
       };
-    };
+    }>(response);
 
     if (!response.ok || !result.member) {
       setMessage(result.error ?? "The member could not be updated.");

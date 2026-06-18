@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { FieldGroup, Label, TextArea, TextInput } from "@/components/ui/Form";
+import { readJsonResponse } from "@/lib/response";
 
 export function MembershipApplicationForm() {
   const [status, setStatus] = useState("");
@@ -24,7 +25,7 @@ export function MembershipApplicationForm() {
         notes: formData.get("notes")
       })
     });
-    const result = (await response.json()) as { error?: string };
+    const result = await readJsonResponse<Record<string, never>>(response);
 
     if (!response.ok) {
       setStatus(result.error ?? "The application could not be submitted.");

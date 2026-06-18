@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { ContentImagePicker } from "@/components/admin/ContentImagePicker";
 import { FieldGroup, Label, TextArea, TextInput } from "@/components/ui/Form";
+import { readJsonResponse } from "@/lib/response";
 
 export function BlogEditor() {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
@@ -30,7 +31,7 @@ export function BlogEditor() {
         publish
       })
     });
-    const result = (await response.json()) as { error?: string };
+    const result = await readJsonResponse<Record<string, never>>(response);
 
     if (!response.ok) {
       setStatus(result.error ?? "The post could not be saved.");

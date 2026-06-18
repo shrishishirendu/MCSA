@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { readJsonResponse } from "@/lib/response";
 
 export function ContentImagePicker({
   multiple = false,
@@ -30,10 +31,9 @@ export function ContentImagePicker({
           method: "POST",
           body: formData
         });
-        const result = (await response.json()) as {
+        const result = await readJsonResponse<{
           url?: string;
-          error?: string;
-        };
+        }>(response);
         if (!response.ok || !result.url) {
           throw new Error(result.error ?? "Image upload failed.");
         }
