@@ -22,6 +22,7 @@ export function MembershipApplicationForm() {
         email: formData.get("email"),
         phone: formData.get("phone"),
         membershipType: formData.get("membershipType"),
+        paymentConfirmed: formData.get("paymentConfirmed") === "on",
         notes: formData.get("notes")
       })
     });
@@ -33,7 +34,9 @@ export function MembershipApplicationForm() {
       return;
     }
 
-    setStatus("Application submitted for admin review.");
+    setStatus(
+      "Application submitted for admin review. Please retain your bank transfer receipt."
+    );
     form.reset();
     setSubmitting(false);
   }
@@ -62,11 +65,28 @@ export function MembershipApplicationForm() {
           className="min-h-11 rounded-md border border-indigoInk/15 bg-white px-3 text-sm text-indigoInk outline-none focus:border-lotus-500 focus:ring-2 focus:ring-lotus-100"
           defaultValue="annual"
         >
-          <option value="annual">Annual membership</option>
-          <option value="lifetime">Lifetime membership</option>
-          <option value="functional">Functional member</option>
+          <option value="annual">Annual Membership</option>
+          <option value="renewal">Renew Membership</option>
+          <option value="lifetime">Lifetime Membership</option>
+          <option value="donation">Donation</option>
         </select>
       </FieldGroup>
+      <label className="flex cursor-pointer items-start gap-3 rounded-md border border-indigoInk/10 bg-lotus-50 p-4">
+        <input
+          type="checkbox"
+          name="paymentConfirmed"
+          className="mt-0.5 size-5 rounded border-indigoInk/25 text-lotus-500 focus:ring-lotus-500"
+        />
+        <span>
+          <span className="block text-sm font-semibold text-indigoInk">
+            Have you paid the membership fee?
+          </span>
+          <span className="mt-1 block text-xs leading-5 text-indigoInk/60">
+            Tick this box if you have already transferred the applicable amount
+            to the society bank account.
+          </span>
+        </span>
+      </label>
       <FieldGroup>
         <Label htmlFor="notes">Application details</Label>
         <TextArea

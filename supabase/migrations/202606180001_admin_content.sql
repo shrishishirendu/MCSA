@@ -6,6 +6,7 @@ create table if not exists public.members (
   email text not null unique,
   phone text,
   membership_type text not null default 'annual',
+  payment_confirmed boolean not null default false,
   notes text,
   membership_status text not null default 'pending'
     check (membership_status in ('pending', 'approved', 'rejected')),

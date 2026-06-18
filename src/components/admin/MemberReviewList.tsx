@@ -128,6 +128,10 @@ export function MemberReviewList({
                       value={member.membershipType || "Annual"}
                     />
                     <Detail
+                      label="Payment declared"
+                      value={member.paymentConfirmed ? "Yes" : "No"}
+                    />
+                    <Detail
                       label="Application date"
                       value={formatDate(member.createdAt)}
                     />

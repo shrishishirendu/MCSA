@@ -8,6 +8,7 @@ export async function POST(request: Request) {
       email?: string;
       phone?: string;
       membershipType?: string;
+      paymentConfirmed?: boolean;
       notes?: string;
     };
 
@@ -23,6 +24,7 @@ export async function POST(request: Request) {
       email: body.email.trim().toLowerCase(),
       phone: body.phone?.trim() || null,
       membership_type: body.membershipType?.trim() || "annual",
+      payment_confirmed: Boolean(body.paymentConfirmed),
       notes: body.notes?.trim() || null,
       membership_status: "pending"
     });

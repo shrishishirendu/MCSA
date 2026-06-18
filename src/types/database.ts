@@ -12,6 +12,7 @@ type MemberRow = {
   email: string;
   phone: string | null;
   membership_type: string;
+  payment_confirmed: boolean;
   notes: string | null;
   membership_status: "pending" | "approved" | "rejected";
   joined_at: string | null;
@@ -55,6 +56,7 @@ export type Database = {
           email: string;
           phone?: string | null;
           membership_type?: string;
+          payment_confirmed?: boolean;
           notes?: string | null;
           membership_status?: MemberRow["membership_status"];
           joined_at?: string | null;

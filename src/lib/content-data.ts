@@ -23,6 +23,7 @@ function mapMember(row: {
   email: string;
   phone: string | null;
   membership_type: string;
+  payment_confirmed: boolean;
   notes: string | null;
   membership_status: "pending" | "approved" | "rejected";
   joined_at: string | null;
@@ -34,6 +35,7 @@ function mapMember(row: {
     email: row.email,
     phone: row.phone,
     membershipType: row.membership_type,
+    paymentConfirmed: row.payment_confirmed,
     notes: row.notes,
     membershipStatus: row.membership_status,
     joinedAt: row.joined_at,

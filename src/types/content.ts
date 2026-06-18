@@ -40,6 +40,7 @@ export type MemberSummary = {
   email: string;
   phone?: string | null;
   membershipType?: string;
+  paymentConfirmed?: boolean;
   notes?: string | null;
   membershipStatus: MembershipStatus;
   joinedAt?: string | null;
