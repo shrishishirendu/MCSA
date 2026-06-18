@@ -24,6 +24,9 @@ const mahotsavMarquee =
 const correctedTirhutaHeroText =
   "𑒧𑒱𑒟𑒱𑒪𑒰 𑒏𑒪𑓂𑒔𑒩𑒪 𑒮𑒻𑒮𑒰𑒃𑒙𑒲 𑒍𑒮𑓂𑒙𑓂𑒩𑒹𑒪𑒱𑒨𑒰 𑒮𑒰𑓀𑒮𑓂𑒏𑒵𑒞𑒱𑒏 𑒏𑒰𑒩𑓂𑒨𑒏𑓂𑒩𑒧, 𑒧𑒺𑒟𑒱𑒪𑒲 𑒦𑒰𑒭𑒰, 𑒧𑒡𑒳𑒥𑒢𑒲 𑒏𑒪𑒰, 𑒮𑒠𑒮𑓂𑒨𑒞𑒰, 𑒮𑓂𑒫𑒨𑓀𑒮𑒹𑒫𑒰 𑒂 𑒮𑒰𑒧𑒳𑒠𑒰𑒨𑒱𑒏 𑒮𑒯𑒨𑒻𑒑𑒏 𑒧𑒰𑒡𑓂𑒨𑒧𑒮𑒿 𑒮𑒧𑓂𑒣𑒴𑒩𑓂𑒝 𑒍𑒮𑓂𑒙𑓂𑒩𑒹𑒪𑒱𑒨𑒰𑒧𑒹 𑒥𑒮𑒪 𑒧𑒺𑒟𑒱𑒪 𑒮𑒦𑒏𑒹𑒿 𑒋𑒏 𑒮𑒴𑒞𑓂𑒩𑒧𑒹 𑒖𑒻𑒛𑓃𑒺𑒞 𑒁𑒕𑒱 𑒂 𑒧𑒱𑒟𑒱𑒪𑒰𑒏 𑒫𑒱𑒩𑒰𑒮𑒞𑒏𑒹𑒿 𑒖𑒲𑒫𑒱𑒞 𑒩𑒐𑒺𑒞 𑒁𑒕𑒱।";
 
+const maithiliDevanagariHeroText =
+  "मिथिला कल्चरल सोसाइटी ऑस्ट्रेलिया सांस्कृतिक कार्यक्रम, मैथिली भाषा, मधुबनी कला, सदस्यता, स्वयंसेवा आ सामुदायिक सहयोगक माध्यमसँ सम्पूर्ण ऑस्ट्रेलियामे बसल मैथिल सभकेँ एक सूत्रमे जोड़ैत अछि आ मिथिलाक विरासतकेँ जीवित रखैत अछि।";
+
 export default function HomePage() {
   const scrollingHighlights = Array.from({ length: 6 }, () => mahotsavMarquee);
 
@@ -54,6 +57,12 @@ export default function HomePage() {
             className="font-tirhuta mt-5 border-l-2 border-lotus-500 pl-4 text-sm leading-7 text-indigoInk/75"
           >
             {correctedTirhutaHeroText}
+          </p>
+          <p
+            lang="mai"
+            className="mt-3 border-l-2 border-lotus-100 pl-4 text-sm leading-6 text-indigoInk/65"
+          >
+            {maithiliDevanagariHeroText}
           </p>
         </div>
         <HeroCarousel images={culturalImages} />
