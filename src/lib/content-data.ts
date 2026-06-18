@@ -17,6 +17,17 @@ function canUseSupabase() {
   );
 }
 
+function isAnnouncementPublished(announcement: {
+  is_published: unknown;
+  published_at: string | null;
+}) {
+  const flag = String(announcement.is_published).trim().toLowerCase();
+  return (
+    Boolean(announcement.published_at) ||
+    ["true", "t", "1", "published"].includes(flag)
+  );
+}
+
 function mapMember(row: {
   id: string;
   full_name: string;
@@ -134,9 +145,7 @@ export async function getAnnouncements(options?: {
       .filter(
         (announcement) => {
           const audience = String(announcement.audience).trim().toLowerCase();
-          const published =
-            announcement.is_published === true ||
-            String(announcement.is_published).trim().toLowerCase() === "true";
+          const published = isAnnouncementPublished(announcement);
 
           return (
             (options?.includeUnpublished || published) &&
@@ -148,9 +157,7 @@ export async function getAnnouncements(options?: {
         const audience = String(announcement.audience)
           .trim()
           .toLowerCase() as "public" | "members";
-        const published =
-          announcement.is_published === true ||
-          String(announcement.is_published).trim().toLowerCase() === "true";
+        const published = isAnnouncementPublished(announcement);
 
         return {
           id: announcement.id,
