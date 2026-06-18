@@ -28,6 +28,11 @@ function isAnnouncementPublished(announcement: {
   );
 }
 
+function announcementAudience(value: unknown): "public" | "members" {
+  const audience = String(value).trim().toLowerCase();
+  return audience.includes("member") ? "members" : "public";
+}
+
 function mapMember(row: {
   id: string;
   full_name: string;
@@ -144,7 +149,7 @@ export async function getAnnouncements(options?: {
     return data
       .filter(
         (announcement) => {
-          const audience = String(announcement.audience).trim().toLowerCase();
+          const audience = announcementAudience(announcement.audience);
           const published = isAnnouncementPublished(announcement);
 
           return (
@@ -154,9 +159,7 @@ export async function getAnnouncements(options?: {
         }
       )
       .map((announcement) => {
-        const audience = String(announcement.audience)
-          .trim()
-          .toLowerCase() as "public" | "members";
+        const audience = announcementAudience(announcement.audience);
         const published = isAnnouncementPublished(announcement);
 
         return {
