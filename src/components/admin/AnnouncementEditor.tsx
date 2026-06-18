@@ -16,9 +16,6 @@ export function AnnouncementEditor() {
     setStatus("");
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const submitter = (event.nativeEvent as SubmitEvent)
-      .submitter as HTMLButtonElement | null;
-    const publish = submitter?.value === "publish";
     const response = await fetch("/api/admin/announcements", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -27,7 +24,7 @@ export function AnnouncementEditor() {
         details: formData.get("details"),
         audience: formData.get("audience"),
         imageUrl: imageUrls[0],
-        publish
+        publish: true
       })
     });
     const result = await readJsonResponse<Record<string, never>>(response);
@@ -38,7 +35,7 @@ export function AnnouncementEditor() {
       return;
     }
 
-    setStatus(publish ? "Announcement published." : "Draft saved.");
+    setStatus("Announcement published.");
     form.reset();
     setImageUrls([]);
     setSaving(false);
@@ -93,19 +90,10 @@ export function AnnouncementEditor() {
       <div className="flex flex-wrap gap-3">
         <button
           type="submit"
-          value="publish"
           disabled={saving}
           className="min-h-11 rounded-md bg-lotus-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-lotus-700 disabled:opacity-60"
         >
           Publish announcement
-        </button>
-        <button
-          type="submit"
-          value="draft"
-          disabled={saving}
-          className="min-h-11 rounded-md border border-indigoInk/15 px-5 py-2.5 text-sm font-semibold text-indigoInk hover:border-lotus-500 disabled:opacity-60"
-        >
-          Save draft
         </button>
       </div>
     </form>

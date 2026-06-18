@@ -22,7 +22,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const publishedAt = body.publish ? new Date().toISOString() : null;
+    const publishedAt = new Date().toISOString();
     const { data, error } = await createServerSupabaseClient()
       .from("announcements")
       .insert({
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         body: body.details.trim(),
         image_url: body.imageUrl || null,
         audience: body.audience ?? "public",
-        is_published: Boolean(body.publish),
+        is_published: true,
         published_at: publishedAt
       })
       .select("*")
