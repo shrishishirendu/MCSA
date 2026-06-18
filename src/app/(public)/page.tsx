@@ -21,17 +21,8 @@ const yajmaanUrl = "https://events.humanitix.com/durga-puja/tickets";
 const mahotsavMarquee =
   "Mithila Mahotsav 2026 - Mithila Welcomes Mahashakti, from 17-19 October 2026 at Quakers Hill Community Hall, Sydney";
 
-const maithiliHeroTitle =
-  "मिथिलाक सांस्कृतिक धरोहरक संरक्षण आ आस्ट्रेलियामे समुदाय निर्माण";
-
-const maithiliHeroSummary =
-  "सांस्कृतिक कार्यक्रम, मैथिली भाषा, मधुबनी कला, सदस्यता, स्वयंसेवा आ सामुदायिक सहयोगक माध्यमसँ आस्ट्रेलियाभरि मैथिलसभकेँ जोड़ब।";
-
-const tirhutaHeroTitle =
-  "\u{114A8}\u{114B1}\u{1149F}\u{114B1}\u{114AC}\u{114B0}\u{1148F} \u{114B2}\u{114B0}\u{114C0}\u{114B2}\u{114C2}\u{1148F}\u{114B5}\u{1149E}\u{114B1}\u{1148F} \u{114A1}\u{114AA}\u{114BC}\u{114B3}\u{114AA}\u{1148F} \u{114B2}\u{114C0}\u{114AA}\u{1148F}\u{114C2}\u{114B1}\u{1149D} \u{11482} \u{11482}\u{114B2}\u{114C2}\u{11499}\u{114C2}\u{114AA}\u{114B9}\u{114AC}\u{114B1}\u{114A9}\u{114B0}\u{114A8}\u{114B9} \u{114B2}\u{114A8}\u{114B3}\u{114A0}\u{114B0}\u{114A9} \u{114A2}\u{114B1}\u{114AA}\u{114C2}\u{114A8}\u{114B0}\u{1149D}";
-
-const tirhutaHeroSummary =
-  "\u{114B2}\u{114B0}\u{114C0}\u{114B2}\u{114C2}\u{1148F}\u{114B5}\u{1149E}\u{114B1}\u{1148F} \u{1148F}\u{114B0}\u{114AA}\u{114C2}\u{114A9}\u{1148F}\u{114C2}\u{114AA}\u{114A8}, \u{114A8}\u{114BB}\u{1149F}\u{114B1}\u{114AC}\u{114B2} \u{114A7}\u{114B0}\u{114B1}\u{114B0}, \u{114A8}\u{114A1}\u{114B3}\u{114A6}\u{114A2}\u{114B2} \u{1148F}\u{114AC}\u{114B0}, \u{114B2}\u{114A0}\u{114B2}\u{114C2}\u{114A9}\u{1149E}\u{114B0}, \u{114B2}\u{114C2}\u{114AF}\u{114A9}\u{114C0}\u{114B2}\u{114B9}\u{114AF}\u{114B0} \u{11482} \u{114B2}\u{114B0}\u{114A8}\u{114B3}\u{114A0}\u{114B0}\u{114A9}\u{114B1}\u{1148F} \u{114B2}\u{114B3}\u{114A9}\u{114BC}\u{11491}\u{1148F} \u{114A8}\u{114B0}\u{114A1}\u{114C2}\u{114A9}\u{114A8}\u{114B2}\u{114BF} \u{11482}\u{114B2}\u{114C2}\u{11499}\u{114C2}\u{114AA}\u{114B9}\u{114AC}\u{114B1}\u{114A9}\u{114B0}\u{114A7}\u{114AA}\u{114B1} \u{114A8}\u{114BB}\u{1149F}\u{114B1}\u{114AC}\u{114B2}\u{114A7}\u{1148F}\u{114B9}\u{114BF} \u{11496}\u{114BC}\u{1149B}\u{114C3}\u{114A6}\u{0964}";
+const correctedTirhutaHeroText =
+  "𑒧𑒱𑒟𑒱𑒪𑒰 𑒏𑒪𑓂𑒔𑒩𑒪 𑒮𑒻𑒮𑒰𑒃𑒙𑒲 𑒍𑒮𑓂𑒙𑓂𑒩𑒹𑒪𑒱𑒨𑒰 𑒮𑒰𑓀𑒮𑓂𑒏𑒵𑒞𑒱𑒏 𑒏𑒰𑒩𑓂𑒨𑒏𑓂𑒩𑒧, 𑒧𑒺𑒟𑒱𑒪𑒲 𑒦𑒰𑒭𑒰, 𑒧𑒡𑒳𑒥𑒢𑒲 𑒏𑒪𑒰, 𑒮𑒠𑒮𑓂𑒨𑒞𑒰, 𑒮𑓂𑒫𑒨𑓀𑒮𑒹𑒫𑒰 𑒂 𑒮𑒰𑒧𑒳𑒠𑒰𑒨𑒱𑒏 𑒮𑒯𑒨𑒻𑒑𑒏 𑒧𑒰𑒡𑓂𑒨𑒧𑒮𑒿 𑒮𑒧𑓂𑒣𑒴𑒩𑓂𑒝 𑒍𑒮𑓂𑒙𑓂𑒩𑒹𑒪𑒱𑒨𑒰𑒧𑒹 𑒥𑒮𑒪 𑒧𑒺𑒟𑒱𑒪 𑒮𑒦𑒏𑒹𑒿 𑒋𑒏 𑒮𑒴𑒞𑓂𑒩𑒧𑒹 𑒖𑒻𑒛𑓃𑒺𑒞 𑒁𑒕𑒱 𑒂 𑒧𑒱𑒟𑒱𑒪𑒰𑒏 𑒫𑒱𑒩𑒰𑒮𑒞𑒏𑒹𑒿 𑒖𑒲𑒫𑒱𑒞 𑒩𑒐𑒺𑒞 𑒁𑒕𑒱।";
 
 export default function HomePage() {
   const scrollingHighlights = Array.from({ length: 6 }, () => mahotsavMarquee);
@@ -58,28 +49,12 @@ export default function HomePage() {
             membership, donations, announcements, gallery updates and community
             stories.
           </p>
-          <div className="mt-5 rounded-md border border-lotus-100 bg-lotus-50/70 p-4">
-            <p
-              lang="mai-Tirh"
-              className="font-tirhuta text-lg font-semibold leading-9 text-indigoInk"
-            >
-              {tirhutaHeroTitle}
-            </p>
-            <p
-              lang="mai-Tirh"
-              className="font-tirhuta mt-1 text-sm leading-7 text-indigoInk/70"
-            >
-              {tirhutaHeroSummary}
-            </p>
-            <div className="mt-3 border-t border-lotus-100 pt-3">
-              <p lang="mai" className="text-base font-bold text-lotus-700">
-                {maithiliHeroTitle}
-              </p>
-              <p lang="mai" className="mt-1 text-sm leading-6 text-indigoInk/65">
-                {maithiliHeroSummary}
-              </p>
-            </div>
-          </div>
+          <p
+            lang="mai-Tirh"
+            className="font-tirhuta mt-5 border-l-2 border-lotus-500 pl-4 text-sm leading-7 text-indigoInk/75"
+          >
+            {correctedTirhutaHeroText}
+          </p>
         </div>
         <HeroCarousel images={culturalImages} />
       </section>
