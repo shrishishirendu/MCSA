@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ORGANISATION_NAME, ORGANISATION_TAGLINE } from "@/lib/constants";
-import { publicNavigation } from "@/lib/navigation";
+import { footerNavigation } from "@/lib/navigation";
 import { Navigation } from "@/components/layout/Navigation";
 import { getPublicAnnouncements } from "@/lib/content-data";
 
@@ -38,7 +38,7 @@ export async function Footer() {
         </div>
 
         <div className="-ml-3 [&_a]:text-white/75 [&_a:hover]:bg-white/10 [&_a:hover]:text-white">
-          <Navigation items={publicNavigation} ariaLabel="Footer navigation" />
+          <Navigation items={footerNavigation} ariaLabel="Footer navigation" />
         </div>
 
         <p className="text-xs text-white/60">

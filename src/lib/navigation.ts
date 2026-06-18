@@ -5,8 +5,12 @@ export const publicNavigation: NavigationItem[] = [
   { label: "Events", href: "/events" },
   { label: "Gallery", href: "/gallery" },
   { label: "Blog", href: "/blog" },
-  { label: "Announcements", href: "/announcements" },
   { label: "Admin Portal", href: "/admin" }
+];
+
+export const footerNavigation: NavigationItem[] = [
+  ...publicNavigation,
+  { label: "Announcements", href: "/announcements" }
 ];
 
 export const memberNavigation: NavigationItem[] = [
