@@ -119,8 +119,14 @@ export function Header() {
               </span>
             </span>
           </Link>
-          <div className="flex flex-wrap items-center justify-end gap-2">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col items-end gap-2">
+            <div className="flex flex-wrap items-center justify-end gap-2">
+              <Button href="/member" variant="secondary" className="bg-white/92">
+                Member Portal
+              </Button>
+              <Button href="/membership">Join / Donate</Button>
+            </div>
+            <div className="flex items-center justify-center gap-2 self-center">
               {socialLinks.map((link) => (
                 <Link
                   key={link.label}
@@ -135,10 +141,6 @@ export function Header() {
                 </Link>
               ))}
             </div>
-            <Button href="/member" variant="secondary" className="bg-white/92">
-              Member Portal
-            </Button>
-            <Button href="/membership">Join / Donate</Button>
           </div>
         </div>
         <div className="mt-4 [&_a]:bg-transparent [&_a]:font-bold [&_a]:text-white [&_a]:drop-shadow-[0_2px_4px_rgba(0,0,0,0.55)] [&_a:hover]:bg-white/15 [&_a:hover]:text-turmeric">
