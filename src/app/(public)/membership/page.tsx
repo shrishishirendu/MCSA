@@ -2,7 +2,7 @@ import { membershipOptions } from "@/data/placeholders";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { FieldGroup, Label, TextArea, TextInput } from "@/components/ui/Form";
+import { MembershipApplicationForm } from "@/components/membership/MembershipApplicationForm";
 
 export default function MembershipPage() {
   return (
@@ -34,41 +34,10 @@ export default function MembershipPage() {
               Membership request
             </h2>
             <p className="mt-2 text-sm leading-6 text-indigoInk/70">
-              Collect the basic request first. Admin approval and payment
-              confirmation can be connected in the next implementation phase.
+              Submit your details for committee review. The application will
+              appear in the admin portal for approval.
             </p>
-            <form className="mt-6 grid gap-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <FieldGroup>
-                  <Label htmlFor="fullName">Full name</Label>
-                  <TextInput id="fullName" placeholder="Your name" />
-                </FieldGroup>
-                <FieldGroup>
-                  <Label htmlFor="email">Email</Label>
-                  <TextInput id="email" type="email" placeholder="you@example.com" />
-                </FieldGroup>
-              </div>
-              <FieldGroup>
-                <Label htmlFor="membershipType">Membership or donation type</Label>
-                <TextInput
-                  id="membershipType"
-                  placeholder="Annual, renewal, lifetime or donation"
-                />
-              </FieldGroup>
-              <FieldGroup>
-                <Label htmlFor="notes">Notes</Label>
-                <TextArea
-                  id="notes"
-                  placeholder="Family details, renewal information, donation message or payment notes"
-                />
-              </FieldGroup>
-              <div className="flex flex-wrap gap-3">
-                <Button type="button">Submit request</Button>
-                <Button type="button" variant="secondary">
-                  Payment ready
-                </Button>
-              </div>
-            </form>
+            <MembershipApplicationForm />
           </Card>
 
           <Card>

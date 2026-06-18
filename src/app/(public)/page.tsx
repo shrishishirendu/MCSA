@@ -1,6 +1,5 @@
 import {
   advisors,
-  blogPosts,
   coreCommittee,
   culturalImages
 } from "@/data/placeholders";
@@ -10,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
 import { UpcomingEventPopup } from "@/components/sections/UpcomingEventPopup";
+import { getBlogPosts } from "@/lib/content-data";
 
 const memberJoiningFormUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
@@ -27,7 +27,10 @@ const correctedTirhutaHeroText =
 const maithiliDevanagariHeroText =
   "मिथिला कल्चरल सोसाइटी ऑस्ट्रेलिया सांस्कृतिक कार्यक्रम, मैथिली भाषा, मधुबनी कला, सदस्यता, स्वयंसेवा आ सामुदायिक सहयोगक माध्यमसँ सम्पूर्ण ऑस्ट्रेलियामे बसल मैथिल सभकेँ एक सूत्रमे जोड़ैत अछि आ मिथिलाक विरासतकेँ जीवित रखैत अछि।";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const blogPosts = (await getBlogPosts()).slice(0, 3);
   const scrollingHighlights = Array.from({ length: 6 }, () => mahotsavMarquee);
 
   return (

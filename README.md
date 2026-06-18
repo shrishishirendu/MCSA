@@ -22,4 +22,23 @@ Open `http://localhost:3000`.
 
 ## Current Scope
 
-This repository contains the page and layout foundation only. Payments, authentication, database schema, and live integrations are intentionally not implemented yet.
+## Admin content and membership setup
+
+Member approvals, blog publishing and announcements use Supabase. To activate
+them:
+
+1. Create or select a Supabase project.
+2. Run `supabase/migrations/202606180001_admin_content.sql` in the Supabase SQL
+   editor.
+3. Add these environment variables to the Vercel project:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `ADMIN_ACCESS_KEY` (a long private password used for `/admin-login`)
+4. Redeploy the application.
+
+The service-role key is used only by server routes. Database tables have row
+level security enabled, and admin write endpoints require an authenticated
+admin cookie.
+
+Payments and full member account authentication remain future integrations.

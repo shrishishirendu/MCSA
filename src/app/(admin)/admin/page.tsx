@@ -1,20 +1,18 @@
 import Link from "next/link";
 import {
-  announcements,
-  blogPosts,
   donations,
   eventPaymentRecords,
   managedEvents,
-  members
 } from "@/data/placeholders";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import {
+  getAnnouncements,
+  getBlogPosts,
+  getMembers
+} from "@/lib/content-data";
 
-const pendingEvents = managedEvents.filter((event) => event.needsApproval);
-const pendingMembers = members.filter(
-  (member) => member.membershipStatus === "pending"
-);
 const pendingPayments = eventPaymentRecords.filter(
   (payment) => payment.status === "pending"
 );
@@ -23,52 +21,63 @@ const receivedDonations = donations.reduce(
   0
 );
 
-const managementAreas = [
-  {
-    title: "Members",
-    description: "Review applications and maintain membership records.",
-    href: "/admin/members",
-    count: members.length,
-    countLabel: "records"
-  },
-  {
-    title: "Events",
-    description: "Review, approve and publish society events.",
-    href: "/admin/events",
-    count: managedEvents.length,
-    countLabel: "events"
-  },
-  {
-    title: "Tickets",
-    description: "Check registrations, payments and attendee records.",
-    href: "/admin/tickets",
-    count: eventPaymentRecords.length,
-    countLabel: "payments"
-  },
-  {
-    title: "Donations",
-    description: "Track donations and payment reconciliation.",
-    href: "/admin/donations",
-    count: donations.length,
-    countLabel: "donations"
-  },
-  {
-    title: "Blog posts",
-    description: "Manage society updates and cultural articles.",
-    href: "/admin/blog-posts",
-    count: blogPosts.length,
-    countLabel: "posts"
-  },
-  {
-    title: "Announcements",
-    description: "Publish updates for members and the public.",
-    href: "/admin/announcements",
-    count: announcements.length,
-    countLabel: "notices"
-  }
-];
+export const dynamic = "force-dynamic";
 
-export default function AdminDashboardPage() {
+export default async function AdminDashboardPage() {
+  const [members, blogPosts, announcements] = await Promise.all([
+    getMembers(),
+    getBlogPosts({ includeDrafts: true }),
+    getAnnouncements({ includeUnpublished: true })
+  ]);
+  const pendingEvents = managedEvents.filter((event) => event.needsApproval);
+  const pendingMembers = members.filter(
+    (member) => member.membershipStatus === "pending"
+  );
+  const managementAreas = [
+    {
+      title: "Members",
+      description: "Review applications and maintain membership records.",
+      href: "/admin/members",
+      count: members.length,
+      countLabel: "records"
+    },
+    {
+      title: "Events",
+      description: "Review, approve and publish society events.",
+      href: "/admin/events",
+      count: managedEvents.length,
+      countLabel: "events"
+    },
+    {
+      title: "Tickets",
+      description: "Check registrations, payments and attendee records.",
+      href: "/admin/tickets",
+      count: eventPaymentRecords.length,
+      countLabel: "payments"
+    },
+    {
+      title: "Donations",
+      description: "Track donations and payment reconciliation.",
+      href: "/admin/donations",
+      count: donations.length,
+      countLabel: "donations"
+    },
+    {
+      title: "Blog posts",
+      description: "Manage society updates and cultural articles.",
+      href: "/admin/blog-posts",
+      count: blogPosts.length,
+      countLabel: "posts"
+    },
+    {
+      title: "Announcements",
+      description: "Publish updates for members and the public.",
+      href: "/admin/announcements",
+      count: announcements.length,
+      countLabel: "notices"
+    }
+  ];
+
   return (
     <PageLayout
       eyebrow="Operations overview"

@@ -32,6 +32,15 @@ export function PortalShell({ title, navigation, children }: PortalShellProps) {
             >
               Public website
             </Link>
+            <form action="/api/admin/session" method="post">
+              <input type="hidden" name="action" value="logout" />
+              <button
+                type="submit"
+                className="rounded-md px-3 py-2 text-sm font-semibold text-indigoInk/65 hover:bg-lotus-50 hover:text-lotus-700"
+              >
+                Sign out
+              </button>
+            </form>
           </div>
         </div>
       </header>
