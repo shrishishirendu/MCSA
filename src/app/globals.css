@@ -23,6 +23,10 @@ body {
   color: #26324d;
 }
 
+.font-tirhuta {
+  font-family: "Noto Sans Tirhuta", "Segoe UI Historic", "Nirmala UI", serif;
+}
+
 ::selection {
   background: #ffe8dc;
   color: #87351f;
