@@ -309,9 +309,20 @@ export default function HomePage() {
                 Reach out for membership, events, volunteering, donations,
                 partnerships and community announcements.
               </p>
+              <a
+                href="mailto:mithilaculturalsoc@gmail.com"
+                className="mt-3 inline-block text-base font-bold text-white underline decoration-lotus-100/70 underline-offset-4 transition hover:text-turmeric"
+              >
+                mithilaculturalsoc@gmail.com
+              </a>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/75">
+                You may also contact any of our elected committee members
+                directly using the phone numbers listed in the Leadership
+                section above.
+              </p>
             </div>
             <Button
-              href="mailto:info@mithilaculturalsocietyaustralia.org"
+              href="mailto:mithilaculturalsoc@gmail.com"
               variant="secondary"
               className="bg-white"
             >
