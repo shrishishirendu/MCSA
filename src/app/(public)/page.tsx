@@ -54,7 +54,7 @@ export default function HomePage() {
           </p>
           <p
             lang="mai-Tirh"
-            className="font-tirhuta mt-5 border-l-2 border-lotus-500 pl-4 text-sm leading-7 text-indigoInk/75"
+            className="font-tirhuta mt-5 border-l-2 border-lotus-500 pl-4 text-sm leading-7 text-lotus-700"
           >
             {correctedTirhutaHeroText}
           </p>
