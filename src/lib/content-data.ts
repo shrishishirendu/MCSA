@@ -132,19 +132,36 @@ export async function getAnnouncements(options?: {
 
     return data
       .filter(
-        (announcement) =>
-          (options?.includeUnpublished || announcement.is_published) &&
-          (!options?.audience || announcement.audience === options.audience)
+        (announcement) => {
+          const audience = String(announcement.audience).trim().toLowerCase();
+          const published =
+            announcement.is_published === true ||
+            String(announcement.is_published).trim().toLowerCase() === "true";
+
+          return (
+            (options?.includeUnpublished || published) &&
+            (!options?.audience || audience === options.audience)
+          );
+        }
       )
-      .map((announcement) => ({
-        id: announcement.id,
-        title: announcement.title,
-        body: announcement.body,
-        imageUrl: announcement.image_url,
-        audience: announcement.audience,
-        isPublished: announcement.is_published,
-        publishedAt: announcement.published_at ?? announcement.created_at
-      }));
+      .map((announcement) => {
+        const audience = String(announcement.audience)
+          .trim()
+          .toLowerCase() as "public" | "members";
+        const published =
+          announcement.is_published === true ||
+          String(announcement.is_published).trim().toLowerCase() === "true";
+
+        return {
+          id: announcement.id,
+          title: announcement.title,
+          body: announcement.body,
+          imageUrl: announcement.image_url,
+          audience,
+          isPublished: published,
+          publishedAt: announcement.published_at ?? announcement.created_at
+        };
+      });
   } catch {
     return fallbackAnnouncements.filter(
       (announcement) =>
