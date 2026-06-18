@@ -74,28 +74,29 @@ export async function getBlogPosts(options?: {
   }
 
   try {
-    let query = createServerSupabaseClient()
+    const { data, error } = await createServerSupabaseClient()
       .from("blog_posts")
       .select("*")
       .order("published_at", { ascending: false });
 
-    if (!options?.includeDrafts) {
-      query = query.eq("status", "published");
-    }
-
-    const { data, error } = await query;
     if (error) throw error;
 
-    return data.map((post) => ({
-      id: post.id,
-      title: post.title,
-      slug: post.slug,
-      excerpt: post.excerpt,
-      body: post.body,
-      imageUrls: post.image_urls,
-      status: post.status,
-      publishedAt: post.published_at ?? post.created_at
-    }));
+    return data
+      .filter(
+        (post) =>
+          options?.includeDrafts ||
+          post.status.trim().toLowerCase() === "published"
+      )
+      .map((post) => ({
+        id: post.id,
+        title: post.title,
+        slug: post.slug,
+        excerpt: post.excerpt,
+        body: post.body,
+        imageUrls: post.image_urls,
+        status: post.status,
+        publishedAt: post.published_at ?? post.created_at
+      }));
   } catch {
     return fallbackBlogPosts;
   }
@@ -120,30 +121,28 @@ export async function getAnnouncements(options?: {
   }
 
   try {
-    let query = createServerSupabaseClient()
+    const { data, error } = await createServerSupabaseClient()
       .from("announcements")
       .select("*")
       .order("published_at", { ascending: false });
 
-    if (!options?.includeUnpublished) {
-      query = query.eq("is_published", true);
-    }
-    if (options?.audience) {
-      query = query.eq("audience", options.audience);
-    }
-
-    const { data, error } = await query;
     if (error) throw error;
 
-    return data.map((announcement) => ({
-      id: announcement.id,
-      title: announcement.title,
-      body: announcement.body,
-      imageUrl: announcement.image_url,
-      audience: announcement.audience,
-      isPublished: announcement.is_published,
-      publishedAt: announcement.published_at ?? announcement.created_at
-    }));
+    return data
+      .filter(
+        (announcement) =>
+          (options?.includeUnpublished || announcement.is_published) &&
+          (!options?.audience || announcement.audience === options.audience)
+      )
+      .map((announcement) => ({
+        id: announcement.id,
+        title: announcement.title,
+        body: announcement.body,
+        imageUrl: announcement.image_url,
+        audience: announcement.audience,
+        isPublished: announcement.is_published,
+        publishedAt: announcement.published_at ?? announcement.created_at
+      }));
   } catch {
     return fallbackAnnouncements.filter(
       (announcement) =>
