@@ -10,7 +10,7 @@ import { Card } from "@/components/ui/Card";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
 import { UpcomingEventPopup } from "@/components/sections/UpcomingEventPopup";
 import { AnnouncementShowcase } from "@/components/sections/AnnouncementShowcase";
-import { getAnnouncements, getBlogPosts } from "@/lib/content-data";
+import { getBlogPosts, getPublicAnnouncements } from "@/lib/content-data";
 
 const memberJoiningFormUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
@@ -33,7 +33,7 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const [blogPosts, announcements] = await Promise.all([
     getBlogPosts(),
-    getAnnouncements({ includeUnpublished: true })
+    getPublicAnnouncements()
   ]);
   const latestBlogPosts = blogPosts.slice(0, 3);
   const latestAnnouncements = announcements.slice(0, 3);

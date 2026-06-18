@@ -183,3 +183,36 @@ export async function getAnnouncements(options?: {
     );
   }
 }
+
+export async function getPublicAnnouncements(): Promise<Announcement[]> {
+  if (!canUseSupabase()) {
+    return fallbackAnnouncements.filter(
+      (announcement) => announcement.audience === "public"
+    );
+  }
+
+  try {
+    const { data, error } = await createServerSupabaseClient()
+      .from("announcements")
+      .select(
+        "id,title,body,image_url,audience,is_published,published_at,created_at"
+      )
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    return data.map((announcement) => ({
+      id: announcement.id,
+      title: announcement.title,
+      body: announcement.body,
+      imageUrl: announcement.image_url,
+      audience: "public",
+      isPublished: true,
+      publishedAt: announcement.published_at ?? announcement.created_at
+    }));
+  } catch {
+    return fallbackAnnouncements.filter(
+      (announcement) => announcement.audience === "public"
+    );
+  }
+}

@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { PageLayout } from "@/components/layout/PageLayout";
-import { getAnnouncements } from "@/lib/content-data";
+import { getPublicAnnouncements } from "@/lib/content-data";
 
 export const dynamic = "force-dynamic";
 
 export default async function AnnouncementsPage() {
-  const announcements = await getAnnouncements({ includeUnpublished: true });
+  const announcements = await getPublicAnnouncements();
 
   return (
     <PageLayout

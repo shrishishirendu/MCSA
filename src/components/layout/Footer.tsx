@@ -2,12 +2,10 @@ import Link from "next/link";
 import { ORGANISATION_NAME, ORGANISATION_TAGLINE } from "@/lib/constants";
 import { publicNavigation } from "@/lib/navigation";
 import { Navigation } from "@/components/layout/Navigation";
-import { getAnnouncements } from "@/lib/content-data";
+import { getPublicAnnouncements } from "@/lib/content-data";
 
 export async function Footer() {
-  const announcementCount = (
-    await getAnnouncements({ includeUnpublished: true })
-  ).length;
+  const announcementCount = (await getPublicAnnouncements()).length;
 
   return (
     <footer className="border-t border-indigoInk/10 bg-indigoInk text-white">
