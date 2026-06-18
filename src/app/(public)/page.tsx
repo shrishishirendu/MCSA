@@ -296,26 +296,26 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
-        <Card className="bg-indigoInk text-white">
+        <Card className="bg-white text-indigoInk">
           <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-lotus-100">
+              <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
                 Contact
               </p>
               <h2 className="mt-3 text-2xl font-bold">
                 Connect with Mithila Cultural Society Australia
               </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/75">
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-indigoInk/75">
                 Reach out for membership, events, volunteering, donations,
                 partnerships and community announcements.
               </p>
               <a
                 href="mailto:mithilaculturalsoc@gmail.com"
-                className="mt-3 inline-block text-base font-bold text-white underline decoration-lotus-100/70 underline-offset-4 transition hover:text-turmeric"
+                className="mt-3 inline-block text-base font-bold text-indigoInk underline decoration-lotus-500/70 underline-offset-4 transition hover:text-lotus-700"
               >
                 mithilaculturalsoc@gmail.com
               </a>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/75">
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-indigoInk/75">
                 You may also contact any of our elected committee members
                 directly using the phone numbers listed in the Leadership
                 section above.
