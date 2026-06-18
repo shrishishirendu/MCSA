@@ -12,35 +12,51 @@ type PortalShellProps = {
 export function PortalShell({ title, navigation, children }: PortalShellProps) {
   return (
     <div className="min-h-screen bg-lotus-50/45">
-      <header className="border-b border-indigoInk/10 bg-white">
+      <header className="border-b border-indigoInk/10 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="text-sm font-bold text-indigoInk">
-            {ORGANISATION_NAME}
-          </Link>
-          <Link
-            href="/"
-            className="rounded-md px-3 py-2 text-sm font-semibold text-lotus-700 hover:bg-lotus-50"
-          >
-            Public website
-          </Link>
+          <div>
+            <Link href="/" className="text-sm font-bold text-indigoInk">
+              {ORGANISATION_NAME}
+            </Link>
+            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-lotus-700">
+              {title}
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="hidden rounded-full bg-turmeric/15 px-3 py-1.5 text-xs font-semibold text-indigoInk sm:inline-flex">
+              Admin workspace
+            </span>
+            <Link
+              href="/"
+              className="rounded-md px-3 py-2 text-sm font-semibold text-lotus-700 hover:bg-lotus-50"
+            >
+              Public website
+            </Link>
+          </div>
         </div>
       </header>
       <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[240px_1fr] lg:px-8">
-        <aside className="rounded-lg border border-indigoInk/10 bg-white p-4 shadow-soft">
+        <aside className="h-fit rounded-lg border border-indigoInk/10 bg-white p-4 shadow-soft lg:sticky lg:top-6">
           <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-indigoInk/55">
-            {title}
+            Manage
           </p>
           <nav className="grid gap-1" aria-label={`${title} navigation`}>
             {navigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-md px-3 py-2 text-sm font-medium text-indigoInk/75 hover:bg-lotus-50 hover:text-lotus-700"
+                className="rounded-md px-3 py-2.5 text-sm font-semibold text-indigoInk/75 transition hover:bg-lotus-50 hover:text-lotus-700 focus:outline-none focus:ring-2 focus:ring-lotus-500"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
+          <div className="mt-5 border-t border-indigoInk/10 pt-4">
+            <p className="text-xs leading-5 text-indigoInk/50">
+              Administrative actions remain subject to final committee
+              approval.
+            </p>
+          </div>
         </aside>
         <main>{children}</main>
       </div>

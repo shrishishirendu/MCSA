@@ -5,7 +5,7 @@ export const publicNavigation: NavigationItem[] = [
   { label: "Events", href: "/events" },
   { label: "Gallery", href: "/gallery" },
   { label: "Blog", href: "/blog" },
-  { label: "Admin", href: "/admin" }
+  { label: "Admin Portal", href: "/admin" }
 ];
 
 export const memberNavigation: NavigationItem[] = [
