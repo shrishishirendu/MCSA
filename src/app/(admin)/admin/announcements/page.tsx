@@ -11,7 +11,7 @@ export default async function AdminAnnouncementsPage() {
   return (
     <PageLayout
       title="Announcements"
-      description="Create a notice with an optional image. Public announcements appear in the website footer."
+      description="Create a notice with an optional image. Public announcements appear prominently on the homepage and in the public announcements archive."
       className="px-0 py-0"
     >
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)]">

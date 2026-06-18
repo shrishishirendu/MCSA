@@ -121,8 +121,12 @@ export function Header() {
           </Link>
           <div className="flex flex-col items-end gap-2">
             <div className="flex flex-wrap items-center justify-end gap-2">
-              <Button href="/member" variant="secondary" className="bg-white/92">
-                Member Portal
+              <Button
+                href="/announcements"
+                variant="secondary"
+                className="bg-white/92"
+              >
+                Announcements
               </Button>
               <Button href="/membership">Join / Donate</Button>
             </div>

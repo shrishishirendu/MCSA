@@ -77,7 +77,7 @@ export function AnnouncementEditor() {
           className="min-h-11 rounded-md border border-indigoInk/15 bg-white px-3 text-sm text-indigoInk outline-none focus:border-lotus-500 focus:ring-2 focus:ring-lotus-100"
           defaultValue="public"
         >
-          <option value="public">Public — show on homepage footer</option>
+          <option value="public">Public — show on homepage</option>
           <option value="members">Members only</option>
         </select>
       </FieldGroup>

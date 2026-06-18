@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
 import { UpcomingEventPopup } from "@/components/sections/UpcomingEventPopup";
-import { getBlogPosts } from "@/lib/content-data";
+import { AnnouncementShowcase } from "@/components/sections/AnnouncementShowcase";
+import { getAnnouncements, getBlogPosts } from "@/lib/content-data";
 
 const memberJoiningFormUrl =
   "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
@@ -30,7 +31,12 @@ const maithiliDevanagariHeroText =
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const blogPosts = (await getBlogPosts()).slice(0, 3);
+  const [blogPosts, announcements] = await Promise.all([
+    getBlogPosts(),
+    getAnnouncements({ audience: "public" })
+  ]);
+  const latestBlogPosts = blogPosts.slice(0, 3);
+  const latestAnnouncements = announcements.slice(0, 3);
   const scrollingHighlights = Array.from({ length: 6 }, () => mahotsavMarquee);
 
   return (
@@ -218,6 +224,8 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <AnnouncementShowcase announcements={latestAnnouncements} />
+
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <Card>
           <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
@@ -266,7 +274,7 @@ export default async function HomePage() {
       <section className="mx-auto grid max-w-7xl gap-4 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8">
         <Card>
           <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-            Member Portal
+            Membership
           </p>
           <h2 className="mt-3 text-xl font-bold text-indigoInk">
             Join Mithila Cultural Society Australia
@@ -278,8 +286,8 @@ export default async function HomePage() {
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Button href={memberJoiningFormUrl}>Open joining form</Button>
-            <Button href="/member" variant="secondary">
-              Member Portal
+            <Button href="/membership" variant="secondary">
+              Membership details
             </Button>
           </div>
         </Card>
@@ -306,7 +314,7 @@ export default async function HomePage() {
         <Card className="lg:col-span-2">
           <h2 className="text-xl font-bold text-indigoInk">Latest stories</h2>
           <div className="mt-4 grid gap-3">
-            {blogPosts.map((post) => (
+            {latestBlogPosts.map((post) => (
               <div key={post.id} className="rounded-md bg-lotus-50 p-4">
                 <p className="font-semibold text-indigoInk">{post.title}</p>
                 <p className="text-sm text-indigoInk/65">{post.excerpt}</p>
