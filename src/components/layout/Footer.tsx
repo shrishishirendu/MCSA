@@ -19,11 +19,16 @@ export function Footer() {
               For membership, events, donations and community enquiries.
             </p>
             <a
-              href="mailto:info@mithilaculturalsocietyaustralia.org"
+              href="mailto:mithilaculturalsoc@gmail.com"
               className="mt-3 inline-block text-sm font-semibold text-white hover:text-lotus-100"
             >
-              info@mithilaculturalsocietyaustralia.org
+              mithilaculturalsoc@gmail.com
             </a>
+            <p className="mt-3 text-sm leading-6 text-white/75">
+              You may also contact an elected committee member directly using
+              the phone numbers listed in the Leadership section on the home
+              page.
+            </p>
           </div>
         </div>
         <div className="[&_a]:text-white/75 [&_a:hover]:bg-white/10 [&_a:hover]:text-white">
