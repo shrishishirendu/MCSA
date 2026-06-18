@@ -22,7 +22,6 @@ export function AnnouncementEditor() {
       body: JSON.stringify({
         title: formData.get("title"),
         details: formData.get("details"),
-        audience: formData.get("audience"),
         imageUrl: imageUrls[0],
         publish: true
       })
@@ -66,18 +65,10 @@ export function AnnouncementEditor() {
           required
         />
       </FieldGroup>
-      <FieldGroup>
-        <Label htmlFor="announcement-audience">Audience</Label>
-        <select
-          id="announcement-audience"
-          name="audience"
-          className="min-h-11 rounded-md border border-indigoInk/15 bg-white px-3 text-sm text-indigoInk outline-none focus:border-lotus-500 focus:ring-2 focus:ring-lotus-100"
-          defaultValue="public"
-        >
-          <option value="public">Public — show on homepage</option>
-          <option value="members">Members only</option>
-        </select>
-      </FieldGroup>
+      <div className="rounded-md border border-lotus-100 bg-lotus-50 px-4 py-3 text-sm text-indigoInk/70">
+        Announcements are published publicly on the homepage and announcements
+        page.
+      </div>
       <FieldGroup>
         <Label>Announcement image</Label>
         <ContentImagePicker urls={imageUrls} onChange={setImageUrls} />

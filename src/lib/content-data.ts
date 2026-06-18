@@ -153,7 +153,9 @@ export async function getAnnouncements(options?: {
           const published = isAnnouncementPublished(announcement);
 
           return (
-            (!options?.audience || audience === options.audience) &&
+            (!options?.audience ||
+              options.audience === "public" ||
+              audience === options.audience) &&
             (options?.includeUnpublished ||
               published ||
               options?.audience === "public")

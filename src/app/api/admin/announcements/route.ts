@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         title: body.title.trim(),
         body: body.details.trim(),
         image_url: body.imageUrl || null,
-        audience: body.audience ?? "public",
+        audience: "public",
         is_published: true,
         published_at: publishedAt
       })
