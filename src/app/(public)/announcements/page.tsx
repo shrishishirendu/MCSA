@@ -5,7 +5,7 @@ import { getAnnouncements } from "@/lib/content-data";
 export const dynamic = "force-dynamic";
 
 export default async function AnnouncementsPage() {
-  const announcements = await getAnnouncements({ audience: "public" });
+  const announcements = await getAnnouncements({ includeUnpublished: true });
 
   return (
     <PageLayout

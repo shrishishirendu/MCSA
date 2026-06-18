@@ -6,7 +6,7 @@ import { getAnnouncements } from "@/lib/content-data";
 
 export async function Footer() {
   const announcementCount = (
-    await getAnnouncements({ audience: "public" })
+    await getAnnouncements({ includeUnpublished: true })
   ).length;
 
   return (

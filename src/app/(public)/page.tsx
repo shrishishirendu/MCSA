@@ -33,7 +33,7 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const [blogPosts, announcements] = await Promise.all([
     getBlogPosts(),
-    getAnnouncements({ audience: "public" })
+    getAnnouncements({ includeUnpublished: true })
   ]);
   const latestBlogPosts = blogPosts.slice(0, 3);
   const latestAnnouncements = announcements.slice(0, 3);
