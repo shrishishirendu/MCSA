@@ -224,8 +224,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <AnnouncementShowcase announcements={latestAnnouncements} />
-
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <Card>
           <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
@@ -323,6 +321,8 @@ export default async function HomePage() {
           </div>
         </Card>
       </section>
+
+      <AnnouncementShowcase announcements={latestAnnouncements} />
 
     </main>
   );
