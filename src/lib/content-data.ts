@@ -124,8 +124,42 @@ export async function getBlogPosts(options?: {
 export async function getBlogPostBySlug(
   slug: string
 ): Promise<BlogPostSummary | null> {
-  const posts = await getBlogPosts();
+  const posts = await getPublishedBlogPosts();
   return posts.find((post) => post.slug === slug || post.id === slug) ?? null;
+}
+
+export async function getPublishedBlogPosts(): Promise<BlogPostSummary[]> {
+  if (!canUseSupabase()) return fallbackBlogPosts;
+
+  try {
+    const { data, error } = await createServerSupabaseClient()
+      .from("blog_posts")
+      .select(
+        "id,title,slug,excerpt,body,image_urls,status,published_at,created_at"
+      )
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    return data
+      .filter(
+        (post) =>
+          Boolean(post.published_at) ||
+          String(post.status).trim().toLowerCase() === "published"
+      )
+      .map((post) => ({
+        id: post.id,
+        title: post.title,
+        slug: post.slug,
+        excerpt: post.excerpt,
+        body: post.body,
+        imageUrls: post.image_urls ?? [],
+        status: "published",
+        publishedAt: post.published_at ?? post.created_at
+      }));
+  } catch {
+    return fallbackBlogPosts;
+  }
 }
 
 export async function getAnnouncements(options?: {

@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { getBlogPosts } from "@/lib/content-data";
+import { getPublishedBlogPosts } from "@/lib/content-data";
 
 export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
-  const posts = await getBlogPosts();
+  const posts = await getPublishedBlogPosts();
 
   return (
     <PageLayout

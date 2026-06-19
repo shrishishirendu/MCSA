@@ -83,10 +83,10 @@ export function BlogEditor({ posts }: { posts: BlogPostSummary[] }) {
         </FieldGroup>
         {status ? <p className="text-sm font-semibold text-lotus-700">{status}</p> : null}
         <div className="flex flex-wrap gap-3">
-          <button type="submit" value="publish" disabled={saving} className="min-h-11 rounded-md bg-lotus-500 px-5 text-sm font-semibold text-white hover:bg-lotus-700 disabled:opacity-60">
+          <button type="submit" name="intent" value="publish" disabled={saving} className="min-h-11 rounded-md bg-lotus-500 px-5 text-sm font-semibold text-white hover:bg-lotus-700 disabled:opacity-60">
             {selected ? "Update and publish" : "Publish to blog"}
           </button>
-          <button type="submit" value="draft" disabled={saving} className="min-h-11 rounded-md border border-indigoInk/15 px-5 text-sm font-semibold text-indigoInk">
+          <button type="submit" name="intent" value="draft" disabled={saving} className="min-h-11 rounded-md border border-indigoInk/15 px-5 text-sm font-semibold text-indigoInk">
             {selected ? "Update as draft" : "Save draft"}
           </button>
           {selected ? <button type="button" onClick={() => reset()} className="min-h-11 rounded-md px-4 text-sm font-semibold text-indigoInk/65">Cancel edit</button> : null}
