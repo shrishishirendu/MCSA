@@ -7,6 +7,7 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type {
   Announcement,
   BlogPostSummary,
+  ManagedEvent,
   MemberSummary
 } from "@/types/content";
 
@@ -214,5 +215,42 @@ export async function getPublicAnnouncements(): Promise<Announcement[]> {
     return fallbackAnnouncements.filter(
       (announcement) => announcement.audience === "public"
     );
+  }
+}
+
+export async function getManagedEvents(options?: {
+  includeDrafts?: boolean;
+}): Promise<ManagedEvent[]> {
+  if (!canUseSupabase()) return [];
+
+  try {
+    const { data, error } = await createServerSupabaseClient()
+      .from("events")
+      .select("*")
+      .order("date", { ascending: true });
+
+    if (error) throw error;
+
+    return data
+      .filter(
+        (event) => options?.includeDrafts || event.status === "published"
+      )
+      .map((event) => ({
+        id: event.id,
+        title: event.title,
+        date: event.date,
+        time: event.time,
+        venue: event.venue,
+        city: event.city,
+        summary: event.summary,
+        ticketingUrl: event.ticketing_url,
+        priceLabel: event.price_label,
+        audience: event.audience,
+        status: event.status,
+        imageUrl: event.image_url,
+        createdAt: event.created_at
+      }));
+  } catch {
+    return [];
   }
 }

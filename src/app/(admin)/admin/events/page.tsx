@@ -1,17 +1,19 @@
-import { featuredEvents } from "@/data/placeholders";
+import { EventEditor } from "@/components/admin/EventEditor";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { FeatureGrid } from "@/components/sections/FeatureGrid";
+import { getManagedEvents } from "@/lib/content-data";
 
-export default function AdminEventsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AdminEventsPage() {
+  const events = await getManagedEvents({ includeDrafts: true });
+
   return (
-    <PageLayout title="Events" description="Admin event creation and publishing foundation." className="px-0 py-0">
-      <FeatureGrid
-        features={featuredEvents.map((event) => ({
-          title: event.title,
-          description: event.location,
-          meta: `${event.date} · ${event.status}`
-        }))}
-      />
+    <PageLayout
+      title="Events"
+      description="Create, publish and edit official event listings. Published events appear on the public Events page."
+      className="px-0 py-0"
+    >
+      <EventEditor events={events} />
     </PageLayout>
   );
 }

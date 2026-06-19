@@ -45,6 +45,23 @@ type AnnouncementRow = {
   updated_at: string;
 };
 
+type EventRow = {
+  id: string;
+  title: string;
+  date: string;
+  time: string;
+  venue: string;
+  city: string;
+  summary: string;
+  ticketing_url: string;
+  price_label: string;
+  audience: string;
+  status: "draft" | "published";
+  image_url: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -100,26 +117,24 @@ export type Database = {
         Relationships: [];
       };
       events: {
-        Row: {
-          id: string;
-          title: string;
-          date: string;
-          location: string;
-          status: string;
-        };
+        Row: EventRow;
         Insert: {
           id?: string;
           title: string;
           date: string;
-          location: string;
-          status?: string;
+          time?: string;
+          venue: string;
+          city?: string;
+          summary: string;
+          ticketing_url?: string;
+          price_label?: string;
+          audience?: string;
+          status?: EventRow["status"];
+          image_url?: string | null;
+          created_at?: string;
+          updated_at?: string;
         };
-        Update: {
-          title?: string;
-          date?: string;
-          location?: string;
-          status?: string;
-        };
+        Update: Partial<Omit<EventRow, "id" | "created_at">>;
         Relationships: [];
       };
     };

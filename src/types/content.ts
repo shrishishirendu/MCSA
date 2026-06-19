@@ -6,6 +6,22 @@ export type EventSummary = {
   status: "draft" | "published" | "completed";
 };
 
+export type ManagedEvent = {
+  id: string;
+  title: string;
+  date: string;
+  time: string;
+  venue: string;
+  city: string;
+  summary: string;
+  ticketingUrl: string;
+  priceLabel: string;
+  audience: string;
+  status: "draft" | "published";
+  imageUrl?: string | null;
+  createdAt: string;
+};
+
 export type BlogPostSummary = {
   id: string;
   title: string;
