@@ -14,7 +14,7 @@ export default async function EventsPage() {
       description="Find approved MCSA events and register through the selected event platform. City groups can manage ticketing externally while MCSA keeps final publishing control."
     >
       <ManagedEventGrid events={events} />
-      <EventManagementWorkspace />
+      <EventManagementWorkspace hideOfficialEvents={events.length > 0} />
     </PageLayout>
   );
 }

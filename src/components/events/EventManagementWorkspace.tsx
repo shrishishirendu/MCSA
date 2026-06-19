@@ -20,12 +20,16 @@ const statusLabel = {
   "needs-ticket-link": "Needs ticket link"
 };
 
-export function EventManagementWorkspace() {
+export function EventManagementWorkspace({
+  hideOfficialEvents = false
+}: {
+  hideOfficialEvents?: boolean;
+}) {
   const activeCityGroups = eventGroups.filter((group) => group.id !== "national");
 
   return (
     <div className="grid gap-8">
-      <section id="events">
+      {!hideOfficialEvents ? <section id="events">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm font-bold uppercase tracking-wide text-lotus-700">
@@ -93,7 +97,7 @@ export function EventManagementWorkspace() {
             </Card>
           ))}
         </div>
-      </section>
+      </section> : null}
 
       <section
         id="create-event"

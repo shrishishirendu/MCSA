@@ -28,3 +28,57 @@ alter table public.events add column if not exists created_at timestamptz not nu
 alter table public.events add column if not exists updated_at timestamptz not null default now();
 
 alter table public.events enable row level security;
+
+insert into public.events (
+  title,
+  date,
+  time,
+  venue,
+  city,
+  summary,
+  ticketing_url,
+  price_label,
+  audience,
+  status
+)
+select
+  'Dandiya Nights',
+  current_date,
+  'See ticketing page',
+  'See Humanitix page',
+  'Official event',
+  'Register and pay through Humanitix. MCSA uses the external event page for ticketing, attendee management and event updates.',
+  'https://events.humanitix.com/dandiya-nights',
+  'Tickets via Humanitix',
+  'Members, families and guests',
+  'published'
+where not exists (
+  select 1 from public.events where title = 'Dandiya Nights'
+);
+
+insert into public.events (
+  title,
+  date,
+  time,
+  venue,
+  city,
+  summary,
+  ticketing_url,
+  price_label,
+  audience,
+  status
+)
+select
+  'Durga Puja',
+  current_date,
+  'See ticketing page',
+  'See Humanitix page',
+  'Official event',
+  'Register and pay through Humanitix. MCSA uses the external event page for ticketing, attendee management and event updates.',
+  'https://events.humanitix.com/durga-puja',
+  'Tickets via Humanitix',
+  'Members, families and guests',
+  'published'
+where not exists (
+  select 1 from public.events where title = 'Durga Puja'
+);
