@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { readJsonResponse } from "@/lib/response";
 
@@ -68,20 +69,23 @@ export function ContentImagePicker({
       ) : null}
       {error ? <p className="text-sm font-semibold text-lotus-700">{error}</p> : null}
       {urls.length ? (
-        <div className="flex flex-wrap gap-2">
+        <div className="grid gap-3 sm:grid-cols-2">
           {urls.map((url) => (
             <div
               key={url}
-              className="flex items-center gap-2 rounded-md bg-lotus-50 px-3 py-2 text-xs text-indigoInk"
+              className="overflow-hidden rounded-md border border-indigoInk/10 bg-lotus-50"
             >
-              <span>Image uploaded</span>
-              <button
-                type="button"
-                onClick={() => onChange(urls.filter((item) => item !== url))}
-                className="font-bold text-lotus-700"
-              >
-                Remove
-              </button>
+              <img src={url} alt="Uploaded preview" className="h-32 w-full object-cover" />
+              <div className="flex items-center justify-between gap-2 px-3 py-2 text-xs text-indigoInk">
+                <span className="font-semibold text-leaf">Image attached</span>
+                <button
+                  type="button"
+                  onClick={() => onChange(urls.filter((item) => item !== url))}
+                  className="font-bold text-lotus-700"
+                >
+                  Remove
+                </button>
+              </div>
             </div>
           ))}
         </div>
