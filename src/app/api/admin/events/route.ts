@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAdminApi } from "@/lib/api-auth";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -33,5 +34,7 @@ export async function POST(request: Request) {
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  revalidatePath("/");
+  revalidatePath("/events");
   return NextResponse.json({ event: data }, { status: 201 });
 }
