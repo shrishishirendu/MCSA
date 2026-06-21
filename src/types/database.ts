@@ -62,6 +62,35 @@ type EventRow = {
   updated_at: string;
 };
 
+type MahotsavEoiRow = {
+  id: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  age_group: string;
+  city: string;
+  contributions: string[];
+  preferred_days: string[];
+  participation_format: string;
+  group_name: string | null;
+  participant_details: string | null;
+  performance_duration: string | null;
+  music_link: string | null;
+  description: string;
+  requirements: string | null;
+  guardian_name: string | null;
+  guardian_phone: string | null;
+  meeting_requested: boolean;
+  meeting_purpose: string | null;
+  meeting_preference_1: string | null;
+  meeting_preference_2: string | null;
+  meeting_preference_3: string | null;
+  status: "submitted" | "under_review" | "approved" | "waitlisted" | "rejected" | "withdrawn";
+  admin_notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -135,6 +164,39 @@ export type Database = {
           updated_at?: string;
         };
         Update: Partial<Omit<EventRow, "id" | "created_at">>;
+        Relationships: [];
+      };
+      mahotsav_eoi: {
+        Row: MahotsavEoiRow;
+        Insert: {
+          id?: string;
+          full_name: string;
+          email: string;
+          phone: string;
+          age_group: string;
+          city: string;
+          contributions: string[];
+          preferred_days: string[];
+          participation_format: string;
+          group_name?: string | null;
+          participant_details?: string | null;
+          performance_duration?: string | null;
+          music_link?: string | null;
+          description: string;
+          requirements?: string | null;
+          guardian_name?: string | null;
+          guardian_phone?: string | null;
+          meeting_requested?: boolean;
+          meeting_purpose?: string | null;
+          meeting_preference_1?: string | null;
+          meeting_preference_2?: string | null;
+          meeting_preference_3?: string | null;
+          status?: MahotsavEoiRow["status"];
+          admin_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<Omit<MahotsavEoiRow, "id" | "created_at">>;
         Relationships: [];
       };
     };

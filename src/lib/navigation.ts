@@ -26,6 +26,7 @@ export const adminNavigation: NavigationItem[] = [
   { label: "Dashboard", href: "/admin" },
   { label: "Members", href: "/admin/members" },
   { label: "Events", href: "/admin/events" },
+  { label: "MM2026 EOI", href: "/admin/mahotsav-eoi" },
   { label: "Tickets", href: "/admin/tickets" },
   { label: "Donations", href: "/admin/donations" },
   { label: "Blog Posts", href: "/admin/blog-posts" },
