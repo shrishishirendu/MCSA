@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { sendMahotsavEoiEmails } from "@/lib/email/resend";
 
 export async function POST(request: Request) {
   try {
@@ -52,7 +53,25 @@ export async function POST(request: Request) {
       .single();
 
     if (error) throw error;
-    return NextResponse.json({ ok: true, id: data.id }, { status: 201 });
+    const email = await sendMahotsavEoiEmails({
+      id: data.id,
+      fullName: body.fullName.trim(),
+      email: body.email.trim().toLowerCase(),
+      phone: body.phone.trim(),
+      city: body.city.trim(),
+      contributions: body.contributions,
+      preferredDays: body.preferredDays ?? [],
+      description: body.description.trim(),
+      meetingRequested: Boolean(body.meetingRequested),
+      meetingPurpose: body.meetingPurpose || undefined,
+      meetingPreferences: [
+        body.meetingPreference1,
+        body.meetingPreference2,
+        body.meetingPreference3
+      ].filter(Boolean)
+    });
+
+    return NextResponse.json({ ok: true, id: data.id, email }, { status: 201 });
   } catch {
     return NextResponse.json({ error: "The EOI database is not configured yet." }, { status: 503 });
   }

@@ -40,11 +40,23 @@ export function MahotsavEoiForm() {
     const response = await fetch("/api/mahotsav-eoi", {
       method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
     });
-    const result = await readJsonResponse<{ id?: string }>(response);
+    const result = await readJsonResponse<{
+      id?: string;
+      email?: {
+        configured: boolean;
+        adminSent: boolean;
+        applicantSent: boolean;
+      };
+    }>(response);
     if (!response.ok) {
       setStatus(result.error ?? "Submission failed.");
     } else {
-      setStatus(`EOI submitted successfully. Reference: ${result.id}. The committee will contact you.`);
+      const emailMessage = result.email?.applicantSent
+        ? " A confirmation email has been sent."
+        : " Your EOI is saved; email delivery is not configured yet.";
+      setStatus(
+        `EOI submitted successfully. Reference: ${result.id}.${emailMessage} The committee will contact you.`
+      );
       form.reset(); setAgeGroup(""); setMeeting(false);
     }
     setSubmitting(false);
