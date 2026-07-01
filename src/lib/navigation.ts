@@ -3,7 +3,6 @@ import type { NavigationItem } from "@/types/navigation";
 export const publicNavigation: NavigationItem[] = [
   { label: "About Us", href: "/" },
   { label: "Who are we?", href: "/who-are-we" },
-  { label: "Membership", href: "/membership" },
   { label: "Events", href: "/events" },
   { label: "Gallery", href: "/gallery" },
   { label: "Blog", href: "/blog" },
@@ -12,7 +11,14 @@ export const publicNavigation: NavigationItem[] = [
 ];
 
 export const footerNavigation: NavigationItem[] = [
-  ...publicNavigation,
+  { label: "About Us", href: "/" },
+  { label: "Who are we?", href: "/who-are-we" },
+  { label: "Membership", href: "/membership" },
+  { label: "Events", href: "/events" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact Us", href: "/contact" },
+  { label: "Admin Portal", href: "/admin" },
   { label: "Announcements", href: "/announcements" }
 ];
 

@@ -128,7 +128,7 @@ export function Header() {
               >
                 Announcements
               </Button>
-              <Button href="/membership">Join / Donate</Button>
+              <Button href="/membership">Membership</Button>
             </div>
             <div className="flex items-center justify-center gap-2 self-center">
               {socialLinks.map((link) => (
