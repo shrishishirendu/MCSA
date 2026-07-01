@@ -1,6 +1,4 @@
 import {
-  advisors,
-  coreCommittee,
   culturalImages
 } from "@/data/placeholders";
 import Image from "next/image";
@@ -135,88 +133,6 @@ export default async function HomePage() {
               </li>
             </ul>
           </Card>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
-        <div className="mb-6 max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-            Leadership
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-indigoInk">
-            Elected members
-          </h2>
-          <p className="mt-4 text-base leading-7 text-indigoInk/70">
-            The elected members support governance, events, membership and
-            community programs for Mithila Cultural Society Australia.
-          </p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {coreCommittee.map((person) => (
-            <Card key={person.name}>
-              <div className="grid size-16 place-items-center rounded-full border border-lotus-100 bg-lotus-50 text-xl font-bold text-lotus-700">
-                {person.name
-                  .split(" ")
-                  .map((part) => part.charAt(0))
-                  .join("")}
-              </div>
-              <h3 className="mt-5 text-lg font-bold text-indigoInk">
-                {person.name}
-              </h3>
-              <p className="mt-1 text-sm font-semibold text-lotus-700">
-                {person.role}
-              </p>
-              <p className="mt-1 text-sm font-semibold text-indigoInk/70">
-                {person.phone}
-              </p>
-              <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-                {person.focus}
-              </p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-lotus-50/60">
-        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="mb-6 max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-              Guidance
-            </p>
-            <h2 className="mt-3 text-3xl font-bold text-indigoInk">
-              Advisors and guides
-            </h2>
-            <p className="mt-4 text-base leading-7 text-indigoInk/70">
-              Our advisors guide Mithila Cultural Society Australia with
-              experience, cultural understanding and strategic direction so the
-              organisation continues moving in the right direction.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {advisors.map((person) => (
-              <Card key={person.name}>
-                <div className="grid size-16 place-items-center rounded-full border border-lotus-100 bg-white text-lg font-bold text-lotus-700">
-                  {person.name
-                    .replace("Sri ", "")
-                    .replace("Smt. ", "")
-                    .replace("Dr. ", "")
-                    .replace(" Ji", "")
-                    .split(" ")
-                    .map((part) => part.charAt(0))
-                    .join("")}
-                </div>
-                <h3 className="text-lg font-bold text-indigoInk">
-                  {person.name}
-                </h3>
-                <p className="mt-1 text-sm font-semibold text-lotus-700">
-                  {person.role}
-                </p>
-                <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-                  {person.focus}
-                </p>
-              </Card>
-            ))}
-          </div>
         </div>
       </section>
 
