@@ -23,7 +23,7 @@ export async function Footer() {
               mithilaculturalsoc@gmail.com
             </a>
             <span className="text-white/70">
-              Committee phone numbers are listed in the Leadership section.
+              Please use the Contact Us page for committee or membership queries.
             </span>
             {announcementCount ? (
               <Link
