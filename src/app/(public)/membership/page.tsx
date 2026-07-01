@@ -59,118 +59,113 @@ export default function MembershipPage() {
           </Card>
 
           <div className="grid gap-4">
-            <Card>
+            <Card className="border-lotus-500/25 bg-lotus-50">
               <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-                Membership
+                Start here
               </p>
-              <h2 className="mt-3 text-xl font-bold text-indigoInk">
+              <h2 className="mt-3 text-2xl font-bold text-indigoInk">
                 Join Mithila Cultural Society Australia
               </h2>
-              <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-                New members can complete the official membership joining form
-                online. The committee will review the submitted details and
-                follow up with next steps.
+              <p className="mt-3 text-sm leading-6 text-indigoInk/75">
+                Complete the membership form first, then pay the applicable fee
+                using the bank details below. The committee will review your
+                submission and confirm your membership status.
               </p>
-              <Button href={memberJoiningFormUrl} className="mt-5">
-                Open joining form
-              </Button>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Button href={memberJoiningFormUrl}>Apply for membership</Button>
+                <Button href="#membership-request" variant="secondary">
+                  Use website form
+                </Button>
+              </div>
             </Card>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <Card>
-                <h3 className="text-lg font-bold text-indigoInk">
-                  Functional Member
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-indigoInk/70">
-                  Take an active role in planning, coordination and society
-                  functions.
+              <Card className="border-lotus-500/25 bg-lotus-50">
+                <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
+                  Bank details
                 </p>
-                <Button
-                  href={functionalMemberFormUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-4"
-                  variant="secondary"
-                >
-                  Join as Functional Member
-                </Button>
+                <h3 className="mt-3 text-lg font-bold text-indigoInk">
+                  Pay your membership fee
+                </h3>
+                <dl className="mt-4 grid gap-3 text-sm">
+                  <BankDetail
+                    label="Account name"
+                    value="Mithila Cultural Society Australia Inc"
+                  />
+                  <BankDetail label="BSB" value="062452" />
+                  <BankDetail label="Account number" value="10509708" />
+                </dl>
+                <p className="mt-4 text-xs leading-5 text-indigoInk/65">
+                  Please include your full name as the payment reference.
+                </p>
               </Card>
 
               <Card>
-                <h3 className="text-lg font-bold text-indigoInk">Volunteer</h3>
-                <p className="mt-2 text-sm leading-6 text-indigoInk/70">
-                  Contribute time and skills for events, cultural activities,
-                  member support and community outreach.
+                <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
+                  Fees
                 </p>
-                <Button href="/volunteer" variant="secondary" className="mt-4">
-                  Join as a Volunteer
-                </Button>
+                <h3 className="mt-3 text-lg font-bold text-indigoInk">
+                  Membership and donation amounts
+                </h3>
+                <ul className="mt-4 grid gap-2 text-sm text-indigoInk/75">
+                  <Fee label="Annual Membership" amount="AUD 21" />
+                  <Fee label="Renew Membership" amount="AUD 21" />
+                  <Fee label="Lifetime Membership" amount="AUD 51" />
+                  <Fee label="Donation (Puja)" amount="Open amount" />
+                </ul>
               </Card>
             </div>
           </div>
         </section>
 
         <section className="grid gap-6 lg:grid-cols-2">
-          <Card className="border-lotus-500/25 bg-lotus-50">
-            <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-              Bank transfer details
+          <Card>
+            <h3 className="text-lg font-bold text-indigoInk">
+              Functional Member
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-indigoInk/70">
+              Take an active role in planning, coordination and society
+              functions.
             </p>
-            <h2 className="mt-3 text-2xl font-bold text-indigoInk">
-              Pay your membership fee
-            </h2>
-            <dl className="mt-5 grid gap-4 text-sm">
-              <BankDetail
-                label="Account name"
-                value="Mithila Cultural Society Australia Inc"
-              />
-              <div className="grid gap-4 sm:grid-cols-2">
-                <BankDetail label="BSB" value="062452" />
-                <BankDetail label="Account number" value="10509708" />
-              </div>
-            </dl>
-            <p className="mt-5 text-sm leading-6 text-indigoInk/65">
-              Please include your full name as the payment reference and retain
-              the transfer receipt for confirmation.
-            </p>
+            <Button
+              href={functionalMemberFormUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4"
+              variant="secondary"
+            >
+              Join as Functional Member
+            </Button>
           </Card>
 
           <Card>
-            <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-              Fees
+            <h3 className="text-lg font-bold text-indigoInk">Volunteer</h3>
+            <p className="mt-2 text-sm leading-6 text-indigoInk/70">
+              Contribute time and skills for events, cultural activities, member
+              support and community outreach.
             </p>
-            <h2 className="mt-3 text-2xl font-bold text-indigoInk">
-              Membership and donation amounts
-            </h2>
-            <ul className="mt-5 grid gap-3 text-sm text-indigoInk/75">
-              <Fee label="Annual Membership" amount="AUD 21" />
-              <Fee label="Renew Membership" amount="AUD 21" />
-              <Fee label="Lifetime Membership" amount="AUD 51" />
-              <Fee label="Donation (Puja)" amount="Open for any amount" />
-            </ul>
+            <Button href="/volunteer" variant="secondary" className="mt-4">
+              Join as a Volunteer
+            </Button>
           </Card>
         </section>
 
         <section className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <Card>
-            <h2 className="text-xl font-bold text-indigoInk">
-              Membership request
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-indigoInk/70">
-              Submit your details for committee review. The application will
-              appear in the admin portal for approval.
-            </p>
-            <MembershipApplicationForm />
-          </Card>
+          <div id="membership-request">
+            <Card>
+              <h2 className="text-xl font-bold text-indigoInk">
+                Membership request
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-indigoInk/70">
+                Submit your details for committee review. The application will
+                appear in the admin portal for approval.
+              </p>
+              <MembershipApplicationForm />
+            </Card>
+          </div>
 
           <Card>
-            <h2 className="text-xl font-bold text-indigoInk">
-              Admin confirmation
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-              Membership and payment records should stay under admin control.
-              Admin can approve, request changes, mark payment received, issue
-              receipts and update member status.
-            </p>
+            <h2 className="text-xl font-bold text-indigoInk">How it works?</h2>
             <div className="mt-5 grid gap-3">
               {[
                 "Request submitted",
