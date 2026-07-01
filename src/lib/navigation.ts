@@ -2,6 +2,7 @@ import type { NavigationItem } from "@/types/navigation";
 
 export const publicNavigation: NavigationItem[] = [
   { label: "About Us", href: "/" },
+  { label: "Who are we?", href: "/who-are-we" },
   { label: "Events", href: "/events" },
   { label: "Gallery", href: "/gallery" },
   { label: "Blog", href: "/blog" },

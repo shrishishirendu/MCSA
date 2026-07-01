@@ -100,48 +100,44 @@ export default async function HomePage() {
         <div className="grid gap-6 lg:grid-cols-2">
           <Card>
             <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-              Vision
+              Our Vision
             </p>
             <h2 className="mt-3 text-2xl font-bold text-indigoInk">
-              A united Mithila community across Australia
+              Traditions of Mithila alive for future generations
             </h2>
             <ul className="mt-5 grid gap-3 text-sm leading-6 text-indigoInk/75">
               <li>
-                To build a self-sustaining and united Mithila community across
-                Australia, where every Maithil feels a deep sense of pride,
-                belonging and cultural connection.
-              </li>
-              <li>
-                To establish a nationwide presence that preserves and promotes
-                Maithili, Madhubani art and the rich heritage of Mithila for
-                future generations.
+                To keep the traditions of Mithila alive for future generations,
+                no matter where in the world we are.
               </li>
             </ul>
           </Card>
 
           <Card>
             <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-              Mission
+              Our Values
             </p>
             <h2 className="mt-3 text-2xl font-bold text-indigoInk">
-              A self-reliant organisation that supports the community
+              The principles that guide our community
             </h2>
             <ul className="mt-5 grid gap-3 text-sm leading-6 text-indigoInk/75">
               <li>
-                To develop a financially self-reliant organisation that
-                sustains its activities and supports community members in times
-                of need.
+                <span className="font-semibold text-indigoInk">
+                  Inclusivity:
+                </span>{" "}
+                Welcoming all Maithils and friends of Mithila.
               </li>
               <li>
-                To expand our footprint across Australia, bringing together
-                Maithils from all regions under one vibrant and inclusive
-                platform.
+                <span className="font-semibold text-indigoInk">
+                  Cultural Preservation:
+                </span>{" "}
+                Passing down our language (Maithili) and rituals.
               </li>
               <li>
-                To maintain a nationwide Maithil database that enables
-                community networking, matrimonial support, professional
-                collaboration, cultural participation, youth development and
-                emergency assistance initiatives.
+                <span className="font-semibold text-indigoInk">
+                  Community Service:
+                </span>{" "}
+                Supporting our members through social and cultural events.
               </li>
             </ul>
           </Card>
