@@ -4,7 +4,6 @@ import {
   culturalImages
 } from "@/data/placeholders";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
 import { UpcomingEventPopup } from "@/components/sections/UpcomingEventPopup";
@@ -13,11 +12,6 @@ import {
   getPublicAnnouncements,
   getPublishedBlogPosts
 } from "@/lib/content-data";
-
-const memberJoiningFormUrl =
-  "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
-
-const functionalMemberFormUrl = "https://forms.gle/yruEwXTZeMcKr7Mw8";
 
 const yajmaanUrl = "https://events.humanitix.com/durga-puja/tickets";
 
@@ -226,72 +220,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <Card>
-          <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-            Join our team
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-indigoInk">
-            Join our dynamic team
-          </h2>
-          <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-            Help build a stronger Maithil community across Australia by joining
-            as a functional member or volunteering for events, outreach,
-            cultural programs and community support.
-          </p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-md border border-lotus-100 bg-lotus-50 p-5">
-              <h3 className="text-lg font-bold text-indigoInk">
-                Functional Member
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-indigoInk/70">
-                Take an active role in planning, coordination and society
-                functions.
-              </p>
-              <Button
-                href={functionalMemberFormUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-4"
-              >
-                Join as Functional Member
-              </Button>
-            </div>
-            <div className="rounded-md border border-lotus-100 bg-lotus-50 p-5">
-              <h3 className="text-lg font-bold text-indigoInk">Volunteer</h3>
-              <p className="mt-2 text-sm leading-6 text-indigoInk/70">
-                Contribute time and skills for events, cultural activities,
-                member support and community outreach.
-              </p>
-              <Button href="/volunteer" variant="secondary" className="mt-4">
-                Join as a Volunteer
-              </Button>
-            </div>
-          </div>
-        </Card>
-      </section>
-
       <section className="mx-auto grid max-w-7xl gap-4 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8">
-        <Card>
-          <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
-            Membership
-          </p>
-          <h2 className="mt-3 text-xl font-bold text-indigoInk">
-            Join Mithila Cultural Society Australia
-          </h2>
-          <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-            New members can complete the official membership joining form
-            online. The committee will review the submitted details and follow
-            up with next steps.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Button href={memberJoiningFormUrl}>Open joining form</Button>
-            <Button href="/membership" variant="secondary">
-              Membership details
-            </Button>
-          </div>
-        </Card>
-        <Card className="overflow-hidden p-0">
+        <Card className="overflow-hidden p-0 lg:col-span-2">
           <div className="relative">
             <Image
               src="/images/mahotsav-invitation-card.png"

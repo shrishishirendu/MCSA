@@ -1,31 +1,113 @@
-import { membershipOptions } from "@/data/placeholders";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { MembershipApplicationForm } from "@/components/membership/MembershipApplicationForm";
 
+const memberJoiningFormUrl =
+  "https://docs.google.com/forms/d/e/1FAIpQLSeuqLV3ND0htcbTojxgCS0f8w6SHumM_cb5fHmvy0SZM0xujw/viewform?usp=sharing&ouid=109159946150988163511";
+
+const functionalMemberFormUrl = "https://forms.gle/yruEwXTZeMcKr7Mw8";
+
 export default function MembershipPage() {
   return (
     <PageLayout
-      title="Membership & Donations"
-      eyebrow="Join, renew or support"
-      description="Apply for membership, renew an existing membership or support the society with a donation."
+      title="Membership"
+      eyebrow="Become a part of our Mithila family"
+      description="Joining the Mithila Cultural Society Australia means more than just signing up—it means connecting with a thriving network of Maithil families across the country."
     >
       <div className="grid gap-6">
-        <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {membershipOptions.map((option) => (
-            <Card key={option.title}>
-              <h2 className="text-lg font-bold text-indigoInk">
-                {option.title}
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-indigoInk/70">
-                {option.description}
+        <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <Card>
+            <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
+              Why Join?
+            </p>
+            <h2 className="mt-3 text-2xl font-bold text-indigoInk">
+              Connect, participate and help shape the society
+            </h2>
+            <ul className="mt-5 grid gap-3 text-sm leading-6 text-indigoInk/75">
+              <li>
+                <span className="font-semibold text-indigoInk">
+                  Exclusive Access:
+                </span>{" "}
+                Priority registration for cultural festivals, workshops, and
+                social gatherings.
+              </li>
+              <li>
+                <span className="font-semibold text-indigoInk">
+                  Community Support:
+                </span>{" "}
+                Connect with mentors, elders, and peers who share your heritage.
+              </li>
+              <li>
+                <span className="font-semibold text-indigoInk">
+                  Cultural Education:
+                </span>{" "}
+                Access resources and events designed to teach Maithili language
+                and arts to the next generation.
+              </li>
+              <li>
+                <span className="font-semibold text-indigoInk">
+                  Voting Rights:
+                </span>{" "}
+                Have your say in the society&apos;s direction and leadership.
+              </li>
+            </ul>
+            <p className="mt-5 text-sm leading-6 text-indigoInk/70">
+              Membership is open to all individuals and families who appreciate
+              Mithila culture, regardless of their background.
+            </p>
+          </Card>
+
+          <div className="grid gap-4">
+            <Card>
+              <p className="text-sm font-semibold uppercase tracking-wide text-lotus-700">
+                Membership
               </p>
-              <Button type="button" className="mt-5" variant="secondary">
-                {option.action}
+              <h2 className="mt-3 text-xl font-bold text-indigoInk">
+                Join Mithila Cultural Society Australia
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-indigoInk/70">
+                New members can complete the official membership joining form
+                online. The committee will review the submitted details and
+                follow up with next steps.
+              </p>
+              <Button href={memberJoiningFormUrl} className="mt-5">
+                Open joining form
               </Button>
             </Card>
-          ))}
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Card>
+                <h3 className="text-lg font-bold text-indigoInk">
+                  Functional Member
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-indigoInk/70">
+                  Take an active role in planning, coordination and society
+                  functions.
+                </p>
+                <Button
+                  href={functionalMemberFormUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4"
+                  variant="secondary"
+                >
+                  Join as Functional Member
+                </Button>
+              </Card>
+
+              <Card>
+                <h3 className="text-lg font-bold text-indigoInk">Volunteer</h3>
+                <p className="mt-2 text-sm leading-6 text-indigoInk/70">
+                  Contribute time and skills for events, cultural activities,
+                  member support and community outreach.
+                </p>
+                <Button href="/volunteer" variant="secondary" className="mt-4">
+                  Join as a Volunteer
+                </Button>
+              </Card>
+            </div>
+          </div>
         </section>
 
         <section className="grid gap-6 lg:grid-cols-2">
