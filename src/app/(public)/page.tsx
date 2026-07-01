@@ -4,7 +4,6 @@ import {
   culturalImages
 } from "@/data/placeholders";
 import Image from "next/image";
-import { ORGANISATION_NAME } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
@@ -52,17 +51,21 @@ export default async function HomePage() {
             Mithila Cultural Society Australia
           </p>
           <h1 className="mt-4 text-3xl font-bold leading-tight text-indigoInk sm:text-4xl">
-            Preserving Mithila heritage and building community in Australia
+            Preserving Mithila Heritage, Building Community in Australia
           </h1>
           <p className="mt-4 text-base leading-7 text-indigoInk/75">
-            {ORGANISATION_NAME} brings Maithils across Australia together
-            through cultural events, Maithili language, Madhubani art,
-            membership, volunteering and community support.
+            The Mithila Cultural Society Australia (MCSA) is a registered
+            not-for-profit community organization established to preserve,
+            promote, and celebrate the rich linguistic, artistic, and cultural
+            heritage of the Mithila region.
           </p>
           <p className="mt-3 text-sm leading-6 text-indigoInk/70">
-            The society is shaped as a simple, practical platform for events,
-            membership, donations, announcements, gallery updates and community
-            stories.
+            Founded by a group of passionate Maithil families across Australia,
+            our society serves as a home away from home. We are dedicated to
+            fostering unity, cultural education, and social connection among the
+            Maithil diaspora while introducing the wider Australian community to
+            our vibrant traditions - from Madhubani art and folk music to our
+            timeless festivals and cuisine.
           </p>
           <p
             lang="mai-Tirh"
