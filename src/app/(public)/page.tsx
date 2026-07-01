@@ -5,11 +5,7 @@ import Image from "next/image";
 import { Card } from "@/components/ui/Card";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
 import { UpcomingEventPopup } from "@/components/sections/UpcomingEventPopup";
-import { AnnouncementShowcase } from "@/components/sections/AnnouncementShowcase";
-import {
-  getPublicAnnouncements,
-  getPublishedBlogPosts
-} from "@/lib/content-data";
+import { getPublishedBlogPosts } from "@/lib/content-data";
 
 const yajmaanUrl = "https://events.humanitix.com/durga-puja/tickets";
 
@@ -25,12 +21,8 @@ const maithiliDevanagariHeroText =
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [blogPosts, announcements] = await Promise.all([
-    getPublishedBlogPosts(),
-    getPublicAnnouncements()
-  ]);
+  const blogPosts = await getPublishedBlogPosts();
   const latestBlogPosts = blogPosts.slice(0, 3);
-  const latestAnnouncements = announcements.slice(0, 3);
   const scrollingHighlights = Array.from({ length: 6 }, () => mahotsavMarquee);
 
   return (
@@ -169,8 +161,6 @@ export default async function HomePage() {
           </div>
         </Card>
       </section>
-
-      <AnnouncementShowcase announcements={latestAnnouncements} />
 
     </main>
   );

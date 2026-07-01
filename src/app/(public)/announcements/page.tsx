@@ -18,6 +18,7 @@ export default async function AnnouncementsPage() {
           {announcements.map((announcement, index) => (
             <article
               key={announcement.id}
+              id={announcement.id}
               className={`overflow-hidden rounded-xl border border-indigoInk/10 bg-white shadow-soft ${
                 index === 0 ? "lg:grid lg:grid-cols-[0.9fr_1.1fr]" : ""
               }`}
