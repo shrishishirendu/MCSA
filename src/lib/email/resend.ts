@@ -22,6 +22,13 @@ type SendEmailInput = {
   idempotencyKey: string;
 };
 
+type ContactEmailDetails = {
+  name: string;
+  email: string;
+  phone: string;
+  comment: string;
+};
+
 function escapeHtml(value: string) {
   return value
     .replaceAll("&", "&amp;")
@@ -69,6 +76,30 @@ async function sendEmail(input: SendEmailInput) {
     console.error("Resend email request failed:", error);
     return { sent: false, reason: "provider_error" as const };
   }
+}
+
+export async function sendContactEmail(details: ContactEmailDetails) {
+  const adminHtml = `
+    <h1>New website contact query</h1>
+    <p><strong>Name:</strong> ${escapeHtml(details.name)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(details.email)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(details.phone || "Not supplied")}</p>
+    <p><strong>Comment:</strong><br>${escapeHtml(details.comment).replaceAll("\n", "<br>")}</p>
+    <p>Submitted via the Mithila Cultural Society Australia Contact Us page.</p>
+  `;
+
+  const result = await sendEmail({
+    to: env.contactNotificationEmail,
+    subject: `Website contact query - ${details.name}`,
+    html: adminHtml,
+    replyTo: details.email,
+    idempotencyKey: `contact-${Date.now()}-${details.email}`
+  });
+
+  return {
+    configured: Boolean(env.resendApiKey && env.eoiFromEmail),
+    sent: result.sent
+  };
 }
 
 export async function sendMahotsavEoiEmails(details: EoiEmailDetails) {

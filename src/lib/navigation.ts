@@ -7,6 +7,7 @@ export const publicNavigation: NavigationItem[] = [
   { label: "Events", href: "/events" },
   { label: "Gallery", href: "/gallery" },
   { label: "Blog", href: "/blog" },
+  { label: "Contact Us", href: "/contact" },
   { label: "Admin Portal", href: "/admin" }
 ];
 

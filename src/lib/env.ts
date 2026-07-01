@@ -7,6 +7,8 @@ export const env = {
   eoiFromEmail: process.env.EOI_FROM_EMAIL,
   eoiNotificationEmail:
     process.env.EOI_NOTIFICATION_EMAIL || "mithilaculturalsoc@gmail.com",
+  contactNotificationEmail:
+    process.env.CONTACT_NOTIFICATION_EMAIL || "mithilaculturalsoc@gmail.com",
   databaseUrl: process.env.DATABASE_URL,
   stripeSecretKey: process.env.STRIPE_SECRET_KEY,
   stripePublishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
