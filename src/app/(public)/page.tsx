@@ -6,8 +6,9 @@ import { Card } from "@/components/ui/Card";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
 import { UpcomingEventPopup } from "@/components/sections/UpcomingEventPopup";
 import { getPublishedBlogPosts } from "@/lib/content-data";
+import { HUMANITIX_CONTRIBUTION_URL } from "@/lib/constants";
 
-const yajmaanUrl = "https://events.humanitix.com/durga-puja/tickets";
+const yajmaanUrl = HUMANITIX_CONTRIBUTION_URL;
 
 const mahotsavMarquee =
   "Mithila Mahotsav 2026 - Mithila Welcomes Mahashakti, from 17-19 October 2026 at Quakers Hill Community Hall, Sydney";

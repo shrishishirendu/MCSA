@@ -5,3 +5,6 @@ export const TIRHUTA_ORGANISATION_NAME =
 
 export const ORGANISATION_TAGLINE =
   "Celebrating Mithila heritage, language, arts and community in Australia.";
+
+export const HUMANITIX_CONTRIBUTION_URL =
+  "https://events.humanitix.com/durga-puja/tickets";
