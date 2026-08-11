@@ -38,12 +38,10 @@ const contributionOptions = [
     badge: "Most Popular",
     description: "Make an auspicious family offering to Maa Bhagwati and celebrate together.",
     benefits: [
-      "Supports Maa Bhagwati Puja",
-      "4 complimentary Dandiya Night tickets",
-      "4 complimentary Mithila Mahotsav tickets",
-      "Mata Ki Chowki Prasad for the family",
-      "Family recognised as a community contributor",
-      "Public recognition is optional"
+      "2 memberships to Mithila Cultural Society Australia",
+      "2 adult and 2 children’s tickets to Mithila Mahotsav 2026 on 17 October",
+      "2 adult and 2 children’s tickets to Dandiya Night on 18 October",
+      "Puja Prasad for all family members"
     ],
     cta: "Choose Family Seva — $111",
     style: "popular",
@@ -51,16 +49,15 @@ const contributionOptions = [
   },
   {
     name: "Community Seva",
-    amount: "From $51",
+    amount: "$51",
     badge: null,
     description: "Every offering helps bring Maa Bhagwati Puja and our community celebration to life.",
     benefits: [
-      "Contribute any amount from $51",
-      "Supports Puja, Bhog and essential arrangements",
-      "Recognition as a community contributor",
-      "Option to contribute privately"
+      "1 membership to Mithila Cultural Society Australia",
+      "2 adult and 2 children’s tickets to Mithila Mahotsav",
+      "Puja Prasad"
     ],
-    cta: "Offer Seva From $51",
+    cta: "Offer Community Seva — $51",
     style: "community",
     mobileOrder: "order-2 lg:order-1"
   }
