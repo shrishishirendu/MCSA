@@ -8,16 +8,16 @@ export async function MithilaGunjImage() {
   return (
     <figure>
       <Image
-        src={uploadedImage || "/images/mithila-gunj-radio.jpg"}
-        alt={uploadedImage ? "Mithila Gunj community radio" : "Broadcast microphone in a recording studio"}
-        width={1200}
-        height={800}
+        src={uploadedImage || "/images/mithila-gunj-community.jpeg"}
+        alt={uploadedImage ? "Mithila Gunj community radio" : "Three Mithila Gunj participants seated together at studio microphones"}
+        width={2040}
+        height={1536}
         unoptimized={Boolean(uploadedImage)}
-        className="aspect-[3/2] w-full rounded-xl object-cover"
+        className="h-auto w-full rounded-xl"
       />
       {!uploadedImage && (
         <figcaption className="mt-2 text-xs opacity-75">
-          Studio photograph by <a className="underline" href="https://unsplash.com/photos/black-and-gray-microphone-with-stand-5ULLwpOS5V8">Jacob Hodgson / Unsplash</a>
+          Community voices in the Mithila Gunj studio.
         </figcaption>
       )}
     </figure>

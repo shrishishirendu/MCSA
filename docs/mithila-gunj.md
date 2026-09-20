@@ -8,4 +8,4 @@ In Admin → Blog Posts, create or edit a post titled exactly `Mithila Gunj`. Up
 
 The shared image component is `src/components/sections/MithilaGunjImage.tsx`. Both pages render dynamically so published photo changes are read on subsequent requests.
 
-Default photo: Jacob Hodgson, Unsplash, https://unsplash.com/photos/black-and-gray-microphone-with-stand-5ULLwpOS5V8 . Downloaded from https://images.unsplash.com/photo-1627667049482-dd134b1f6366 . This is an illustrative studio photograph, not a photograph of the Mithila Gunj studio. Attribution appears with the default image only.
+Default photo: organiser-supplied group photograph, `WhatsApp Image 2026-09-21 at 07.14.37.jpeg`, copied to `public/images/mithila-gunj-community.jpeg`. The radio page also displays the organiser-supplied `WhatsApp Image 2026-09-21 at 07.16.10.jpeg` as `public/images/mithila-gunj-studio.jpeg`. Both are displayed at their natural aspect ratio without cropping faces. These replace the illustrative stock photograph.

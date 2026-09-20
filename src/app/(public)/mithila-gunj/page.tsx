@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { MithilaGunjImage } from "@/components/sections/MithilaGunjImage";
 
 export const dynamic = "force-dynamic";
@@ -77,6 +78,19 @@ export default function MithilaGunjPage() {
             <h3 className="text-xl font-bold text-indigoInk">A voice for the global Maithil community</h3>
             <p>Mithila is one of South Asia’s oldest cultural regions and the sacred land of Maa Janaki. Its history is enriched by philosophers, poets and scholars such as King Janaka, Yajnavalkya, Gargi, Maitreyi and Mahakavi Vidyapati.</p>
             <p>For families away from their ancestral homeland, Mithila Gunj brings language, stories and traditions into their homes. Connecting Sydney with Darbhanga, Madhubani, Janakpur and beyond, it reminds us that distance need not weaken cultural belonging.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="studio-heading" className="grid items-center gap-8 lg:grid-cols-2">
+          <figure>
+            <Image src="/images/mithila-gunj-studio.jpeg" alt="A Mithila Gunj participant seated beside a microphone in the radio studio" width={1736} height={1315} className="h-auto w-full rounded-2xl" />
+            <figcaption className="mt-3 text-sm text-indigoInk/75">A moment in the Mithila Gunj studio.</figcaption>
+          </figure>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-lotus-700">Inside Mithila Gunj</p>
+            <h2 id="studio-heading" className="mt-3 text-3xl font-bold text-indigoInk">Our people. Our shared voice.</h2>
+            <p className="mt-4 leading-7 text-indigoInk/85">Every conversation is an opportunity to bring our community closer. Mithila Gunj gives people a place to share their stories, celebrate Maithili and keep our connection to Mithila alive.</p>
+            <a href="mailto:mithilaculturalsoc@gmail.com?subject=Mithila%20Gunj%20-%20Participation%20enquiry" className="mt-5 inline-block font-bold text-lotus-700 underline underline-offset-4">Be part of the conversation</a>
           </div>
         </section>
 
