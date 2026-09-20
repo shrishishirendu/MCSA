@@ -49,3 +49,8 @@ body {
 .animate-scroll-x:hover {
   animation-play-state: paused;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-scroll-x { animation: none; }
+}

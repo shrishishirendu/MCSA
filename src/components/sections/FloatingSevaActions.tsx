@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { HUMANITIX_CONTRIBUTION_URL } from "@/lib/constants";
 
 const floatingOptions = [
@@ -7,6 +10,9 @@ const floatingOptions = [
 ] as const;
 
 export function FloatingSevaActions() {
+  const pathname = usePathname();
+  if (pathname === "/durga-puja-2026" || pathname.startsWith("/durga-puja-2026/")) return null;
+
   return (
     <nav
       aria-label="Maa Bhagwati Puja contribution options"

@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//MCSA//Durga Puja 2026//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:durga-puja-2026@mithilaculturalsociety.au
+DTSTAMP:20260920T000000Z
+DTSTART;VALUE=DATE:20261017
+DTEND;VALUE=DATE:20261020
+SUMMARY:Durga Puja & Mithila Mahotsav 2026
+LOCATION:Quakers Hill Community Centre\, 7 Lalor Road\, Quakers Hill NSW 2763
+DESCRIPTION:Three days of devotion and culture. See the website for programme
+  updates and booking information. All programme times are Sydney local time.
+URL:https://www.mithilaculturalsociety.au/durga-puja-2026
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR

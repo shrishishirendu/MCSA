@@ -1,14 +1,13 @@
 import {
   culturalImages
 } from "@/data/placeholders";
-import Image from "next/image";
+import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { HeroCarousel } from "@/components/sections/HeroCarousel";
 import { UpcomingEventPopup } from "@/components/sections/UpcomingEventPopup";
+import { DurgaPujaFeature } from "@/components/sections/DurgaPujaFeature";
+import { MithilaGunjFeature } from "@/components/sections/MithilaGunjFeature";
 import { getPublishedBlogPosts } from "@/lib/content-data";
-import { HUMANITIX_CONTRIBUTION_URL } from "@/lib/constants";
-
-const yajmaanUrl = HUMANITIX_CONTRIBUTION_URL;
 
 const mahotsavMarquee =
   "Mithila Mahotsav 2026 - Mithila Welcomes Mahashakti, from 17-19 October 2026 at Quakers Hill Community Hall, Sydney";
@@ -28,7 +27,8 @@ export default async function HomePage() {
 
   return (
     <main>
-      <UpcomingEventPopup yajmaanUrl={yajmaanUrl} />
+      <UpcomingEventPopup />
+      <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8"><DurgaPujaFeature /><MithilaGunjFeature /></div>
 
       <section className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_1fr] lg:px-8 lg:py-16">
         <div className="max-w-3xl">
@@ -71,12 +71,13 @@ export default async function HomePage() {
       <section className="overflow-hidden border-y border-indigoInk/10 bg-white">
         <div className="flex w-max animate-scroll-x gap-3 py-4">
           {scrollingHighlights.map((item, index) => (
-            <span
+            <Link
+              href="/durga-puja-2026"
               key={`${item}-${index}`}
               className="rounded-full border border-lotus-100 bg-lotus-50 px-5 py-2 text-sm font-semibold text-indigoInk"
             >
               {item}
-            </span>
+            </Link>
           ))}
         </div>
       </section>
@@ -130,26 +131,6 @@ export default async function HomePage() {
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-4 px-4 py-14 sm:px-6 lg:grid-cols-2 lg:px-8">
-        <Card className="overflow-hidden p-0 lg:col-span-2">
-          <div className="relative">
-            <Image
-              src="/images/mahotsav-invitation-card.png"
-              alt="Upcoming event invitation for Celebrate Durga Puja and Mithila Mahotsav 2026"
-              width={1104}
-              height={579}
-              className="h-auto w-full"
-            />
-            <a
-              href={yajmaanUrl}
-              aria-label="Become Our Yajmaan"
-              target="_blank"
-              rel="noreferrer"
-              className="absolute bottom-[6%] left-[12%] h-[16%] w-[35%] rounded-md focus:outline-none focus:ring-4 focus:ring-turmeric/70"
-            >
-              <span className="sr-only">Become Our Yajmaan</span>
-            </a>
-          </div>
-        </Card>
         <Card className="lg:col-span-2">
           <h2 className="text-xl font-bold text-indigoInk">Latest stories</h2>
           <div className="mt-4 grid gap-3">

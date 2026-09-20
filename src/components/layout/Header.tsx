@@ -13,7 +13,7 @@ const socialLinks = [
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/explore/search/keyword/?q=Mithila%20Cultural%20Society%20Australia",
+    href: "https://www.instagram.com/mithilaculturalsoc/",
     icon: "instagram"
   },
   {
