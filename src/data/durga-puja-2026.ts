@@ -19,6 +19,7 @@ export const durgaPuja = {
   directionsUrl: "https://www.google.com/maps/search/?api=1&query=Quakers+Hill+Community+Centre+7+Lalor+Road+Quakers+Hill+NSW+2763",
   calendarUrl: "/downloads/durga-puja-2026.ics",
   invitationPath: "/durga-puja-2026/invitation",
+  dandiyaPath: "/durga-puja-2026/dandiya",
   programmeConfirmed: true
 } as const;
 
@@ -109,4 +110,9 @@ export function ritualParticipationUrl(activity: RitualActivity) {
 
 export function ritualActivityTime(activity: RitualActivity) {
   return festivalDays.find(day => day.id === "sunday")?.items.find(item => item.title === ritualActivities[activity].programmeTitle)?.time;
+}
+
+export function dandiyaSession() {
+  const day = festivalDays.find(festivalDay => festivalDay.items.some(item => item.title === "Dandiya Utsav"));
+  return { date: day ? `${day.day} ${day.date} 2026` : "", time: day?.items.find(item => item.title === "Dandiya Utsav")?.time ?? "" };
 }

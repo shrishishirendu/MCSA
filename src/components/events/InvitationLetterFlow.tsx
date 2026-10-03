@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { durgaPuja } from "@/data/durga-puja-2026";
 import { FieldGroup, Label, TextInput } from "@/components/ui/Form";
+import { StepQuestion, stepButton } from "@/components/events/StepQuestion";
 import { readJsonResponse } from "@/lib/response";
 
 type Step = "paid" | "paid-thanks" | "details" | "contribute" | "letter";
@@ -10,17 +11,8 @@ type PaidStatus = "paid" | "not_paid";
 type Guest = { name: string; email: string; phone: string };
 type Letter = { reference: string; fileName: string; url: string; emailed: boolean };
 
-const primary = "inline-flex min-h-12 items-center justify-center rounded-md bg-[#761c25] px-5 py-3 text-sm font-bold text-white hover:bg-[#55141d] disabled:opacity-60";
-const secondary = "inline-flex min-h-12 items-center justify-center rounded-md border border-[#761c25]/40 bg-white px-5 py-3 text-sm font-bold text-[#761c25] hover:border-[#761c25]";
-const backLink = "mt-6 text-sm font-semibold text-[#761c25] underline underline-offset-4";
-
-function Question({ step, title, children }: { step: string; title: string; children: ReactNode }) {
-  return <div>
-    <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#9b6430]">{step}</p>
-    <h2 className="mt-2 font-serif text-2xl text-[#761c25]">{title}</h2>
-    {children}
-  </div>;
-}
+const { primary, secondary, back: backLink } = stepButton;
+const Question = StepQuestion;
 
 export function InvitationLetterFlow() {
   const [step, setStep] = useState<Step>("paid");

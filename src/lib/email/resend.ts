@@ -1,4 +1,4 @@
-import { durgaPuja } from "@/data/durga-puja-2026";
+import { dandiyaSession, durgaPuja } from "@/data/durga-puja-2026";
 import { env } from "@/lib/env";
 
 type EoiEmailDetails = {
@@ -231,4 +231,55 @@ export async function sendDurgaPujaInvitationNotification(details: InvitationNot
     replyTo: details.email,
     idempotencyKey: `dp2026-invitation-${details.reference}-admin`
   });
+}
+
+type DandiyaBookingDetails = {
+  name: string;
+  email: string;
+  phone: string;
+  ticketCount: number;
+  bookingReference: string;
+  submissionId: string;
+};
+
+export async function sendDandiyaBookingEmails(details: DandiyaBookingDetails) {
+  const reference = details.bookingReference ? escapeHtml(details.bookingReference) : "Not supplied";
+  const adminHtml = `
+    <h1>Dandiya Utsav 2026 – booking details shared</h1>
+    <p><strong>Name:</strong> ${escapeHtml(details.name)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(details.email)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(details.phone)}</p>
+    <p><strong>Tickets booked (self-reported):</strong> ${details.ticketCount}</p>
+    <p><strong>Order number / payment reference:</strong> ${reference}</p>
+    <p>Please check this against the Humanitix orders for Dandiya Nights if needed.</p>
+  `;
+
+  const guestHtml = `
+    <p>Dear ${escapeHtml(details.name)},</p>
+    <p>Thank you for booking Dandiya Utsav at Durga Puja 2026. We have shared your booking details with the organising team.</p>
+    <p><strong>Tickets:</strong> ${details.ticketCount}<br><strong>Order number / payment reference:</strong> ${reference}</p>
+    <p><strong>When:</strong> ${dandiyaSession().date}, ${dandiyaSession().time}<br><strong>Where:</strong> ${durgaPuja.venue}, ${durgaPuja.address}</p>
+    <p>Please bring your Humanitix ticket (on your phone or printed) for entry. Bring your dandiya sticks and festive spirit!</p>
+    <p>Programme and updates: <a href="${durgaPuja.url}">${durgaPuja.url.replace("https://www.", "")}</a></p>
+    <p>With warm regards,<br>Mithila Cultural Society Australia</p>
+  `;
+
+  const [admin, guest] = await Promise.all([
+    sendEmail({
+      to: env.eoiNotificationEmail,
+      subject: `Dandiya 2026 booking - ${details.name} (${details.ticketCount} ticket${details.ticketCount === 1 ? "" : "s"})`,
+      html: adminHtml,
+      replyTo: details.email,
+      idempotencyKey: `dandiya2026-${details.submissionId}-admin`
+    }),
+    sendEmail({
+      to: details.email,
+      subject: "Dandiya Utsav 2026 · Your booking details",
+      html: guestHtml,
+      replyTo: env.eoiNotificationEmail,
+      idempotencyKey: `dandiya2026-${details.submissionId}-guest`
+    })
+  ]);
+
+  return { adminSent: admin.sent, guestSent: guest.sent };
 }
