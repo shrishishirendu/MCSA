@@ -18,6 +18,7 @@ export const durgaPuja = {
   stallUrl: "https://events.humanitix.com/mithila-haat/tickets",
   directionsUrl: "https://www.google.com/maps/search/?api=1&query=Quakers+Hill+Community+Centre+7+Lalor+Road+Quakers+Hill+NSW+2763",
   calendarUrl: "/downloads/durga-puja-2026.ics",
+  invitationPath: "/durga-puja-2026/invitation",
   programmeConfirmed: true
 } as const;
 

@@ -1,3 +1,4 @@
+import { durgaPuja } from "@/data/durga-puja-2026";
 import { env } from "@/lib/env";
 
 type EoiEmailDetails = {
@@ -20,6 +21,7 @@ type SendEmailInput = {
   html: string;
   replyTo?: string;
   idempotencyKey: string;
+  attachments?: Array<{ filename: string; content: string }>;
 };
 
 type ContactEmailDetails = {
@@ -60,7 +62,8 @@ async function sendEmail(input: SendEmailInput) {
         to: [input.to],
         subject: input.subject,
         html: input.html,
-        reply_to: input.replyTo
+        reply_to: input.replyTo,
+        attachments: input.attachments
       }),
       cache: "no-store"
     });
@@ -163,4 +166,69 @@ export async function sendMahotsavEoiEmails(details: EoiEmailDetails) {
     adminSent: admin.sent,
     applicantSent: applicant.sent
   };
+}
+
+type InvitationEmailDetails = {
+  name: string;
+  email: string;
+  reference: string;
+  fileName: string;
+  pdf: Buffer;
+};
+
+export async function sendDurgaPujaInvitationEmail(details: InvitationEmailDetails) {
+  const html = `
+    <p>Dear ${escapeHtml(details.name)},</p>
+    <p>With the blessings of Maa Bhagwati, Mithila Cultural Society Australia warmly invites you and your family to <strong>Durga Puja 2026</strong>, ${durgaPuja.dates} at ${durgaPuja.venue}, ${durgaPuja.address}.</p>
+    <p>Your invitation letter with the full programme is attached.</p>
+    <p><strong>Help bring this celebration to life:</strong> your offering supports the Puja, Bhog, venue and community arrangements.<br>
+      Donate via GoFundMe: <a href="${durgaPuja.donationUrl}">${durgaPuja.donationUrl}</a><br>
+      Seva packages: <a href="${durgaPuja.sevaUrl}">${durgaPuja.sevaUrl}</a></p>
+    <p>Programme and updates: <a href="${durgaPuja.url}">${durgaPuja.url.replace("https://www.", "")}</a></p>
+    <p>Reference: ${escapeHtml(details.reference)}</p>
+    <p>With warm regards,<br>Invited by: Mithila Cultural Society Australia</p>
+  `;
+
+  const result = await sendEmail({
+    to: details.email,
+    subject: "Your invitation to Durga Puja 2026 · Mithila Cultural Society Australia",
+    html,
+    replyTo: env.eoiNotificationEmail,
+    // One email per address per day, so repeated downloads do not flood an inbox.
+    idempotencyKey: `dp2026-invitation-${details.email}-${new Date().toISOString().slice(0, 10)}`,
+    attachments: [{ filename: details.fileName, content: details.pdf.toString("base64") }]
+  });
+
+  return { configured: Boolean(env.resendApiKey && env.eoiFromEmail), sent: result.sent };
+}
+
+type InvitationNotificationDetails = {
+  name: string;
+  email: string;
+  phone: string;
+  reference: string;
+  paidStatus: "paid" | "not_paid";
+  wantsToContribute: boolean | null;
+};
+
+export async function sendDurgaPujaInvitationNotification(details: InvitationNotificationDetails) {
+  const contribute = details.wantsToContribute === null ? "Not asked (said already paid)" : details.wantsToContribute ? "Yes, opened GoFundMe" : "Not now";
+  const html = `
+    <h1>Durga Puja 2026 invitation letter requested</h1>
+    <p><strong>Reference:</strong> ${escapeHtml(details.reference)}</p>
+    <p><strong>Name:</strong> ${escapeHtml(details.name)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(details.email)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(details.phone)}</p>
+    <p><strong>Already paid (self-reported):</strong> ${details.paidStatus === "paid" ? "Yes" : "No"}</p>
+    <p><strong>Contribute to Maa Bhagwati now:</strong> ${contribute}</p>
+    <p>The guest agreed to be contacted about Durga Puja 2026.</p>
+  `;
+
+  return sendEmail({
+    to: env.eoiNotificationEmail,
+    subject: `Durga Puja 2026 invitation - ${details.name}`,
+    html,
+    replyTo: details.email,
+    idempotencyKey: `dp2026-invitation-${details.reference}-admin`
+  });
 }
