@@ -214,23 +214,33 @@ export function buildInvitationLetter(details: InvitationLetterDetails) {
     doc.textWithLink(url, left + 14, linkY, { url });
     linkY += 4.6;
   });
-  y = Math.max(linkY, qrY + qrSize + 6) + 5;
+  y = Math.max(linkY, qrY + qrSize + 6) + 9;
 
-  // Sign-off
+  // Sign-off, with the Public Officer's signature block on the right
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   doc.setTextColor(...ink);
   doc.text("With warm regards and the blessings of Maa Bhagwati,", left, y);
-  y += 7;
   doc.setFont("times", "bold");
   doc.setFontSize(12);
   doc.setTextColor(...maroon);
-  doc.text("Invited by: Mithila Cultural Society Australia", left, y);
-  y += 5;
-  doc.setFont("helvetica", "normal");
+  doc.text("Invited by: Mithila Cultural Society Australia", left, y + 7);
+
+  const signatureHeight = 13;
+  const signatureWidth = signatureHeight * (408 / 307);
+  const signatoryX = right - 48;
+  doc.addImage(invitationImages.signature, "PNG", signatoryX + 2, y - 8, signatureWidth, signatureHeight);
+  doc.setDrawColor(...gold);
+  doc.setLineWidth(0.3);
+  doc.line(signatoryX, y + 5.5, right, y + 5.5);
+  doc.setFont("helvetica", "bold");
   doc.setFontSize(9.5);
   doc.setTextColor(...ink);
-  doc.text("Shishirendu Jha, Public Officer", left, y);
+  doc.text("Shishirendu Jha", signatoryX, y + 10);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8.5);
+  doc.setTextColor(...muted);
+  doc.text("Public Officer", signatoryX, y + 14.2);
 
   // Footer note
   doc.setFont("helvetica", "normal");
@@ -240,9 +250,9 @@ export function buildInvitationLetter(details: InvitationLetterDetails) {
     "This letter is a personal invitation and is not an entry ticket or proof of payment. Ticketed events (Mithila Mahotsav and Dandiya Utsav) and Seva packages are booked separately. Programme details may change; please check the website before your visit.",
     contentWidth
   );
-  doc.text(note, width / 2, height - 22, { align: "center", lineHeightFactor: 1.35 });
+  doc.text(note, width / 2, height - 20, { align: "center", lineHeightFactor: 1.35 });
   doc.setTextColor(...maroon);
-  doc.textWithLink(durgaPuja.url.replace("https://", ""), width / 2, height - 13, { align: "center", url: durgaPuja.url });
+  doc.textWithLink(durgaPuja.url.replace("https://", ""), width / 2, height - 12, { align: "center", url: durgaPuja.url });
 
   return Buffer.from(doc.output("arraybuffer"));
 }
