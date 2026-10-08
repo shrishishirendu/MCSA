@@ -82,17 +82,17 @@ export function InvitationLetterFlow() {
     setStep("paid");
   }
 
-  if (step === "paid") return <Question step="Step 1 of 5" title="Have you already paid for Durga Puja 2026?">
+  if (step === "paid") return <Question step="Step 1 of 5" title="Have you contributed for Durga Puja 2026?">
     <p className="mt-3 leading-7 text-[#725e4b]">For example, a Seva package, an event ticket or a GoFundMe donation.</p>
     <div className="mt-6 grid gap-3 sm:grid-cols-2">
-      <button type="button" className={secondary} onClick={() => { setPaidStatus("paid"); setStep("paid-thanks"); }}>Yes, I have paid</button>
+      <button type="button" className={secondary} onClick={() => { setPaidStatus("paid"); setStep("paid-thanks"); }}>Yes, I have contributed</button>
       <button type="button" className={primary} onClick={() => { setPaidStatus("not_paid"); setStep("details"); }}>No, not yet</button>
     </div>
   </Question>;
 
   if (step === "paid-thanks") return <Question step="Thank you" title="Thank you for supporting the celebration.">
     <p className="mt-3 leading-7 text-[#725e4b]">For any questions about your booking or contribution, please get in touch with the organising team:</p>
-    <a href={`mailto:${durgaPuja.email}?subject=${encodeURIComponent("Durga Puja 2026 – payment enquiry")}`} className="mt-3 inline-block break-words text-lg font-semibold text-[#761c25] underline">{durgaPuja.email}</a>
+    <a href={`mailto:${durgaPuja.email}?subject=${encodeURIComponent("Durga Puja 2026 – contribution enquiry")}`} className="mt-3 inline-block break-words text-lg font-semibold text-[#761c25] underline">{durgaPuja.email}</a>
     <div className="mt-6 rounded-lg bg-[#fff9ec] p-4">
       <p className="text-sm leading-6 text-[#725e4b]">Would you also like a personal invitation letter with the full programme?</p>
       <button type="button" className={`${primary} mt-4`} onClick={() => setStep("details")}>Get my invitation letter</button>

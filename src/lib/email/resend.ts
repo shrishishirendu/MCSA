@@ -221,14 +221,14 @@ function invitationEventList(ids: InvitationEventId[]) {
 }
 
 export async function sendDurgaPujaInvitationNotification(details: InvitationNotificationDetails) {
-  const contribute = details.wantsToContribute === null ? "Not asked (said already paid)" : details.wantsToContribute ? "Yes, opened GoFundMe" : "Not now";
+  const contribute = details.wantsToContribute === null ? "Not asked (said already contributed)" : details.wantsToContribute ? "Yes, opened GoFundMe" : "Not now";
   const html = `
     <h1>Durga Puja 2026 invitation letter requested</h1>
     <p><strong>Reference:</strong> ${escapeHtml(details.reference)}</p>
     <p><strong>Name:</strong> ${escapeHtml(details.name)}</p>
     <p><strong>Email:</strong> ${escapeHtml(details.email)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(details.phone)}</p>
-    <p><strong>Already paid (self-reported):</strong> ${details.paidStatus === "paid" ? "Yes" : "No"}</p>
+    <p><strong>Already contributed (self-reported):</strong> ${details.paidStatus === "paid" ? "Yes" : "No"}</p>
     <p><strong>Contribute to Maa Bhagwati now:</strong> ${contribute}</p>
     <p><strong>Joining:</strong> ${details.adults} adult${details.adults === 1 ? "" : "s"}, ${details.children} child${details.children === 1 ? "" : "ren"}</p>
     <p><strong>Events they plan to join:</strong><br>${invitationEventList(details.events)}</p>
