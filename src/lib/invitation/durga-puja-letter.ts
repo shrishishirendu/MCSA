@@ -54,7 +54,9 @@ export function buildInvitationLetter(details: InvitationLetterDetails) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8.5);
   doc.setTextColor(...muted);
-  doc.text("Jai Mata Jaanaki · Jai Mithila · Jai Maithili", left + 26, 28);
+  // Jai Mata Jaanaki · Jai Mithila · Jai Maithili, in Tirhuta (pre-shaped image; standard PDF fonts lack the script)
+  const greetingHeight = 4.2;
+  doc.addImage(invitationImages.tirhutaGreeting, "PNG", left + 26, 24.6, greetingHeight * (1600 / 88), greetingHeight);
   doc.text(`${durgaPuja.email} · ${durgaPuja.contacts.map(contact => `${contact.name} ${contact.phone}`).join(" · ")}`, left + 26, 33);
 
   doc.setDrawColor(...gold);
