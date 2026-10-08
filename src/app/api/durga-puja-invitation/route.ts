@@ -29,8 +29,9 @@ export async function POST(request: Request) {
   const phone = String(body.phone ?? "").trim();
   const paidStatus = body.paidStatus === "paid" ? "paid" : "not_paid";
   const wantsToContribute = typeof body.wantsToContribute === "boolean" ? body.wantsToContribute : null;
-  const adults = Number(body.adults);
-  const children = Number(body.children ?? 0);
+  // Pages opened before the attendance step existed do not send a party size.
+  const adults = body.adults === undefined ? 1 : Number(body.adults);
+  const children = body.children === undefined ? 0 : Number(body.children);
   const requestedEvents = Array.isArray(body.events) ? body.events : [];
   const events = invitationEvents.map(event => event.id).filter((id): id is InvitationEventId => requestedEvents.includes(id));
 
