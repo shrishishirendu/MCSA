@@ -54,7 +54,7 @@ export function buildInvitationLetter(details: InvitationLetterDetails) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8.5);
   doc.setTextColor(...muted);
-  doc.text("Jai Mata Di · Jai Mithila · Jai Maithili", left + 26, 28);
+  doc.text("Jai Mata Jaanaki · Jai Mithila · Jai Maithili", left + 26, 28);
   doc.text(`${durgaPuja.email} · ${durgaPuja.contacts.map(contact => `${contact.name} ${contact.phone}`).join(" · ")}`, left + 26, 33);
 
   doc.setDrawColor(...gold);
