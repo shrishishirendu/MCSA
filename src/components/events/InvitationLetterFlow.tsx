@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { durgaPuja } from "@/data/durga-puja-2026";
+import { durgaPuja, invitationEvents, invitationEventSlot, type InvitationEventId } from "@/data/durga-puja-2026";
 import { FieldGroup, Label, TextInput } from "@/components/ui/Form";
 import { StepQuestion, stepButton } from "@/components/events/StepQuestion";
 import { readJsonResponse } from "@/lib/response";
 
-type Step = "paid" | "paid-thanks" | "details" | "contribute" | "letter";
+type Step = "paid" | "paid-thanks" | "details" | "attendance" | "contribute" | "letter";
 type PaidStatus = "paid" | "not_paid";
 type Guest = { name: string; email: string; phone: string };
 type Letter = { reference: string; fileName: string; url: string; emailed: boolean };
@@ -19,6 +19,8 @@ export function InvitationLetterFlow() {
   const [paidStatus, setPaidStatus] = useState<PaidStatus>("not_paid");
   const [guest, setGuest] = useState<Guest>({ name: "", email: "", phone: "" });
   const [consent, setConsent] = useState(false);
+  const [party, setParty] = useState({ adults: 1, children: 0 });
+  const [events, setEvents] = useState<InvitationEventId[]>([]);
   const [wantsToContribute, setWantsToContribute] = useState<boolean | null>(null);
   const [letter, setLetter] = useState<Letter | null>(null);
   const [generating, setGenerating] = useState(false);
@@ -35,12 +37,12 @@ export function InvitationLetterFlow() {
       const response = await fetch("/api/durga-puja-invitation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...guest, consent, paidStatus, wantsToContribute: contribute })
+        body: JSON.stringify({ ...guest, consent, paidStatus, wantsToContribute: contribute, ...party, events })
       });
       const result = await readJsonResponse<{ ok?: boolean; reference: string; fileName: string; pdf: string; emailed: boolean }>(response);
       if (!response.ok || !result.ok) {
         setError(result.error ?? "Your invitation letter could not be prepared.");
-        if (response.status === 400) setStep("details");
+        if (response.status === 400) setStep(result.error?.includes("adults") ? "attendance" : "details");
         return;
       }
       const bytes = Uint8Array.from(atob(result.pdf), character => character.charCodeAt(0));
@@ -56,20 +58,31 @@ export function InvitationLetterFlow() {
   function submitDetails(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
+    setStep("attendance");
+  }
+
+  function submitAttendance(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     if (paidStatus === "paid") void generate(null);
     else setStep("contribute");
+  }
+
+  function toggleEvent(id: InvitationEventId, checked: boolean) {
+    setEvents(current => checked ? [...current, id] : current.filter(item => item !== id));
   }
 
   function restart() {
     setLetter(null);
     setGuest({ name: "", email: "", phone: "" });
     setConsent(false);
+    setParty({ adults: 1, children: 0 });
+    setEvents([]);
     setWantsToContribute(null);
     setError("");
     setStep("paid");
   }
 
-  if (step === "paid") return <Question step="Step 1 of 4" title="Have you already paid for Durga Puja 2026?">
+  if (step === "paid") return <Question step="Step 1 of 5" title="Have you already paid for Durga Puja 2026?">
     <p className="mt-3 leading-7 text-[#725e4b]">For example, a Seva package, an event ticket or a GoFundMe donation.</p>
     <div className="mt-6 grid gap-3 sm:grid-cols-2">
       <button type="button" className={secondary} onClick={() => { setPaidStatus("paid"); setStep("paid-thanks"); }}>Yes, I have paid</button>
@@ -87,7 +100,7 @@ export function InvitationLetterFlow() {
     <button type="button" className={backLink} onClick={() => setStep("paid")}>← Back</button>
   </Question>;
 
-  if (step === "details") return <Question step="Step 2 of 4" title="Your details">
+  if (step === "details") return <Question step="Step 2 of 5" title="Your details">
     <p className="mt-3 leading-7 text-[#725e4b]">Your name appears on the invitation letter, and we will email you a copy.</p>
     <form onSubmit={submitDetails} className="mt-6 grid gap-5">
       <FieldGroup><Label htmlFor="invite-name">Full name (in English) *</Label><TextInput id="invite-name" autoComplete="name" maxLength={80} required value={guest.name} onChange={event => setGuest({ ...guest, name: event.target.value })} /></FieldGroup>
@@ -102,16 +115,36 @@ export function InvitationLetterFlow() {
     <button type="button" className={backLink} onClick={() => setStep(paidStatus === "paid" ? "paid-thanks" : "paid")}>← Back</button>
   </Question>;
 
-  if (step === "contribute") return <Question step="Step 3 of 4" title="Would you like to contribute to Maa Bhagwati now?">
+  if (step === "attendance") return <Question step="Step 3 of 5" title="Who is joining you?">
+    <p className="mt-3 leading-7 text-[#725e4b]">This helps us plan Bhog, Prasad and seating. Your chosen events will be highlighted on your letter.</p>
+    <form onSubmit={submitAttendance} className="mt-6 grid gap-6">
+      <div className="grid grid-cols-2 gap-5 sm:max-w-md">
+        <FieldGroup><Label htmlFor="invite-adults">Adults (including you) *</Label><TextInput id="invite-adults" type="number" inputMode="numeric" min={1} max={20} step={1} required value={party.adults} onChange={event => setParty({ ...party, adults: Number(event.target.value) })} /></FieldGroup>
+        <FieldGroup><Label htmlFor="invite-children">Children *</Label><TextInput id="invite-children" type="number" inputMode="numeric" min={0} max={20} step={1} required value={party.children} onChange={event => setParty({ ...party, children: Number(event.target.value) })} /></FieldGroup>
+      </div>
+      <fieldset className="grid gap-3">
+        <legend className="text-sm font-semibold text-indigoInk">Which events would you like to join? <span className="font-normal text-[#725e4b]">(optional, choose any)</span></legend>
+        {invitationEvents.map(item => <label key={item.id} className="flex items-start gap-3 rounded-md border border-[#c5953d]/40 p-3 text-sm leading-6 has-[:checked]:border-[#761c25] has-[:checked]:bg-[#fff9ec]">
+          <input type="checkbox" checked={events.includes(item.id)} onChange={event => toggleEvent(item.id, event.target.checked)} className="mt-1 size-4 shrink-0" />
+          <span><strong className="text-[#342820]">{item.name}</strong><br /><span className="text-[#725e4b]">{invitationEventSlot(item.id)}</span></span>
+        </label>)}
+      </fieldset>
+      {error && <p role="alert" className="rounded-md border border-[#c5953d]/50 bg-[#fff9ec] p-4 text-sm leading-6">{error}</p>}
+      <button type="submit" className={primary}>{paidStatus === "paid" ? "Prepare my letter" : "Continue"}</button>
+    </form>
+    <button type="button" className={backLink} onClick={() => setStep("details")}>← Back</button>
+  </Question>;
+
+  if (step === "contribute") return <Question step="Step 4 of 5" title="Would you like to contribute to Maa Bhagwati now?">
     <p className="mt-3 leading-7 text-[#725e4b]">Your offering supports the Puja, Bhog, venue and community arrangements. Your invitation letter will be ready either way.</p>
     <div className="mt-6 grid gap-3 sm:grid-cols-2">
       <a href={durgaPuja.donationUrl} target="_blank" rel="noopener noreferrer" className={primary} onClick={() => void generate(true)}>Yes, contribute via GoFundMe <span aria-hidden="true" className="ml-1">↗</span></a>
       <button type="button" className={secondary} onClick={() => void generate(false)}>Not now, show my letter</button>
     </div>
-    <button type="button" className={backLink} onClick={() => setStep("details")}>← Back</button>
+    <button type="button" className={backLink} onClick={() => setStep("attendance")}>← Back</button>
   </Question>;
 
-  return <Question step={paidStatus === "paid" ? "Your invitation" : "Step 4 of 4"} title={generating ? "Preparing your invitation letter…" : letter ? `Your invitation is ready, ${guest.name.split(" ")[0]}.` : "Something went wrong"}>
+  return <Question step={paidStatus === "paid" ? "Your invitation" : "Step 5 of 5"} title={generating ? "Preparing your invitation letter…" : letter ? `Your invitation is ready, ${guest.name.split(" ")[0]}.` : "Something went wrong"}>
     {generating && <p role="status" className="mt-3 leading-7 text-[#725e4b]">This only takes a moment.</p>}
     {!generating && error && <div role="alert" className="mt-4 rounded-md border border-[#c5953d]/50 bg-[#fff9ec] p-4 text-sm leading-6">
       <p>{error}</p>

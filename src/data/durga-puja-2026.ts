@@ -116,3 +116,28 @@ export function dandiyaSession() {
   const day = festivalDays.find(festivalDay => festivalDay.items.some(item => item.title === "Dandiya Utsav"));
   return { date: day ? `${day.day} ${day.date} 2026` : "", time: day?.items.find(item => item.title === "Dandiya Utsav")?.time ?? "" };
 }
+
+// Events guests can say they plan to join when requesting an invitation letter.
+export const invitationEvents = [
+  { id: "mithila-mahotsav", name: "Mithila Mahotsav", titles: ["Mithila Mahotsav"] },
+  { id: "mata-ki-chowki", name: "Mata ki Chowki", titles: ["Mata ki Chowki"] },
+  { id: "kanya-pujan", name: "Kanya Pujan", titles: ["Kanya Pujan"] },
+  { id: "khoichha", name: "Maithilani Khoichha", titles: ["Maithilani Khoichha"] },
+  { id: "dandiya", name: "Dandiya Utsav", titles: ["Dandiya Utsav"] },
+  { id: "visarjan-sindoor-khela", name: "Visarjan & Sindoor Khela", titles: ["Visarjan", "Sindoor Khela"] }
+] as const;
+
+export type InvitationEventId = (typeof invitationEvents)[number]["id"];
+
+export function invitationEventSlot(id: InvitationEventId) {
+  const event = invitationEvents.find(item => item.id === id);
+  for (const day of festivalDays) {
+    const item = day.items.find(entry => entry.title === event?.titles[0]);
+    if (item) return `${day.day} ${day.date} · ${item.time}`;
+  }
+  return "";
+}
+
+export function invitationEventTitles(ids: readonly InvitationEventId[]) {
+  return invitationEvents.filter(event => ids.includes(event.id)).flatMap(event => [...event.titles]);
+}

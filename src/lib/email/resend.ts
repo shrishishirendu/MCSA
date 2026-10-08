@@ -1,4 +1,4 @@
-import { dandiyaSession, durgaPuja } from "@/data/durga-puja-2026";
+import { dandiyaSession, durgaPuja, invitationEvents, invitationEventSlot, type InvitationEventId } from "@/data/durga-puja-2026";
 import { env } from "@/lib/env";
 
 type EoiEmailDetails = {
@@ -186,7 +186,7 @@ export async function sendDurgaPujaInvitationEmail(details: InvitationEmailDetai
       Seva packages: <a href="${durgaPuja.sevaUrl}">${durgaPuja.sevaUrl}</a></p>
     <p>Programme and updates: <a href="${durgaPuja.url}">${durgaPuja.url.replace("https://www.", "")}</a></p>
     <p>Reference: ${escapeHtml(details.reference)}</p>
-    <p>With warm regards,<br>Invited by: Mithila Cultural Society Australia</p>
+    <p>With warm regards,<br>Invited by: Mithila Cultural Society Australia<br>Shishirendu Jha, Public Officer</p>
   `;
 
   const result = await sendEmail({
@@ -209,7 +209,16 @@ type InvitationNotificationDetails = {
   reference: string;
   paidStatus: "paid" | "not_paid";
   wantsToContribute: boolean | null;
+  adults: number;
+  children: number;
+  events: InvitationEventId[];
 };
+
+function invitationEventList(ids: InvitationEventId[]) {
+  return ids.length
+    ? invitationEvents.filter(event => ids.includes(event.id)).map(event => `${escapeHtml(event.name)} (${escapeHtml(invitationEventSlot(event.id))})`).join("<br>")
+    : "None selected";
+}
 
 export async function sendDurgaPujaInvitationNotification(details: InvitationNotificationDetails) {
   const contribute = details.wantsToContribute === null ? "Not asked (said already paid)" : details.wantsToContribute ? "Yes, opened GoFundMe" : "Not now";
@@ -221,12 +230,14 @@ export async function sendDurgaPujaInvitationNotification(details: InvitationNot
     <p><strong>Phone:</strong> ${escapeHtml(details.phone)}</p>
     <p><strong>Already paid (self-reported):</strong> ${details.paidStatus === "paid" ? "Yes" : "No"}</p>
     <p><strong>Contribute to Maa Bhagwati now:</strong> ${contribute}</p>
+    <p><strong>Joining:</strong> ${details.adults} adult${details.adults === 1 ? "" : "s"}, ${details.children} child${details.children === 1 ? "" : "ren"}</p>
+    <p><strong>Events they plan to join:</strong><br>${invitationEventList(details.events)}</p>
     <p>The guest agreed to be contacted about Durga Puja 2026.</p>
   `;
 
   return sendEmail({
     to: env.eoiNotificationEmail,
-    subject: `Durga Puja 2026 invitation - ${details.name}`,
+    subject: `Durga Puja 2026 invitation - ${details.name} (${details.adults + details.children} guest${details.adults + details.children === 1 ? "" : "s"})`,
     html,
     replyTo: details.email,
     idempotencyKey: `dp2026-invitation-${details.reference}-admin`

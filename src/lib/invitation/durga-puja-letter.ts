@@ -1,5 +1,5 @@
 import { jsPDF } from "jspdf";
-import { durgaPuja, festivalDays } from "@/data/durga-puja-2026";
+import { durgaPuja, festivalDays, invitationEventTitles, type InvitationEventId } from "@/data/durga-puja-2026";
 import { invitationImages } from "@/lib/invitation/images";
 
 export type InvitationLetterDetails = {
@@ -7,7 +7,12 @@ export type InvitationLetterDetails = {
   email: string;
   reference: string;
   issuedAt: Date;
+  adults: number;
+  children: number;
+  events: InvitationEventId[];
 };
+
+const plural = (count: number, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
 
 const maroon: [number, number, number] = [118, 28, 37];
 const gold: [number, number, number] = [197, 149, 61];
@@ -88,7 +93,7 @@ export function buildInvitationLetter(details: InvitationLetterDetails) {
   doc.setTextColor(...ink);
   doc.setFontSize(10);
   const body = doc.splitTextToSize(
-    "With the blessings of Maa Bhagwati, Mithila Cultural Society Australia warmly invites you and your family to Durga Puja 2026: three days of devotion, culture and togetherness in Sydney. Join us to welcome Maa Durga, offer your prayers, celebrate the living traditions of Mithila, and share Bhog and Prasad with the community.",
+    `With the blessings of Maa Bhagwati, Mithila Cultural Society Australia warmly invites you and your family to Durga Puja 2026: three days of devotion, culture and togetherness in Sydney. Join us to welcome Maa Durga, offer your prayers, celebrate the living traditions of Mithila, and share Bhog and Prasad with the community. We look forward to welcoming your party of ${plural(details.adults, "adult", "adults")}${details.children ? ` and ${plural(details.children, "child", "children")}` : ""}.`,
     contentWidth
   );
   doc.text(body, left, y, { lineHeightFactor: 1.45 });
@@ -115,7 +120,7 @@ export function buildInvitationLetter(details: InvitationLetterDetails) {
     doc.setTextColor(...ink);
     doc.text(doc.splitTextToSize(value, factWidth - 6)[0], x, y + 10.5);
   });
-  y += 23;
+  y += 22;
 
   // Programme
   doc.setFont("times", "bold");
@@ -125,12 +130,13 @@ export function buildInvitationLetter(details: InvitationLetterDetails) {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.5);
   doc.setTextColor(...muted);
-  doc.text("All times are Sydney local time (AEDT) · * Ticketed event", right, y, { align: "right" });
+  doc.text(`All times are Sydney local time (AEDT) · * Ticketed event${details.events.length ? " · Highlighted: events you plan to join" : ""}`, right, y, { align: "right" });
   y += 5;
 
   const gap = 4;
   const columnWidth = (contentWidth - gap * 2) / 3;
   let programmeBottom = y;
+  const chosenTitles = invitationEventTitles(details.events);
   festivalDays.forEach((day, index) => {
     const x = left + index * (columnWidth + gap);
     let rowY = y;
@@ -142,14 +148,20 @@ export function buildInvitationLetter(details: InvitationLetterDetails) {
     doc.text(`${day.day} ${day.date}`, x + 3, rowY + 5.9);
     rowY += 13;
     day.items.forEach(item => {
+      doc.setFontSize(8);
+      const title = doc.splitTextToSize(`${item.title}${"ticketed" in item && item.ticketed ? " *" : ""}`, columnWidth - 2);
+      const chosen = (chosenTitles as string[]).includes(item.title);
+      if (chosen) {
+        doc.setFillColor(246, 228, 192);
+        doc.roundedRect(x, rowY - 3, columnWidth, 4.4 + title.length * 3.4, 1, 1, "F");
+      }
       doc.setFont("helvetica", "bold");
       doc.setFontSize(7);
       doc.setTextColor(...gold);
       doc.text(item.time, x + 1, rowY);
-      doc.setFont("helvetica", "normal");
+      doc.setFont("helvetica", chosen ? "bold" : "normal");
       doc.setFontSize(8);
-      doc.setTextColor(...ink);
-      const title = doc.splitTextToSize(`${item.title}${"ticketed" in item && item.ticketed ? " *" : ""}`, columnWidth - 2);
+      doc.setTextColor(...(chosen ? maroon : ink));
       doc.text(title, x + 1, rowY + 3.6);
       rowY += 3.6 + title.length * 3.4 + 1.6;
     });
@@ -160,7 +172,7 @@ export function buildInvitationLetter(details: InvitationLetterDetails) {
   // Support
   doc.setDrawColor(...gold);
   doc.line(left, y, right, y);
-  y += 7;
+  y += 6;
   doc.setFont("times", "bold");
   doc.setFontSize(13);
   doc.setTextColor(...maroon);
@@ -202,20 +214,23 @@ export function buildInvitationLetter(details: InvitationLetterDetails) {
     doc.textWithLink(url, left + 14, linkY, { url });
     linkY += 4.6;
   });
-  y = Math.max(linkY, qrY + qrSize + 6) + 6;
+  y = Math.max(linkY, qrY + qrSize + 6) + 5;
 
   // Sign-off
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   doc.setTextColor(...ink);
-  doc.text("We look forward to celebrating with you.", left, y);
-  y += 5.5;
   doc.text("With warm regards and the blessings of Maa Bhagwati,", left, y);
-  y += 8;
+  y += 7;
   doc.setFont("times", "bold");
   doc.setFontSize(12);
   doc.setTextColor(...maroon);
   doc.text("Invited by: Mithila Cultural Society Australia", left, y);
+  y += 5;
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9.5);
+  doc.setTextColor(...ink);
+  doc.text("Shishirendu Jha, Public Officer", left, y);
 
   // Footer note
   doc.setFont("helvetica", "normal");
