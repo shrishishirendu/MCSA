@@ -42,7 +42,7 @@ export default function DurgaPujaPage() {
           <p className={styles.heroSubtitle}>Mithila welcomes Mahashakti.</p>
           <div className={styles.heroFacts}><p><strong>{durgaPuja.dates}</strong><span>Saturday to Monday</span></p><p><strong>Quakers Hill, Sydney</strong><span>{durgaPuja.venue}</span></p></div>
           <p className={styles.heroDescription}>Three days to seek blessings, celebrate our roots, and make memories with the people who matter.</p>
-          <div className={styles.actions}><Action href="#programme">Explore the programme</Action><Action href={durgaPuja.donationUrl} secondary>Donate via GoFundMe</Action></div>
+          <div className={styles.actions}><Action href="#programme">Explore the programme</Action><Action href={durgaPuja.donationUrl} secondary>Donate via GoFundMe</Action><Action href={durgaPuja.pujaItemsPath} secondary>Bhagwati Ashirwaad Items</Action></div>
           <Link href={durgaPuja.invitationPath} className={styles.textLink}>Get your personal invitation letter →</Link>
           <p className={styles.heroFootnote}>Devotion. Culture. Heritage. Togetherness.</p>
         </div>
@@ -112,6 +112,7 @@ export default function DurgaPujaPage() {
             <article className={styles.donationCard}><span className={styles.smallLabel}>A contribution from the heart</span><h3>Give what you can.</h3><p>Every contribution helps our community welcome Maa Bhagwati and share the traditions of Mithila with the next generation.</p><Action href={durgaPuja.donationUrl}>Donate via GoFundMe</Action><p className={styles.smallPrint}>For general donations. Event tickets and Seva bookings are separate.</p></article>
             <article className={styles.sevaCard}><span className={styles.smallLabel}>Participate through Seva</span><h3>Make an offering with your family.</h3><p>Explore Community Seva, Shubh Family Seva and Yajman Seva on Humanitix.</p><ul><li>Support Puja and community arrangements</li><li>Explore family participation and package inclusions</li><li>Choose the offering that is right for you</li></ul><Action href={durgaPuja.sevaUrl} secondary>View Seva packages</Action><p className={styles.smallPrint}>See Humanitix for current prices, inclusions, availability and booking fees.</p></article>
           </div>
+          <div className={styles.ashirwaadStrip}><div><p className={styles.eyebrow}>Blessings to take home</p><h3>Bhagwati Ashirwaad Items</h3></div><p>Items donated to the Puja, available to our devotees. Each item is one of a kind and goes to the first devotee who completes payment.</p><div><Action href={durgaPuja.pujaItemsPath}>Bhagwati Ashirwaad Items</Action></div></div>
           <details className={styles.bankDetails}><summary>Prefer a bank transfer? <span aria-hidden="true">+</span></summary><div><dl><div><dt>Account name</dt><dd>Mithila Cultural Society Australia Inc.</dd></div><div><dt>Bank</dt><dd>Commonwealth Bank of Australia</dd></div><div><dt>BSB</dt><dd>062-452</dd></div><div><dt>Account number</dt><dd>1050 9708</dd></div></dl><p>For Seva, sponsorship or stall payments, please contact the team to confirm arrangements and use a reference with the purpose and your name.</p></div></details>
         </div>
       </section>

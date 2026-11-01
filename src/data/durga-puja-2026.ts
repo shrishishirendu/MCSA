@@ -20,6 +20,7 @@ export const durgaPuja = {
   calendarUrl: "/downloads/durga-puja-2026.ics",
   invitationPath: "/durga-puja-2026/invitation",
   dandiyaPath: "/durga-puja-2026/dandiya",
+  pujaItemsPath: "/durga-puja-2026/bhagwati-ashirwaad-items",
   programmeConfirmed: true
 } as const;
 

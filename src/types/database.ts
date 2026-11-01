@@ -91,6 +91,26 @@ type MahotsavEoiRow = {
   updated_at: string;
 };
 
+export type PujaItemRow = {
+  id: string;
+  name: string;
+  description: string;
+  price_cents: number;
+  image_url: string | null;
+  sort_order: number;
+  active: boolean;
+  status: "available" | "held" | "claimed";
+  held_until: string | null;
+  claimant_name: string | null;
+  claimant_email: string | null;
+  claimant_phone: string | null;
+  stripe_session_id: string | null;
+  stripe_payment_intent: string | null;
+  claimed_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -199,9 +219,24 @@ export type Database = {
         Update: Partial<Omit<MahotsavEoiRow, "id" | "created_at">>;
         Relationships: [];
       };
+      puja_items: {
+        Row: PujaItemRow;
+        Insert: Pick<PujaItemRow, "name" | "price_cents"> & Partial<Omit<PujaItemRow, "name" | "price_cents">>;
+        Update: Partial<Omit<PujaItemRow, "id" | "created_at">>;
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      hold_puja_item: {
+        Args: { p_item_id: string; p_name: string; p_email: string; p_phone: string; p_minutes: number };
+        Returns: PujaItemRow[];
+      };
+      release_puja_item: {
+        Args: { p_item_id: string; p_session_id?: string | null };
+        Returns: PujaItemRow[];
+      };
+    };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
   };

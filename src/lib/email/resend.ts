@@ -294,3 +294,74 @@ export async function sendDandiyaBookingEmails(details: DandiyaBookingDetails) {
 
   return { adminSent: admin.sent, guestSent: guest.sent };
 }
+
+type PujaItemPurchaseDetails = {
+  itemId: string;
+  itemName: string;
+  amount: string;
+  buyerName: string;
+  buyerEmail: string;
+  buyerPhone: string;
+  stripeSessionId: string;
+};
+
+export async function sendPujaItemPurchaseEmails(details: PujaItemPurchaseDetails) {
+  const buyerHtml = `
+    <p>Dear ${escapeHtml(details.buyerName)},</p>
+    <h1>Thank you for your purchase</h1>
+    <p>Your Bhagwati Ashirwaad item, <strong>${escapeHtml(details.itemName)}</strong>, is now yours.</p>
+    <p><strong>Amount paid:</strong> ${escapeHtml(details.amount)}</p>
+    <p>The organising team will contact you about collecting your item. If you have any questions, reply to this email or write to ${escapeHtml(env.eoiNotificationEmail)}.</p>
+    <p>With the blessings of Maa Bhagwati,<br>Mithila Cultural Society Australia</p>
+  `;
+
+  const committeeHtml = `
+    <h1>New Bhagwati Ashirwaad item purchase</h1>
+    <p><strong>Item:</strong> ${escapeHtml(details.itemName)}</p>
+    <p><strong>Amount:</strong> ${escapeHtml(details.amount)}</p>
+    <p><strong>Buyer:</strong> ${escapeHtml(details.buyerName)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(details.buyerEmail)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(details.buyerPhone)}</p>
+    <p><strong>Stripe Checkout session:</strong> ${escapeHtml(details.stripeSessionId)}</p>
+    <p>The item is marked as Sold in Admin Portal &gt; Bhagwati Ashirwaad Items.</p>
+  `;
+
+  const [buyer, committee] = await Promise.all([
+    sendEmail({
+      to: details.buyerEmail,
+      subject: "Thank you for your purchase · Bhagwati Ashirwaad Items",
+      html: buyerHtml,
+      replyTo: env.eoiNotificationEmail,
+      idempotencyKey: `puja-item-${details.stripeSessionId}-buyer`
+    }),
+    sendEmail({
+      to: env.eoiNotificationEmail,
+      subject: `New Bhagwati Ashirwaad item purchase - ${details.itemName}`,
+      html: committeeHtml,
+      replyTo: details.buyerEmail,
+      idempotencyKey: `puja-item-${details.stripeSessionId}-committee`
+    })
+  ]);
+
+  return { buyerSent: buyer.sent, committeeSent: committee.sent };
+}
+
+export async function sendPujaItemRefundAlert(details: { itemId: string; stripeSessionId: string; amount: string; buyerEmail: string; reason: string }) {
+  const html = `
+    <h1>Action needed: Bhagwati Ashirwaad payment needs a manual refund</h1>
+    <p>A payment was completed for an item that was no longer reserved for this buyer, so the item was <strong>not</strong> marked as sold for them.</p>
+    <p><strong>Reason:</strong> ${escapeHtml(details.reason)}</p>
+    <p><strong>Item ID:</strong> ${escapeHtml(details.itemId || "Unknown")}</p>
+    <p><strong>Amount:</strong> ${escapeHtml(details.amount)}</p>
+    <p><strong>Buyer email:</strong> ${escapeHtml(details.buyerEmail || "Unknown")}</p>
+    <p><strong>Stripe Checkout session:</strong> ${escapeHtml(details.stripeSessionId)}</p>
+    <p>Please review this payment in the Stripe Dashboard, refund it, and contact the buyer.</p>
+  `;
+
+  return sendEmail({
+    to: env.eoiNotificationEmail,
+    subject: "Action needed: Bhagwati Ashirwaad payment needs a manual refund",
+    html,
+    idempotencyKey: `puja-item-${details.stripeSessionId}-refund-alert`
+  });
+}

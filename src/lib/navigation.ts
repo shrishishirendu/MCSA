@@ -38,6 +38,7 @@ export const adminNavigation: NavigationItem[] = [
   { label: "Members", href: "/admin/members" },
   { label: "Events", href: "/admin/events" },
   { label: "MM2026 EOI", href: "/admin/mahotsav-eoi" },
+  { label: "Bhagwati Ashirwaad Items", href: "/admin/puja-items" },
   { label: "Tickets", href: "/admin/tickets" },
   { label: "Donations", href: "/admin/donations" },
   { label: "Blog Posts", href: "/admin/blog-posts" },
