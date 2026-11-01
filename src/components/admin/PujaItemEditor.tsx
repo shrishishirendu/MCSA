@@ -59,6 +59,7 @@ export function PujaItemEditor({ items }: { items: AdminPujaItem[] }) {
         priceDollars: priceLocked && selected ? selected.priceCents / 100 : data.get("priceDollars"),
         sortOrder: Number(data.get("sortOrder") || 0),
         active: data.get("active") === "on",
+        paymentUrl: data.get("paymentUrl"),
         imageUrl: imageUrls[0] ?? null
       })
     }, selected ? "Item updated." : "Item added.");
@@ -66,7 +67,7 @@ export function PujaItemEditor({ items }: { items: AdminPujaItem[] }) {
   }
 
   async function release(item: AdminPujaItem) {
-    if (!window.confirm(`Release the hold on "${item.name}"? Any open Stripe checkout for it will be closed.`)) return;
+    if (!window.confirm(`Release the reservation on "${item.name}"? Only do this if the devotee has not paid. The item becomes available to others again.`)) return;
     await call(`/api/admin/puja-items/${item.id}`, { method: "POST", body: JSON.stringify({ action: "release" }) }, "Hold released.");
   }
 
@@ -75,7 +76,7 @@ export function PujaItemEditor({ items }: { items: AdminPujaItem[] }) {
     const data = new FormData(event.currentTarget);
     await call(`/api/admin/puja-items/${item.id}`, {
       method: "POST",
-      body: JSON.stringify({ action: "mark-sold", buyerName: data.get("buyerName"), buyerEmail: data.get("buyerEmail"), buyerPhone: data.get("buyerPhone") })
+      body: JSON.stringify({ action: "mark-sold", buyerName: data.get("buyerName"), buyerEmail: data.get("buyerEmail"), buyerPhone: data.get("buyerPhone"), sendEmail: data.get("sendEmail") === "on" })
     }, "Item marked as sold.");
   }
 
@@ -98,6 +99,11 @@ export function PujaItemEditor({ items }: { items: AdminPujaItem[] }) {
           </FieldGroup>
           <FieldGroup><Label htmlFor="item-sort">Sort order</Label><TextInput key={`s-${selected?.id}`} id="item-sort" name="sortOrder" type="number" step="1" defaultValue={selected?.sortOrder ?? 0} /></FieldGroup>
         </div>
+        <FieldGroup>
+          <Label htmlFor="item-payment">Tyro payment link</Label>
+          <TextInput key={`l-${selected?.id}`} id="item-payment" name="paymentUrl" type="url" placeholder="https://" maxLength={pujaItemLimits.paymentUrl} defaultValue={selected?.paymentUrl ?? ""} />
+          <p className="text-xs text-indigoInk/60">Create a payment link in Tyro for this item&apos;s price and paste it here. Devotees are sent to it after reserving. Required to show the item publicly.</p>
+        </FieldGroup>
         <label className="flex items-center gap-3 text-sm font-semibold text-indigoInk"><input key={`a-${selected?.id}`} type="checkbox" name="active" defaultChecked={selected?.active ?? true} className="size-4" /> Show on the public page</label>
         <FieldGroup><Label>Photo</Label><ContentImagePicker urls={imageUrls} onChange={setImageUrls} /></FieldGroup>
         {message ? <p className="text-sm font-semibold text-lotus-700">{message}</p> : null}
@@ -117,6 +123,7 @@ export function PujaItemEditor({ items }: { items: AdminPujaItem[] }) {
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${stateClass[item.state]}`}>{stateLabel[item.state]}</span>
+                    {!item.paymentUrl ? <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">No payment link</span> : null}
                     {!item.active ? <span className="rounded-full bg-indigoInk/10 px-2.5 py-1 text-xs font-bold text-indigoInk/70">Hidden</span> : null}
                     <span className="text-xs text-indigoInk/50">Sort {item.sortOrder}</span>
                   </div>
@@ -131,25 +138,26 @@ export function PujaItemEditor({ items }: { items: AdminPujaItem[] }) {
                   {item.claimantEmail ? <div><dt className="inline font-semibold">Email: </dt><dd className="inline break-all">{item.claimantEmail}</dd></div> : null}
                   {item.claimantPhone ? <div><dt className="inline font-semibold">Phone: </dt><dd className="inline">{item.claimantPhone}</dd></div> : null}
                   {item.state === "reserved" ? <div><dt className="inline font-semibold">Held until: </dt><dd className="inline">{formatTime(item.heldUntil)}</dd></div> : null}
-                  {item.state === "sold" ? <div><dt className="inline font-semibold">Sold: </dt><dd className="inline">{formatTime(item.claimedAt)}{item.stripeSessionId ? " · paid online" : " · marked manually"}</dd></div> : null}
+                  {item.state === "sold" ? <div><dt className="inline font-semibold">Sold: </dt><dd className="inline">{formatTime(item.claimedAt)}</dd></div> : null}
                 </dl>
               ) : null}
 
               <div className="mt-4 flex flex-wrap gap-2">
                 <button type="button" onClick={() => edit(item)} className="rounded-md border border-lotus-500 px-4 py-2 text-sm font-semibold text-lotus-700 hover:bg-lotus-50">Edit</button>
-                {item.status === "held" ? <button type="button" onClick={() => release(item)} className="rounded-md border border-indigoInk/15 px-4 py-2 text-sm font-semibold text-indigoInk">Release hold</button> : null}
-                {item.state === "available" ? <button type="button" onClick={() => setSellingId(sellingId === item.id ? null : item.id)} className="rounded-md border border-indigoInk/15 px-4 py-2 text-sm font-semibold text-indigoInk">Mark as sold manually</button> : null}
+                {item.state !== "sold" ? <button type="button" onClick={() => setSellingId(sellingId === item.id ? null : item.id)} className="rounded-md bg-lotus-500 px-4 py-2 text-sm font-semibold text-white">Mark as sold</button> : null}
+                {item.status === "held" ? <button type="button" onClick={() => release(item)} className="rounded-md border border-indigoInk/15 px-4 py-2 text-sm font-semibold text-indigoInk">Release reservation</button> : null}
                 {!item.everHeld ? <button type="button" onClick={() => remove(item)} className="px-3 py-2 text-sm font-semibold text-lotus-700">Delete</button> : null}
               </div>
 
               {sellingId === item.id ? (
                 <form onSubmit={event => markSold(event, item)} className="mt-4 grid gap-3 rounded-md border border-indigoInk/10 p-4">
-                  <p className="text-sm text-indigoInk/70">For cash or bank transfer sales. The item will show as Sold on the public page.</p>
-                  <FieldGroup><Label htmlFor={`buyer-${item.id}`}>Buyer name *</Label><TextInput id={`buyer-${item.id}`} name="buyerName" maxLength={pujaItemLimits.name} required /></FieldGroup>
+                  <p className="text-sm text-indigoInk/70">{item.state === "reserved" ? "Confirm once the payment shows in Tyro. The reserving devotee's details are filled in." : "For a sale paid in Tyro, cash or bank transfer."} The item will show as Sold on the public page.</p>
+                  <FieldGroup><Label htmlFor={`buyer-${item.id}`}>Buyer name *</Label><TextInput id={`buyer-${item.id}`} name="buyerName" maxLength={pujaItemLimits.name} defaultValue={item.state === "reserved" ? item.claimantName ?? "" : ""} required /></FieldGroup>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <FieldGroup><Label htmlFor={`buyer-email-${item.id}`}>Email</Label><TextInput id={`buyer-email-${item.id}`} name="buyerEmail" type="email" maxLength={pujaItemLimits.email} /></FieldGroup>
-                    <FieldGroup><Label htmlFor={`buyer-phone-${item.id}`}>Phone</Label><TextInput id={`buyer-phone-${item.id}`} name="buyerPhone" maxLength={pujaItemLimits.phone} /></FieldGroup>
+                    <FieldGroup><Label htmlFor={`buyer-email-${item.id}`}>Email</Label><TextInput id={`buyer-email-${item.id}`} name="buyerEmail" type="email" maxLength={pujaItemLimits.email} defaultValue={item.state === "reserved" ? item.claimantEmail ?? "" : ""} /></FieldGroup>
+                    <FieldGroup><Label htmlFor={`buyer-phone-${item.id}`}>Phone</Label><TextInput id={`buyer-phone-${item.id}`} name="buyerPhone" maxLength={pujaItemLimits.phone} defaultValue={item.state === "reserved" ? item.claimantPhone ?? "" : ""} /></FieldGroup>
                   </div>
+                  <label className="flex items-center gap-3 text-sm text-indigoInk"><input type="checkbox" name="sendEmail" defaultChecked className="size-4" /> Email the buyer a thank-you (if an email is given)</label>
                   <button type="submit" className="min-h-11 rounded-md bg-lotus-500 px-5 text-sm font-semibold text-white">Mark as sold</button>
                 </form>
               ) : null}

@@ -36,7 +36,7 @@ export function PujaItemGrid({ items }: { items: PublicPujaItem[] }) {
     setError("");
     let redirecting = false;
     try {
-      const response = await fetch(`/api/puja-items/${selected.id}/checkout`, {
+      const response = await fetch(`/api/puja-items/${selected.id}/reserve`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: data.get("name"), email: data.get("email"), phone: data.get("phone") })
@@ -49,15 +49,15 @@ export function PujaItemGrid({ items }: { items: PublicPujaItem[] }) {
         return;
       }
       if (!response.ok || !result.url) {
-        setError(result.error ?? "We could not start the payment. Please try again.");
+        setError(result.error ?? "We could not reserve this item. Please try again.");
         return;
       }
       redirecting = true;
       window.location.href = result.url;
     } catch {
-      setError("We could not start the payment. Please check your connection and try again.");
+      setError("We could not reserve this item. Please check your connection and try again.");
     } finally {
-      // Stay disabled while the browser leaves for Stripe, so a second click cannot re-submit.
+      // Stay disabled while the browser leaves for the payment page, so a second click cannot re-submit.
       if (!redirecting) setSubmitting(false);
     }
   }
@@ -92,7 +92,7 @@ export function PujaItemGrid({ items }: { items: PublicPujaItem[] }) {
           <FieldGroup><Label htmlFor="buyer-name">Full name *</Label><TextInput id="buyer-name" name="name" autoComplete="name" maxLength={pujaItemLimits.name} required autoFocus /></FieldGroup>
           <FieldGroup><Label htmlFor="buyer-email">Email *</Label><TextInput id="buyer-email" name="email" type="email" autoComplete="email" maxLength={pujaItemLimits.email} required /></FieldGroup>
           <FieldGroup><Label htmlFor="buyer-phone">Phone *</Label><TextInput id="buyer-phone" name="phone" type="tel" autoComplete="tel" maxLength={pujaItemLimits.phone} pattern="\+?[\d\s()\-]{8,20}" title="Enter a phone number" required /></FieldGroup>
-          <p className={styles.holdNote}>When you continue, this item is held for you for about 30 minutes while you pay securely with Stripe. If payment is not completed, it becomes available to other devotees again.</p>
+          <p className={styles.holdNote}>When you continue, this item is reserved for you for about 2 hours and you are taken to our secure Tyro payment page. We will also email you the payment link. The organising team confirms your purchase once payment is received; if it is not received in time, the item becomes available to other devotees again.</p>
           {error && <p role="alert" className={styles.error}>{error}</p>}
           <div className={styles.dialogActions}>
             <button type="button" className={`${styles.button} ${styles.buttonSecondary}`} onClick={() => setSelected(null)} disabled={submitting}>Cancel</button>

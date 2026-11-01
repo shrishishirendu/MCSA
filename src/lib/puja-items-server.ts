@@ -28,7 +28,7 @@ export function toAdminPujaItem(row: PujaItemRow): AdminPujaItem {
     claimantName: row.claimant_name,
     claimantEmail: row.claimant_email,
     claimantPhone: row.claimant_phone,
-    stripeSessionId: row.stripe_session_id,
+    paymentUrl: row.payment_url,
     claimedAt: row.claimed_at,
     // Holds always record the claimant, and releasing a hold keeps them.
     everHeld: Boolean(row.claimant_email) || row.status !== "available"
@@ -41,7 +41,8 @@ async function selectItems(activeOnly: boolean) {
     .select("*")
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: true });
-  if (activeOnly) query = query.eq("active", true);
+  // Items without a payment link cannot be bought, so they stay off the public page.
+  if (activeOnly) query = query.eq("active", true).not("payment_url", "is", null);
   const { data, error } = await query;
   if (error) throw error;
   return data;
@@ -76,14 +77,18 @@ export function readPujaItemFields(body: Record<string, unknown>) {
   const priceCents = Math.round(priceDollars * 100);
   const sortOrder = Number(body.sortOrder ?? 0);
   const imageUrl = typeof body.imageUrl === "string" && body.imageUrl.trim() ? body.imageUrl.trim() : null;
+  const paymentUrl = typeof body.paymentUrl === "string" && body.paymentUrl.trim() ? body.paymentUrl.trim() : null;
+  const active = body.active !== false;
 
   if (!name || name.length > pujaItemLimits.itemName) return { error: `Enter an item name (up to ${pujaItemLimits.itemName} characters).` } as const;
   if (description.length > pujaItemLimits.itemDescription) return { error: `Keep the description to ${pujaItemLimits.itemDescription} characters.` } as const;
   if (!Number.isFinite(priceDollars) || priceCents < 1 || priceCents > 10_000_000) return { error: "Enter a price in AUD greater than $0." } as const;
   if (!Number.isInteger(sortOrder)) return { error: "Sort order must be a whole number." } as const;
   if (imageUrl && !/^https?:\/\//.test(imageUrl)) return { error: "Upload the image again." } as const;
+  if (paymentUrl && (!/^https:\/\/\S+$/.test(paymentUrl) || paymentUrl.length > pujaItemLimits.paymentUrl)) return { error: "Paste the full Tyro payment link, starting with https://" } as const;
+  if (active && !paymentUrl) return { error: "Add the Tyro payment link before showing the item on the public page." } as const;
 
   return {
-    fields: { name, description, price_cents: priceCents, image_url: imageUrl, sort_order: sortOrder, active: body.active !== false }
+    fields: { name, description, price_cents: priceCents, image_url: imageUrl, payment_url: paymentUrl, sort_order: sortOrder, active }
   } as const;
 }

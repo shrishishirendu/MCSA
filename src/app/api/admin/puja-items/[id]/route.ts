@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { requireAdminApi } from "@/lib/api-auth";
-import { createStripeClient } from "@/lib/payments/stripe";
-import { pujaItemLimits, pujaItemState, pujaItemsPath } from "@/lib/puja-items";
+import { sendPujaItemSoldEmail } from "@/lib/email/resend";
+import { formatAud, pujaItemLimits, pujaItemState, pujaItemsPath } from "@/lib/puja-items";
 import { readPujaItemFields, toAdminPujaItem } from "@/lib/puja-items-server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -84,37 +84,20 @@ export async function POST(request: Request, { params }: Params) {
 
     if (body.action === "release") {
       if (item.status !== "held") return NextResponse.json({ error: "This item is not being reserved." }, { status: 409 });
-
-      // Close the devotee's Stripe checkout first, so it cannot be paid after the item is freed.
-      if (item.stripe_session_id) {
-        try {
-          const stripe = createStripeClient();
-          const session = await stripe.checkout.sessions.retrieve(item.stripe_session_id);
-          if (session.status === "complete") {
-            return NextResponse.json({ error: "This checkout has already been paid. The item will be marked as Sold shortly." }, { status: 409 });
-          }
-          if (session.status === "open") await stripe.checkout.sessions.expire(session.id);
-        } catch (error) {
-          console.error("Stripe session could not be expired before release:", error);
-          return NextResponse.json({ error: "The Stripe checkout could not be closed, so the hold was not released. Try again in a moment." }, { status: 502 });
-        }
-      }
-
-      const { data, error } = await supabase.rpc("release_puja_item", { p_item_id: item.id, p_session_id: item.stripe_session_id });
+      const { data, error } = await supabase.rpc("release_puja_item", { p_item_id: item.id });
       if (error) return NextResponse.json({ error: error.message }, { status: 500 });
       if (!data?.[0]) return NextResponse.json({ error: "The item changed in the meantime. Refresh and try again." }, { status: 409 });
       return done(data[0]);
     }
 
+    // Used once the payment shows in Tyro, or for a cash or bank transfer sale.
     if (body.action === "mark-sold") {
+      if (item.status === "claimed") return NextResponse.json({ error: "This item is already sold." }, { status: 409 });
       const buyerName = String(body.buyerName ?? "").trim();
       const buyerEmail = String(body.buyerEmail ?? "").trim().toLowerCase();
       const buyerPhone = String(body.buyerPhone ?? "").trim();
       if (!buyerName || buyerName.length > pujaItemLimits.name) return NextResponse.json({ error: "Enter the buyer's name." }, { status: 400 });
       if (buyerEmail.length > pujaItemLimits.email || buyerPhone.length > pujaItemLimits.phone) return NextResponse.json({ error: "Buyer email or phone is too long." }, { status: 400 });
-      if (pujaItemState(item) !== "available") {
-        return NextResponse.json({ error: item.status === "claimed" ? "This item is already sold." : "A devotee is paying for this item online. Release the hold first." }, { status: 409 });
-      }
 
       const now = new Date().toISOString();
       let update = supabase
@@ -126,17 +109,23 @@ export async function POST(request: Request, { params }: Params) {
           claimant_phone: buyerPhone || null,
           claimed_at: now,
           held_until: null,
-          stripe_session_id: null,
-          stripe_payment_intent: null,
           updated_at: now
         })
         .eq("id", item.id)
         .eq("status", item.status);
-      // An expired hold may only be overwritten if nobody has re-reserved it in the meantime.
-      if (item.status === "held") update = update.lt("held_until", now);
+      // Only confirm the reservation the admin was looking at, not one made since.
+      if (item.status === "held") update = item.claimant_email ? update.eq("claimant_email", item.claimant_email) : update.is("claimant_email", null);
       const { data, error } = await update.select("*");
       if (error) return NextResponse.json({ error: error.message }, { status: 500 });
       if (!data?.[0]) return NextResponse.json({ error: "The item changed in the meantime. Refresh and try again." }, { status: 409 });
+
+      if (buyerEmail && body.sendEmail !== false) {
+        try {
+          await sendPujaItemSoldEmail({ itemId: item.id, itemName: item.name, amount: formatAud(item.price_cents), buyerName, buyerEmail });
+        } catch (emailError) {
+          console.error("Bhagwati Ashirwaad sold email failed:", emailError);
+        }
+      }
       return done(data[0]);
     }
 

@@ -46,42 +46,27 @@ Payments and full member account authentication remain future integrations.
 ## Bhagwati Ashirwaad Items (Durga Puja 2026)
 
 Items donated to the Puja are sold to devotees at
-`/durga-puja-2026/bhagwati-ashirwaad-items`. Each item is single-quantity: the
-first devotee to start paying reserves it, and it is marked Sold once Stripe
-confirms payment. The committee manages items in Admin Portal > Bhagwati
-Ashirwaad Items (add, edit, release a hold, mark as sold manually for cash or
-bank transfer sales).
+`/durga-puja-2026/bhagwati-ashirwaad-items`. Each item is single-quantity and
+has its own Tyro payment link. The committee manages items in Admin Portal >
+Bhagwati Ashirwaad Items (add, edit, mark as sold, release a reservation).
 
 How a purchase works:
 
-1. The devotee enters their name, email and phone and continues to payment.
-2. `hold_puja_item` reserves the item for 36 minutes in one conditional
-   database update, so two devotees can never reserve the same item.
-3. A Stripe Checkout session is created with a 31-minute expiry, so the
-   reservation always outlasts the session.
-4. The Stripe webhook marks the item Sold on `checkout.session.completed`, or
-   releases it on `checkout.session.expired`. The buyer receives a receipt and
-   the committee a notification. If a payment arrives for an item that is no
-   longer reserved for that buyer, the item is not changed and the committee is
-   emailed to arrange a manual refund.
+1. The devotee chooses an item and enters their name, email and phone.
+2. `hold_puja_item` reserves the item for 2 hours in one conditional database
+   update, so two devotees can never reserve the same item. Items without a
+   payment link cannot be reserved and are not shown publicly.
+3. The devotee is sent to the item's Tyro payment link. They and the
+   committee are emailed the reservation details.
+4. When the payment appears in Tyro, an admin clicks Mark as sold (the
+   reserving devotee's details are pre-filled) and the buyer is emailed a
+   thank-you. If nobody pays, the reservation lapses on its own, or an admin
+   can release it.
 
 Setup:
 
 1. Run `supabase/migrations/202611010001_puja_items.sql` in the Supabase SQL
    editor. Photos use the existing `content-images` storage bucket.
-2. In the Stripe Dashboard, add a webhook endpoint
-   `https://<your-domain>/api/stripe/webhook` listening for
-   `checkout.session.completed` and `checkout.session.expired`.
-3. Add these environment variables to the Vercel project and redeploy:
-   - `STRIPE_SECRET_KEY`
-   - `STRIPE_WEBHOOK_SECRET` (the webhook endpoint's signing secret)
-   - `RESEND_API_KEY` and `EOI_FROM_EMAIL` for receipts and committee emails
-4. Add items in the admin portal. No items are seeded.
-
-To test locally with Stripe test keys:
-
-```bash
-stripe listen --forward-to localhost:3000/api/stripe/webhook
-```
-
-Use the `whsec_...` secret it prints as `STRIPE_WEBHOOK_SECRET`.
+2. `RESEND_API_KEY` and `EOI_FROM_EMAIL` must be set for the emails.
+3. For each item, create a Tyro payment link for its price and paste it into
+   the item in the admin portal. No items are seeded.

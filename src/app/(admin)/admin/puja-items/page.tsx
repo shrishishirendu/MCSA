@@ -10,7 +10,7 @@ export default async function AdminPujaItemsPage() {
   return (
     <PageLayout
       title="Bhagwati Ashirwaad Items"
-      description="Add the donated Puja items devotees can buy online. Each item is one of a kind: it shows as Being reserved while a devotee pays, and Sold once payment is complete."
+      description="Add the donated Puja items devotees can buy online, each with its own Tyro payment link. When a devotee reserves an item it shows as Being reserved for about 2 hours; once their payment appears in Tyro, mark it as sold."
       className="px-0 py-0"
     >
       {items ? (

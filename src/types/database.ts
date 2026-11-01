@@ -97,6 +97,7 @@ export type PujaItemRow = {
   description: string;
   price_cents: number;
   image_url: string | null;
+  payment_url: string | null;
   sort_order: number;
   active: boolean;
   status: "available" | "held" | "claimed";
@@ -104,8 +105,6 @@ export type PujaItemRow = {
   claimant_name: string | null;
   claimant_email: string | null;
   claimant_phone: string | null;
-  stripe_session_id: string | null;
-  stripe_payment_intent: string | null;
   claimed_at: string | null;
   created_at: string;
   updated_at: string;
@@ -233,7 +232,7 @@ export type Database = {
         Returns: PujaItemRow[];
       };
       release_puja_item: {
-        Args: { p_item_id: string; p_session_id?: string | null };
+        Args: { p_item_id: string };
         Returns: PujaItemRow[];
       };
     };

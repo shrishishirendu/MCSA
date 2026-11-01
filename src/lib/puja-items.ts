@@ -21,19 +21,18 @@ export type AdminPujaItem = PublicPujaItem & {
   claimantName: string | null;
   claimantEmail: string | null;
   claimantPhone: string | null;
-  stripeSessionId: string | null;
+  paymentUrl: string | null;
   claimedAt: string | null;
   everHeld: boolean;
 };
 
-// The database hold always outlasts the Stripe Checkout session (Stripe's minimum is 30 minutes),
-// so a session can never be paid after its hold has lapsed.
-export const PUJA_ITEM_HOLD_MINUTES = 36;
-export const PUJA_ITEM_SESSION_MINUTES = 31;
+// Devotees pay through the item's Tyro payment link and the committee confirms the sale,
+// so a reservation lasts long enough to pay and lapses on its own if nobody does.
+export const PUJA_ITEM_HOLD_MINUTES = 120;
 
 export const pujaItemsPath = durgaPuja.pujaItemsPath;
 
-export const pujaItemLimits = { name: 120, email: 254, phone: 20, itemName: 120, itemDescription: 300 };
+export const pujaItemLimits = { name: 120, email: 254, phone: 20, itemName: 120, itemDescription: 300, paymentUrl: 500 };
 
 export function formatAud(cents: number) {
   return new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD", minimumFractionDigits: cents % 100 ? 2 : 0 }).format(cents / 100);
